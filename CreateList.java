@@ -1,15 +1,15 @@
 
 /**
  * Write a description of class CreateList here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
 public class CreateList
 {
    public static void main(String[] args){
        RandomCircularList game = new RandomCircularList();
-       System.out.println("Number of players = " + game.getNumPlayers());
+       System.out.println("Number of people = " + game.getNumPeople());
        game.printAllTeams();
        game.assignTargets();
        System.out.println(" ------------------------ ");
@@ -18,6 +18,6 @@ public class CreateList
        System.out.println(" ------------------------ ");
        System.out.println();
        game.printList();
-       
+
     }
 }
