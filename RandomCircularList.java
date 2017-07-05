@@ -49,13 +49,6 @@ public class RandomCircularList
     }
 
     /**
-     *  post: returns ArrayList of strings of the players on a team
-     */
-    public ArrayList<Person> rosterToArray(String fileName){
-        return new ArrayList<Person>();
-    }
-
-    /**
      *
      *
      *  pre: the teams have players loaded onto them
@@ -165,19 +158,6 @@ public class RandomCircularList
     }
 
     /**
-     * ***didn't actually end up using this method in the final program***
-     * post: circularList has every player with their target after and Person before
-     */
-    public void createList(){
-        circleList.add(coach);
-        Person temp = coach.getTarget();
-        while(!temp.equals(coach)){
-            circleList.add(temp);
-            temp = temp.getTarget();
-        }
-    }
-
-    /**
      *  prints a list of everyone's first target
      *  example:
      *      x --> y
@@ -225,10 +205,11 @@ public class RandomCircularList
      *       - b
      *       - c
      */
-    public void printTeam(List<Person> team){
-        System.out.println(team.get(0).getTeam());
-        for(Person player: team){
-            System.out.println(" - " + player.getName());
+    public void printTeam(Team team){
+        System.out.println(team.getTeamName());
+        List<Person> people = team.getPeople();
+        for(Person person: people){
+            System.out.println(" - " + person.getName());
         }
         System.out.println();   // gap for readability
     }
@@ -237,29 +218,19 @@ public class RandomCircularList
      *  prints all team rosters using printTeam method
      */
     public void printAllTeams(){
-        printTeam(novice);
-        printTeam(jv);
-        printTeam(varsity);
-        printTeam(statGirls);
+        for(Team team: teams){
+            printTeam(team);
+        }
     }
 
     /**
      *  post: returns number of players in the game
      */
     public int getNumPeople(){
-        int sum = 1; // 1 accounts for coach
+        int sum = 0;
 
-        for(Person i: novice){
-            sum++;
-        }
-        for(Person i: jv){
-            sum++;
-        }
-        for(Person i: varsity){
-            sum++;
-        }
-        for(Person i: statGirls){
-            sum++;
+        for(Team team: teams){
+            sum += team.size();
         }
 
         return sum;
