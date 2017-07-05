@@ -1,9 +1,20 @@
 
 /** RandomCircularListGenerator
  *  @author Chase Carnaroli
- *  Enumeration class Team - write a description of the enum class here
  *
+ *  The Team class tracks a List<Person>
+ *  This is so that people of the same team won't get placed together
  *
+ *  INSTANCE VARIABLES
+ *      String teamName             // name of the team
+ *      List<Person> people         // list of Persons on the team
+ *
+ *  METHODS
+ *      size() -> int                   // returns number of people on the team
+ *      add(Person)                     // a Person is added to the List<Person> people
+ *      remove(Person) -> boolean       // returns true if person is removed, false if person wasn't in list
+ *      setPeople(List<Person>)         // people is set to the List<Person> passed through
+ *      getPeople() -> List<Person>     // returns List<Person> people
  */
 
  import java.util.*;    // import arraylists
@@ -47,7 +58,7 @@ public class Team
     }
 
     // post: people is set to the List<Person> passed through
-    public void setPeople(List<People> people){
+    public void setPeople(List<Person> people){
         this.people = people;
     }
 
