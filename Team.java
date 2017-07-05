@@ -29,10 +29,13 @@ public class Team
       return people.size();
     }
 
+    // post: a Person is added to the List<Person> people
     public void add(Person person){
         people.add(person);
     }
 
+    // scans List<Person> people and removes the person
+    // post: returns true if person is removed, false if person wasn't in list
     public boolean remove(Person person){
         int index = people.indexOf(person);
         if(index != -1){
@@ -43,10 +46,12 @@ public class Team
         }
     }
 
+    // post: people is set to the List<Person> passed through
     public void setPeople(List<People> people){
         this.people = people;
     }
 
+    // post: returns List<Person> people
     public List<Person> getPeople(){
         return people;
     }
