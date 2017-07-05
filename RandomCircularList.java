@@ -1,7 +1,8 @@
-/**
+/** RandomCircularListGenerator
+ *  @author Chase Carnaroli
+ *
  * Creates a circular list of players for the TAG volleyball game
  *
- * @author Chase Carnaroli
  * @version 4/20/2017
  */
 
@@ -10,19 +11,14 @@ import java.util.*;     // Import List
 public class RandomCircularList
 {
     // instance variables
-    public List<Person> novice, jv, varsity, statGirls, circleList;     // teams
-    private Person coach = new Person("Coach Jackson", Team.VARSITY);   // coach
+    public List<Team> teams;
 
     /**
      * Constructor for objects of class RandomCircularList
      */
-    public RandomCircularList()
+    public RandomCircularList(List<Team> teams)
     {
-        // Load different teams
-        novice = fileToArray("novice.txt", Team.NOVICE);
-        jv = fileToArray("jv.txt", Team.JV);
-        varsity = fileToArray("varsity.txt", Team.VARSITY);
-        statGirls = fileToArray("statGirls.txt", Team.STATGIRLS);
+        this.teams = teams;
     }
 
     /**
