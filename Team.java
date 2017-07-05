@@ -15,6 +15,8 @@
  *      remove(Person) -> boolean       // returns true if person is removed, false if person wasn't in list
  *      setPeople(List<Person>)         // people is set to the List<Person> passed through
  *      getPeople() -> List<Person>     // returns List<Person> people
+ *      getTeamName() -> String         // returns teamName
+ *      get(int) -> Person              // returns person at index in List<Person> people
  */
 
  import java.util.*;    // import arraylists
@@ -65,5 +67,15 @@ public class Team
     // post: returns List<Person> people
     public List<Person> getPeople(){
         return people;
+    }
+
+    // post: return teamName
+    public String getTeamName(){
+        return teamName;
+    }
+
+    // post: returns person at index in List<Person> people
+    public Person get(int index){
+        return people.get(index);
     }
 }
