@@ -36,6 +36,10 @@ public class Tester {
         circularList.printList();
     }
 
+    /**
+     *  pre: file contains team name, followed by each player on a seperate line
+     *  post: returns a List<Person>
+     */
     private static List<Person> fileToArray(String file, Team team){
         List<Person> array = new ArrayList<Person>();    // Makes a list
 
@@ -46,8 +50,6 @@ public class Tester {
 
             inFile.readLine();   // Disregards the team name at the beginning of the file
 
-            int i = 0;  // Index to run through array
-
             String name;        // name from file
 
             // Runs through each number and adds it to an item
@@ -55,7 +57,6 @@ public class Tester {
 
                 Person temp = new Person(name, team);   // Creates new Person with parameters from the file
                 array.add(temp);                        // Adds Person to array
-                i++;                                    // Moves to next position in array
             }
 
             inFile.close();     // Closes in file
