@@ -30,7 +30,7 @@ public class Team
     // Constructors
     public Team(String teamName){
         this.teamName = teamName;
-        people = new ArrayList<People>();
+        people = new ArrayList<Person>();
     }
 
     public Team(String teamName, List<Person> people){
