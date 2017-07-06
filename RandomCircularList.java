@@ -1,9 +1,26 @@
 /** RandomCircularListGenerator
  *  @author Chase Carnaroli
  *
- * Creates a circular list of players for the TAG volleyball game
+ *  Creates a circular list of players.
+ *  The list is essentially a linked list. Each person is a node.
+ *  Each person class is assigned a target, so it knows who the next node is
  *
- * @version 4/20/2017
+ *  No two players on the same team will be directly next to eachother on the list (unless only one team is inputed)
+ *
+ *  INSTANCE VARIABLES
+ *      List<Team> teams        // list teams that will included in the circular list
+ *      Person firstPeron       // considered the "starting" point for the circular list
+ *
+ *  METHODS
+ *      assignTargets()         // creates the circlular linked list, telling each person who its next target is
+ *      printFirstTarget()      // prints to console a list of everyone's first target.
+ *                                      Ex: One "Person -> Target" per line
+ *      printList()             // prints to console a list of everyone and who they are targeting
+ *                                      Ex: "x --> y --> z --> a --> b --> c --> x"
+ *      printTeam(Team)         // prints to console a list of the team's players
+ *                                      Ex: "TeamName/n - name1 /n -name2 /n" etc
+ *      printAllTeams()         // runs printTeam(Team) method for all teams in the list
+ *      getNumPeople() -> int   // returns number of people in the list
  */
 
 import java.util.*;     // Import List
@@ -11,8 +28,8 @@ import java.util.*;     // Import List
 public class RandomCircularList
 {
     // instance variables
-    public List<Team> teams;
-    public Person firstPerson;
+    public List<Team> teams;        // list teams that will included in the circular list
+    public Person firstPerson;      // considered the "starting" point for the circular list
 
     /**
      * Constructor for objects of class RandomCircularList
@@ -51,7 +68,7 @@ public class RandomCircularList
     }*/
 
     /**
-     *
+     *  This method creates the circlular linked list, telling each person who its next target is
      *
      *  pre: the teams have players loaded onto them
      *  post: each player is assigned a target
