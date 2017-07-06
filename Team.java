@@ -13,8 +13,8 @@
  *      size() -> int                   // returns number of people on the team
  *      add(Person)                     // a Person is added to the List<Person> people
  *      remove(Person) -> boolean       // returns true if person is removed, false if person wasn't in list
- *      setPeople(List<Person>)         // people is set to the List<Person> passed through
- *      getPeople() -> List<Person>     // returns List<Person> people
+ *      setList(List<Person>)           // people is set to the List<Person> passed through
+ *      getList() -> List<Person>       // returns List<Person> people
  *      getTeamName() -> String         // returns teamName
  *      get(int) -> Person              // returns person at index in List<Person> people
  *      toString() -> String            // overrides toString method and returns teamName
@@ -61,12 +61,12 @@ public class Team
     }
 
     // post: people is set to the List<Person> passed through
-    public void setPeople(List<Person> people){
+    public void setList(List<Person> people){
         this.people = people;
     }
 
     // post: returns List<Person> people
-    public List<Person> getPeople(){
+    public List<Person> getList(){
         return people;
     }
 
