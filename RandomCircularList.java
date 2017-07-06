@@ -200,7 +200,7 @@ public class RandomCircularList
         do{
             System.out.print(temp.getName() + " --> ");
             temp = temp.getTarget();
-        } while (temp.equals(firstPerson));
+        } while (!temp.equals(firstPerson));
         System.out.print(firstPerson.getName());
         System.out.println();
     }
