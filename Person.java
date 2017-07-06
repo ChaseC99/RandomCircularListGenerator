@@ -12,6 +12,7 @@
  *  METHODS
  *      getName() -> String               // returns person's name
  *      getTeam() -> Team                 // returns person's team
+ *      getTeamName() -> String           // returns team name
  *      setTarget()                       // sets person's target
  *      getTarget() -> Person             // returns person's target
  *      diffTeams(Person) -> boolean      // returns true if different teams, false if same team
@@ -42,6 +43,11 @@ public class Person
     // post: returns team
     public Team getTeam(){
         return team;
+    }
+
+    // post: returns team name
+    public String getTeamName(){
+        return team.getTeamName();
     }
 
     // post: set target
