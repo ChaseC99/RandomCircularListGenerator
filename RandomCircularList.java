@@ -57,23 +57,13 @@ public class RandomCircularList
     public void assignTargets(){
         ArrayList<Person> list = new ArrayList<Person>();   // Creates new list
 
-        // temporary team rosters (USELESS... references the same object.. meep)
-        List<Person> n = novice;
-        List<Person> j = jv;
-        List<Person> v = varsity;
-        List<Person> g = statGirls;
-
-        // List of the teams in the game
-        List<List<Person>> teams = new ArrayList<List<Person>>();   // creates List
-        teams.add(n); teams.add(j); teams.add(v); teams.add(g);     // add teams to the teams List
-
         // Set up for while loop
-        Person player = coach;      // establishes coach as first player
-        List<Person> targetTeam;    // declares targetTeam
+        //Person player = coach;      // establishes coach as first player
+        Team targetTeam;    // declares targetTeam
 
         // random number so that the first nested while loop will run
-        int teamIndex = 5;
-        int lastTeamIndex = 5;
+        int teamIndex = teams.size() + 1;
+        int lastTeamIndex = teams.size() + 1;
 
         while(teams.size() > 1){
             // Randomly gives the Person a team that is different from his own
@@ -87,7 +77,7 @@ public class RandomCircularList
 
             // Give player a random target from his/her targetTeam
             Random r = new Random();
-            int i = r.nextInt(targetTeam.size());       // random index in the targetTeam List
+            int i = r.nextInt(targetTeam.size());       // random index in the targetTeam List to pick random person in the team
             Person target = targetTeam.remove(i);       // set target as player at random index of targetTeam and takes them out of the list
             player.setTarget(target);                   // set player's target
 
@@ -109,8 +99,8 @@ public class RandomCircularList
          */
 
         // Establishes which team is left
-        List<Person> teamLeft = teams.get(0);               // get team List
-        Team teamLeftName = teamLeft.get(0).getTeam();      // get team name
+        Team teamLeft = teams.get(0);               // get team List
+        String teamLeftName = teamLeft.get(0).getTeamName();      // get team name  // UNSURE IF NECESSAY/STILL WORKS
 
         // Assign targets to remaining players on teamLeft
         for(Person thisPerson: teamLeft)
@@ -123,7 +113,7 @@ public class RandomCircularList
             // runs until player inserted
             while(!inserted)
             {
-                if(player1.getTeam().equals(teamLeftName) || player2.getTeam().equals(teamLeftName))    // if player is on same team as target
+                if(player1.getTeam().equals(teamLeft) || player2.getTeam().equals(teamLeft))    // if player is on same team as target
                 {
                     // move to next player
                     player1 = player2;
@@ -144,7 +134,7 @@ public class RandomCircularList
 
         // parse the list to get the lastPerson
         Person lastPerson = coach;              // start at coach
-        // post: laterPerson is now the last player in the linked list
+        // post: lastPerson is now the last player in the linked list
         while(lastPerson.getTarget() != null){
             lastPerson = lastPerson.getTarget();
         }
