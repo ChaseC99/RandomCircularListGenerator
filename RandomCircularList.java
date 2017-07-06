@@ -13,7 +13,7 @@
  *
  *  METHODS
  *      assignTargets()         // creates the circlular linked list, telling each person who its next target is
- *      printFirstTarget()      // prints to console a list of everyone's first target.
+ *      printFirstTargets()     // prints to console a list of everyone's first target.
  *                                      Ex: One "Person -> Target" per line
  *      printList()             // prints to console a list of everyone and who they are targeting
  *                                      Ex: "x --> y --> z --> a --> b --> c --> x"
