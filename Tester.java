@@ -32,6 +32,7 @@ public class Tester {
 
         circularList.printAllTeams();
         circularList.assignTargets();
+        circularList.printFirstTargets();
         circularList.printList();
     }
 
