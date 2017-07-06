@@ -17,6 +17,7 @@
  *      getPeople() -> List<Person>     // returns List<Person> people
  *      getTeamName() -> String         // returns teamName
  *      get(int) -> Person              // returns person at index in List<Person> people
+ *      toString() -> String            // overrides toString method and returns teamName
  */
 
  import java.util.*;    // import arraylists
@@ -77,5 +78,10 @@ public class Team
     // post: returns person at index in List<Person> people
     public Person get(int index){
         return people.get(index);
+    }
+
+    // post: overrides toString method and returns teamName
+    public String toString(){
+        return getTeamName();
     }
 }
