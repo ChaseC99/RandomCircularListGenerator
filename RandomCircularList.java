@@ -76,6 +76,13 @@ public class RandomCircularList
     public void assignTargets(){
         ArrayList<Person> list = new ArrayList<Person>();   // Creates new list
 
+        // Make a copy of teams
+        List<Team> teamsCopy = new ArrayList<Team>();
+        for(Team team: teams){
+            Team teamCopy = new Team(team.getTeamName(), team.getList());
+            teamsCopy.add(teamCopy);
+        }
+
         // Set up for while loop
         Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
         Team targetTeam;                                // declares targetTeam
