@@ -12,15 +12,16 @@
  *      Person firstPeron       // considered the "starting" point for the circular list
  *
  *  METHODS
- *      assignTargets()         // creates the circlular linked list, telling each person who its next target is
- *      printFirstTargets()     // prints to console a list of everyone's first target.
- *                                      Ex: One "Person -> Target" per line
- *      printList()             // prints to console a list of everyone and who they are targeting
- *                                      Ex: "x --> y --> z --> a --> b --> c --> x"
- *      printTeam(Team)         // prints to console a list of the team's players
- *                                      Ex: "TeamName/n - name1 /n -name2 /n" etc
- *      printAllTeams()         // runs printTeam(Team) method for all teams in the list
- *      getNumPeople() -> int   // returns number of people in the list
+ *      assignTargets()                 // creates the circlular linked list, telling each person who its next target is
+ *      printFirstTargets()             // prints to console a list of everyone's first target.
+ *                                              Ex: One "Person -> Target" per line
+ *      printList()                     // prints to console a list of everyone and who they are targeting
+ *                                              Ex: "x --> y --> z --> a --> b --> c --> x"
+ *      printTeam(Team)                 // prints to console a list of the team's players
+ *                                              Ex: "TeamName/n - name1 /n -name2 /n" etc
+ *      printAllTeams()                 // runs printTeam(Team) method for all teams in the list
+ *      getNumPeople() -> int           // returns number of people in the game
+ *      getNumPeopleInList() -> int     // returns number of people in the list
  */
 
 import java.util.*;     // Import List
@@ -79,7 +80,8 @@ public class RandomCircularList
         // Make a copy of teams
         List<Team> teamsCopy = new ArrayList<Team>();
         for(Team team: teams){
-            Team teamCopy = new Team(team.getTeamName(), team.getList());
+            List<Person> teamListCopy = new ArrayList<>(team.getList());
+            Team teamCopy = new Team(team.getTeamName(), teamListCopy);
             teamsCopy.add(teamCopy);
         }
 
@@ -89,17 +91,17 @@ public class RandomCircularList
 
         // random number so that the first nested while loop will run
         int teamIndex = teams.size() + 1;
-        int lastTeamIndex = teams.size() + 1;
+        int lastTeamIndex = teamsCopy.size() + 1;
 
-        while(teams.size() > 1){
+        while(teamsCopy.size() > 1){
             // Randomly gives the Person a team that is different from his own
             while(teamIndex == lastTeamIndex){
-                // generates a random num representing a team in teams List
+                // generates a random num representing a team in teamsCopy List
                 Random rand = new Random();
-                teamIndex = rand.nextInt(teams.size());
+                teamIndex = rand.nextInt(teamsCopy.size());
             }
 
-            targetTeam = teams.get(teamIndex);  // set targetTeam based off the random number
+            targetTeam = teamsCopy.get(teamIndex);  // set targetTeam based off the random number
 
             // Give player a random target from his/her targetTeam
             Random r = new Random();
@@ -107,9 +109,9 @@ public class RandomCircularList
             Person target = targetTeam.getList().remove(i);     // set target as player at random index of targetTeam and takes them out of the list
             player.setTarget(target);                           // set player's target
 
-            // If the targetTeam is now empty, take the team out of the teams List
+            // If the targetTeam is now empty, take the team out of the teamsCopy List
             if(targetTeam.size() == 0){
-                teams.remove(teamIndex);
+                teamsCopy.remove(teamIndex);
             }
 
 
@@ -120,12 +122,12 @@ public class RandomCircularList
         /*
          *  After the while loop there is usually one team left
          *  The remaining players must be inserted into the list
-         *  It runs through the linked list until it finds a pair of people who are different teams
+         *  It runs through the linked list until it finds a pair of people who are different teamsCopy
          *  The player is inserted inbetween the two people
          */
 
         // Establishes which team is left
-        Team teamLeft = teams.get(0);                   // get team List
+        Team teamLeft = teamsCopy.get(0);                   // get team List
         List<Person> peopleLeft = teamLeft.getList();   // get list of remaining people from teamLeft
         // Assign targets to remaining players on teamLeft
         for(Person thisPerson: peopleLeft)
@@ -137,19 +139,19 @@ public class RandomCircularList
 
             // runs until player inserted
             while(!inserted)
-            {
-                if(player1.getTeam().equals(teamLeft) || player2.getTeam().equals(teamLeft))    // if player is on same team as target
                 {
-                    // move to next player
-                    player1 = player2;
-                    player2 = player2.getTarget();
-                } else  // if player is on different team as target
-                {
-                    // insert player
-                    player1.setTarget(thisPerson);  // set previous player target as thisPerson
-                    thisPerson.setTarget(player2);  // set thisPerson's target to previous player's target
-                    inserted = true;
-                }
+                    if(player1.getTeam().equals(teamLeft) || player2.getTeam().equals(teamLeft))    // if player is on same team as target
+                    {
+                        // move to next player
+                        player1 = player2;
+                        player2 = player2.getTarget();
+                    } else  // if player is on different team as target
+                    {
+                        // insert player
+                        player1.setTarget(thisPerson);  // set previous player target as thisPerson
+                        thisPerson.setTarget(player2);  // set thisPerson's target to previous player's target
+                        inserted = true;
+                    }
             }
         }
 
@@ -247,6 +249,22 @@ public class RandomCircularList
         for(Team team: teams){
             sum += team.size();
         }
+
+        return sum;
+    }
+
+    /**
+     *  post: returns number of players in the list
+     */
+    public int getNumPeopleInList(){
+        int sum = 0;
+
+        Person i = firstPerson;
+
+        do{
+            sum++;
+            i = i.getTarget();
+        }while(i != firstPerson);
 
         return sum;
     }
