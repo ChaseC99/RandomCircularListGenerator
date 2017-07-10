@@ -3,7 +3,7 @@
 The program takes a list of names from multiple groups of people and generates a circular linked list where no two people from the same group are next to each other.
 
 #### Background
-Background Info
+Every year, my volleyball team would play a game called "*The Assasination Game*" (TAG for short). Everyone in the volleyball program would play together: Varsity, JV, Novice, and the Stat Keepers.
 
 ---
 ### The Code
