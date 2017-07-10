@@ -34,7 +34,7 @@ public class Tester {
         circularList.assignTargets();
         circularList.printFirstTargets();
         circularList.printList();
-        circularList.printAllTeams();
+        System.out.println();
         System.out.println(circularList.getNumPeople());
         System.out.println(circularList.getNumPeopleInList());
     }
