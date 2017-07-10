@@ -37,6 +37,7 @@ public class Tester {
         System.out.println();
         System.out.println(circularList.getNumPeople());
         System.out.println(circularList.getNumPeopleInList());
+        System.out.println("Number of same team conflicts = " + circularList.sameTeamConflicts());
     }
 
     /**

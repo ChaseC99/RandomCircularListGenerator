@@ -313,4 +313,21 @@ public class RandomCircularList
 
         return sum;
     }
+
+    public int sameTeamConflicts(){
+        int count = 0;
+
+        Person i = firstPerson.getTarget();
+        Team previousTeam = firstPerson.getTeam();
+        do{
+            if(i.getTeam().equals(previousTeam)){
+                count++;
+            }
+
+            previousTeam = i.getTeam();
+            i = i.getTarget();
+        }while(i != firstPerson);
+
+        return count;
+    }
 }
