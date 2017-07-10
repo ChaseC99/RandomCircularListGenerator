@@ -75,8 +75,6 @@ public class RandomCircularList
      *  post: each player is assigned a target
      */
     public void assignTargets(){
-        ArrayList<Person> list = new ArrayList<Person>();   // Creates new list
-
         // Make a copy of teams
         List<Team> teamsCopy = new ArrayList<Team>();
         for(Team team: teams){
@@ -85,38 +83,35 @@ public class RandomCircularList
             teamsCopy.add(teamCopy);
         }
 
+        // Establish start of loop
+        firstPerson = removeRandomPerson(teamsCopy);
+
         // Set up for while loop
         Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
+        Team lastTargetTeam = firstPerson.getTeam();    // sets lastTargetTeam as the first players team
         Team targetTeam;                                // declares targetTeam
-
-        // random number so that the first nested while loop will run
-        int teamIndex = teams.size() + 1;
-        int lastTeamIndex = teamsCopy.size() + 1;
+        Person target;                                  // declares target
 
         while(teamsCopy.size() > 1){
             // Randomly gives the Person a team that is different from his own
-            while(teamIndex == lastTeamIndex){
-                // generates a random num representing a team in teamsCopy List
-                Random rand = new Random();
-                teamIndex = rand.nextInt(teamsCopy.size());
-            }
-
-            targetTeam = teamsCopy.get(teamIndex);  // set targetTeam based off the random number
+            // post: targetTeam is a team different that the previous player's
+            do{
+                targetTeam = randomlySelectTeam(teamsCopy);
+            } while(targetTeam == lastTargetTeam);
 
             // Give player a random target from his/her targetTeam
-            Random r = new Random();
-            int i = r.nextInt(targetTeam.size());               // random index in the targetTeam List to pick random person in the team
-            Person target = targetTeam.getList().remove(i);     // set target as player at random index of targetTeam and takes them out of the list
-            player.setTarget(target);                           // set player's target
+            target = removeRandomPerson(targetTeam);    // randomly removes a person from the target team
+            player.setTarget(target);                   // set player's target
 
             // If the targetTeam is now empty, take the team out of the teamsCopy List
             if(targetTeam.size() == 0){
-                teamsCopy.remove(teamIndex);
+                // remove team from list
+                int index = teamsCopy.indexOf(targetTeam);
+                teamsCopy.remove(index);
             }
 
-
-            lastTeamIndex = teamIndex;  // updates last team
-            player = target;            // target now gets assigned their target
+            lastTargetTeam = targetTeam;  // updates last team
+            player = target;              // target now gets assigned their target
         }
 
         /*
@@ -172,6 +167,54 @@ public class RandomCircularList
         } else {
             assignTargets();    // rerun the assign targets method so new player is at the end
         }
+    }
+
+    /**
+     *  This method randomly selects a team from a list of teams.
+     *
+     *  pre: listOfTeam.size() >= 1
+     *  post: return random team
+     */
+    private Team randomlySelectTeam(List<Team> listOfTeams){
+        Team team;          // Team to be returned
+
+        Random rand = new Random();
+        int teamIndex = rand.nextInt(listOfTeams.size());   // random index in listOfTeams to pick random team
+        team = listOfTeams.get(teamIndex);                  // get team from list based off teamIndex
+
+        return team;        // return team
+    }
+
+    /**
+     *  This method randomly selects a player from a team.
+     *  The player is removed from the team and returned
+     *
+     *  pre: team.size() >= 1
+     *  post: random player is removed and returned
+     */
+    private Person removeRandomPerson(Team team){
+        Person target;          // Person to be returned
+
+        Random r = new Random();
+        int i = r.nextInt(team.size());         // random index in the targetTeam List to pick random person in the team
+        target = team.getList().remove(i);      // set target as player at random index of targetTeam and takes them out of the list
+
+        return target;          // return target
+    }
+
+    /**
+     *  This method randomly selects a player from a team from a list of teams.
+     *  The player is removed from the team and returned.
+     *
+     *  pre: teams.size() >= 1 && team.size() >= 1
+     *  post: random player is removed and returned
+     */
+    private Person removeRandomPerson(List<Team> teams){
+        Team targetTeam = randomlySelectTeam(teams);        // Team from which person is selected
+
+        Person target = removeRandomPerson(targetTeam);     // Person to be returned
+
+        return target;          // return target
     }
 
     /**
