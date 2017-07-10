@@ -13,6 +13,9 @@
  *
  *  METHODS
  *      assignTargets()                 // creates the circlular linked list, telling each person who its next target is
+ *      randomlySelectTeam(List<Team>)  // randomly selects team form a list of teams
+ *      removeRandomPerson(Team)        // randomly selects, removes, and returns a person from a team
+ *      removeRandomPerson(List<Team>)  // randomly selects, removes, and returns a person from a random team in a list of teams
  *      printFirstTargets()             // prints to console a list of everyone's first target.
  *                                              Ex: One "Person -> Target" per line
  *      printList()                     // prints to console a list of everyone and who they are targeting
@@ -25,7 +28,6 @@
  */
 
 import java.util.*;     // Import List
-//import chn.util.*;      // Allows for FileInput
 public class RandomCircularList
 {
     // instance variables
@@ -123,7 +125,7 @@ public class RandomCircularList
 
         // Establishes which team is left
         Team teamLeft = teamsCopy.get(0);                   // get team List
-        List<Person> peopleLeft = teamLeft.getList();   // get list of remaining people from teamLeft
+        List<Person> peopleLeft = teamLeft.getList();       // get list of remaining people from teamLeft
         // Assign targets to remaining players on teamLeft
         for(Person thisPerson: peopleLeft)
         {
@@ -139,7 +141,7 @@ public class RandomCircularList
                     {
                         // move to next player
                         player1 = player2;
-                        player2 = player2.getTarget();
+                        player2 = player1.getTarget();
                     } else  // if player is on different team as target
                     {
                         // insert player
@@ -151,7 +153,7 @@ public class RandomCircularList
         }
 
         /*
-         *  Assign last player in the list to target coach
+         *  Assign last player in the list to target firstPerson
          */
         // parse the list to get the lastPerson
         Person lastPerson = firstPerson;              // starts loop at firstPerson
@@ -163,7 +165,7 @@ public class RandomCircularList
 
         // check to makesure coach and player aren't on the same team
         if(!lastPerson.getTeam().equals(firstPerson.getTeam())){
-            player.setTarget(firstPerson);
+            lastPerson.setTarget(firstPerson);
         } else {
             assignTargets();    // rerun the assign targets method so new player is at the end
         }
