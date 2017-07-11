@@ -12,19 +12,20 @@
  *      Person firstPeron       // considered the "starting" point for the circular list
  *
  *  METHODS
- *      assignTargets()                 // creates the circlular linked list, telling each person who its next target is
- *      randomlySelectTeam(List<Team>)  // randomly selects team form a list of teams
- *      removeRandomPerson(Team)        // randomly selects, removes, and returns a person from a team
- *      removeRandomPerson(List<Team>)  // randomly selects, removes, and returns a person from a random team in a list of teams
- *      printFirstTargets()             // prints to console a list of everyone's first target.
- *                                              Ex: One "Person -> Target" per line
- *      printList()                     // prints to console a list of everyone and who they are targeting
- *                                              Ex: "x --> y --> z --> a --> b --> c --> x"
- *      printTeam(Team)                 // prints to console a list of the team's players
- *                                              Ex: "TeamName/n - name1 /n -name2 /n" etc
- *      printAllTeams()                 // runs printTeam(Team) method for all teams in the list
- *      getNumPeople() -> int           // returns number of people in the game
- *      getNumPeopleInList() -> int     // returns number of people in the list
+ *      assignTargets()                                 // creates the circlular linked list, telling each person who its next target is
+ *      copyListOfTeams(List<Team>) -> List<Team>       // return copy of a list of teams
+ *      randomlySelectTeam(List<Team>)                  // randomly selects team form a list of teams
+ *      removeRandomPerson(Team)                        // randomly selects, removes, and returns a person from a team
+ *      removeRandomPerson(List<Team>)                  // randomly selects, removes, and returns a person from a random team in a list of teams
+ *      printFirstTargets()                             // prints to console a list of everyone's first target.
+ *                                                              Ex: One "Person -> Target" per line
+ *      printList()                                     // prints to console a list of everyone and who they are targeting
+ *                                                              Ex: "x --> y --> z --> a --> b --> c --> x"
+ *      printTeam(Team)                                 // prints to console a list of the team's players
+ *                                                              Ex: "TeamName/n - name1 /n -name2 /n" etc
+ *      printAllTeams()                                 // runs printTeam(Team) method for all teams in the list
+ *      getNumPeople() -> int                           // returns number of people in the game
+ *      getNumPeopleInList() -> int                     // returns number of people in the list
  */
 
 import java.util.*;     // Import List
@@ -78,12 +79,7 @@ public class RandomCircularList
      */
     public void assignTargets(){
         // Make a copy of teams
-        List<Team> teamsCopy = new ArrayList<Team>();
-        for(Team team: teams){
-            List<Person> teamListCopy = new ArrayList<>(team.getList());
-            Team teamCopy = new Team(team.getTeamName(), teamListCopy);
-            teamsCopy.add(teamCopy);
-        }
+        List<Team> teamsCopy = copyListOfTeams(teams);
 
         // Establish start of loop
         firstPerson = removeRandomPerson(teamsCopy);
@@ -126,6 +122,7 @@ public class RandomCircularList
         // Establishes which team is left
         Team teamLeft = teamsCopy.get(0);                   // get team List
         List<Person> peopleLeft = teamLeft.getList();       // get list of remaining people from teamLeft
+
         // Assign targets to remaining players on teamLeft
         for(Person thisPerson: peopleLeft)
         {
@@ -176,6 +173,27 @@ public class RandomCircularList
         if(sameTeamConflicts() != 0){
             assignTargets();    // rerun assignTargets so there are no conflicts
         }
+    }
+
+    /**
+     *  This method takes a list of teams and returns a copy of that list
+     *  The copy is a new object, seperate from the original
+     *
+     *  post: return copy of a list of teams
+     */
+    private List<Team> copyListOfTeams(List<Team> original){
+        // Create list
+        List<Team> copy = new ArrayList<Team>();
+
+        // Create new team and add team to the list
+        for(Team team: teams){
+            List<Person> teamListCopy = new ArrayList<>(team.getList());
+            Team teamCopy = new Team(team.getTeamName(), teamListCopy);
+            copy.add(teamCopy);
+        }
+
+        // Return list
+        return copy;
     }
 
     /**
