@@ -17,6 +17,7 @@
  *      randomlySelectTeam(List<Team>)                  // randomly selects team form a list of teams
  *      removeRandomPerson(Team)                        // randomly selects, removes, and returns a person from a team
  *      removeRandomPerson(List<Team>)                  // randomly selects, removes, and returns a person from a random team in a list of teams
+ *      getLastPerson() -> Person                       // returns last person in the list
  *      printFirstTargets()                             // prints to console a list of everyone's first target.
  *                                                              Ex: One "Person -> Target" per line
  *      printList()                                     // prints to console a list of everyone and who they are targeting
@@ -90,6 +91,7 @@ public class RandomCircularList
         Team targetTeam;                                // declares targetTeam
         Person target;                                  // declares target
 
+        // Randomly assign player targets
         while(teamsCopy.size() > 1){
             // Randomly gives the Person a team that is different from his own
             // post: targetTeam is a team different that the previous player's
@@ -115,7 +117,7 @@ public class RandomCircularList
         /*
          *  After the while loop there is usually one team left
          *  The remaining players must be inserted into the list
-         *  It runs through the linked list until it finds a pair of people who are different teamsCopy
+         *  It runs through the linked list until it finds a pair of people who are different teams
          *  The player is inserted inbetween the two people
          */
 
@@ -152,15 +154,8 @@ public class RandomCircularList
         /*
          *  Assign last player in the list to target firstPerson
          */
-        // parse the list to get the lastPerson
-        Person lastPerson = firstPerson;              // starts loop at firstPerson
-
-        // post: lastPerson is now the last player in the linked list
-        while(lastPerson.getTarget() != null){
-            lastPerson = lastPerson.getTarget();
-        }
-
-        System.out.println("Debug");
+        // get last person in the list
+        Person lastPerson = getLastPerson();
 
         // check to makesure coach and player aren't on the same team
         if(!lastPerson.getTeam().equals(firstPerson.getTeam())){
@@ -171,7 +166,7 @@ public class RandomCircularList
 
         // check to make sure there are no same team conflicts
         if(sameTeamConflicts() != 0){
-            assignTargets();    // rerun assignTargets so there are no conflicts
+            //assignTargets();    // rerun assignTargets so there are no conflicts
         }
     }
 
@@ -242,6 +237,25 @@ public class RandomCircularList
         Person target = removeRandomPerson(targetTeam);     // Person to be returned
 
         return target;          // return target
+    }
+
+    /**
+     *  Parse through the list to find the person at the end
+     *
+     *  pre: circular list has been created, firstPerson != null
+     *  post: last person in the list is returned
+     */
+    private Person getLastPerson(){
+        // parse the list to get the lastPerson
+        Person lastPerson = firstPerson;        // starts loop at firstPerson
+
+        // post: lastPerson is now the last player in the linked list
+        while(lastPerson.getTarget() != null) {
+            lastPerson = lastPerson.getTarget();
+        }
+
+        // return lastPerson
+        return lastPerson;
     }
 
     /**
