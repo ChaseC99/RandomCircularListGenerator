@@ -163,11 +163,18 @@ public class RandomCircularList
             lastPerson = lastPerson.getTarget();
         }
 
+        System.out.println("Debug");
+
         // check to makesure coach and player aren't on the same team
         if(!lastPerson.getTeam().equals(firstPerson.getTeam())){
             lastPerson.setTarget(firstPerson);
         } else {
             assignTargets();    // rerun the assign targets method so new player is at the end
+        }
+
+        // check to make sure there are no same team conflicts
+        if(sameTeamConflicts() != 0){
+            assignTargets();    // rerun assignTargets so there are no conflicts
         }
     }
 
