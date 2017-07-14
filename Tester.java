@@ -31,7 +31,6 @@ public class Tester {
         RandomCircularList circularList = new RandomCircularList(teams);
 
         circularList.printAllTeams();
-        circularList.assignTargets();
         circularList.printFirstTargets();
         circularList.printList();
         System.out.println();
