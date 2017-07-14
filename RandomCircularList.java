@@ -13,7 +13,8 @@
  *
  *  METHODS
  *      createList()                                    // creates the circlular linked list, telling each person who its next target is
- *      copyListOfTeams(List<Team>) -> List<Team>       // return copy of a list of teams
+ *      copyListOfTeams(List<Team>) -> List<Team>       // return copy of a list of Team objects
+ *      copyListFromTeam(Team) -> List<Person>          // return copy of list of Person objects
  *      randomlySelectTeam(List<Team>)                  // randomly selects team form a list of teams
  *      removeRandomPerson(Team)                        // randomly selects, removes, and returns a person from a team
  *      removeRandomPerson(List<Team>)                  // randomly selects, removes, and returns a person from a random team in a list of teams
@@ -27,6 +28,7 @@
  *      printAllTeams()                                 // runs printTeam(Team) method for all teams in the list
  *      getNumPeople() -> int                           // returns number of people in the game
  *      getNumPeopleInList() -> int                     // returns number of people in the list
+ *      sameTeamConflicts() -> int                      // returns number of times people on the same team are next to eachother
  */
 
 import java.util.*;     // Import List
@@ -165,6 +167,12 @@ public class RandomCircularList
         return copy;
     }
 
+    /**
+     *  This method takes a list Person objects and returns a copy of that list
+     *  The copy is a new object, seperate from the original
+     *
+     *  post: return copy of a list of Person objects
+     */
     private List<Person> copyListFromTeam(Team team){
         List<Person> newList = new ArrayList<Person>();
         List<Person> oldList = team.getList();
@@ -241,23 +249,6 @@ public class RandomCircularList
 
         // return lastPerson
         return lastPerson;
-    }
-
-    private void resetList(){
-        if(lastPerson == null){
-            return;
-        }
-
-        Person i = firstPerson;
-        Person iNext = i.getTarget();
-
-        while(iNext != lastPerson){
-            i.setTarget(null);
-            i = iNext;
-            iNext = iNext.getTarget();
-        }
-
-        iNext.setTarget(null);
     }
 
     /**
@@ -355,6 +346,12 @@ public class RandomCircularList
         return sum;
     }
 
+    /**
+     *  Counts and returns the number of times people on the same team are next to eachother
+     *
+     *  pre: circular linked list is created
+     *  post: returns number of times people on the same team are next to eachother
+     */
     public int sameTeamConflicts(){
         int count = 0;
 
