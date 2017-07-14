@@ -65,13 +65,8 @@ public class RandomCircularList
         // Make a copy of teams
         List<Team> teamsCopy = copyListOfTeams(teams);
 
-        // Set targets to null
-        resetList();
-
         // Establish start of loop
         firstPerson = removeRandomPerson(teamsCopy);
-
-
 
         // Set up for while loop
         Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
@@ -171,13 +166,24 @@ public class RandomCircularList
 
         // Create new team and add team to the list
         for(Team team: teams){
-            List<Person> teamListCopy = new ArrayList<>(team.getList());
+            List<Person> teamListCopy = copyListFromTeam(team);
             Team teamCopy = new Team(team.getTeamName(), teamListCopy);
             copy.add(teamCopy);
         }
 
         // Return list
         return copy;
+    }
+
+    private List<Person> copyListFromTeam(Team team){
+        List<Person> newList = new ArrayList<Person>();
+        List<Person> oldList = team.getList();
+
+        for(Person i: oldList){
+            newList.add(new Person(i.getName(), i.getTeam()));
+        }
+
+        return newList;
     }
 
     /**
