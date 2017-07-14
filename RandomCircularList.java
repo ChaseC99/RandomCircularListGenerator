@@ -36,7 +36,6 @@ public class RandomCircularList
     public List<Team> teams;        // list teams that will included in the circular list
     public Person firstPerson;      // considered the "starting" point for the circular list
     public Person lastPerson;       // considered the "ending" point for the circular list
-    private boolean list_is_good;   // variable represents whether the list
 
     /**
      * Constructor for objects of class RandomCircularList
@@ -47,12 +46,7 @@ public class RandomCircularList
         firstPerson = teams.get(0).get(0);       // establishes first player on the first team as first player
         lastPerson = null;
 
-        System.out.println("Made it to while loop");
-        list_is_good = false;
-        while(!list_is_good){
-            System.out.println("Loop");
-            assignTargets();
-        }
+        assignTargets();
     }
 
     /**
@@ -140,15 +134,16 @@ public class RandomCircularList
         // get last person in the list
         lastPerson = getLastPerson();
 
-        System.out.println("got last person in list");
+        System.out.println("loop 0");
         // check to makesure coach and player aren't on the same team
         if(!lastPerson.getTeam().equals(firstPerson.getTeam())){
-            System.out.println("Entered if statement");
             lastPerson.setTarget(firstPerson);
-            System.out.println("set last person target");
-            if(sameTeamConflicts() == 0){
-                list_is_good = true;
-            }
+        } else {
+            assignTargets();
+        }
+
+        if(sameTeamConflicts() != 0){
+            assignTargets();
         }
 
         System.out.println("made it through method");
