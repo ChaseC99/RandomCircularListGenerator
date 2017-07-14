@@ -13,7 +13,6 @@ public class CreateList
        RandomCircularList game = new RandomCircularList(temp);
        System.out.println("Number of people = " + game.getNumPeople());
        game.printAllTeams();
-       game.assignTargets();
        System.out.println(" ------------------------ ");
        System.out.println();
        game.printFirstTargets();
