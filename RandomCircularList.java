@@ -127,14 +127,13 @@ public class RandomCircularList
                     }
             }
         }
-        System.out.println("made it to getLastPerson");
+
         /*
          *  Assign last player in the list to target firstPerson
          */
         // get last person in the list
         lastPerson = getLastPerson();
 
-        System.out.println("loop 0");
         // check to makesure coach and player aren't on the same team
         if(!lastPerson.getTeam().equals(firstPerson.getTeam())){
             lastPerson.setTarget(firstPerson);
@@ -145,8 +144,6 @@ public class RandomCircularList
         if(sameTeamConflicts() != 0){
             assignTargets();
         }
-
-        System.out.println("made it through method");
     }
 
     /**
