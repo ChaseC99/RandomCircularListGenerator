@@ -28,15 +28,17 @@ public class Tester {
         sg.setList(fileToArray("TestFiles/statGirls.txt", sg));
         teams.add(sg);
 
-        RandomCircularList circularList = new RandomCircularList(teams);
+        for(int i = 0; i < 100; i++){
+            RandomCircularList circularList = new RandomCircularList(teams);
 
-        circularList.printAllTeams();
-        circularList.printFirstTargets();
-        circularList.printList();
-        System.out.println();
-        System.out.println(circularList.getNumPeople());
-        System.out.println(circularList.getNumPeopleInList());
-        System.out.println("Number of same team conflicts = " + circularList.sameTeamConflicts());
+            circularList.printAllTeams();
+            circularList.printFirstTargets();
+            circularList.printList();
+            System.out.println();
+            System.out.println(circularList.getNumPeople());
+            System.out.println(circularList.getNumPeopleInList());
+            System.out.println("Number of same team conflicts = " + circularList.sameTeamConflicts());
+        }
     }
 
     /**
