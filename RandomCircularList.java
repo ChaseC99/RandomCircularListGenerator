@@ -12,7 +12,7 @@
  *      Person firstPeron       // considered the "starting" point for the circular list
  *
  *  METHODS
- *      assignTargets()                                 // creates the circlular linked list, telling each person who its next target is
+ *      createList()                                    // creates the circlular linked list, telling each person who its next target is
  *      copyListOfTeams(List<Team>) -> List<Team>       // return copy of a list of teams
  *      randomlySelectTeam(List<Team>)                  // randomly selects team form a list of teams
  *      removeRandomPerson(Team)                        // randomly selects, removes, and returns a person from a team
@@ -42,20 +42,18 @@ public class RandomCircularList
      */
     public RandomCircularList(List<Team> teams)
     {
-        this.teams = teams;
-        firstPerson = teams.get(0).get(0);       // establishes first player on the first team as first player
-        lastPerson = null;
-
-        assignTargets();
+        this.teams = teams;                     // sets teams variable
+        firstPerson = teams.get(0).get(0);      // establishes first player on the first team as first player
+        createList();                           // creates the random circular linked list and instantiates lastPerson
     }
 
     /**
      *  This method creates the circlular linked list, telling each person who its next target is
      *
      *  pre: the teams have players loaded onto them
-     *  post: each player is assigned a target
+     *  post: each player is assigned a target, lastPerson = lastPerson in the list
      */
-    public void assignTargets(){
+    public void createList(){
         // Make a copy of teams
         List<Team> teamsCopy = copyListOfTeams(teams);
 
@@ -128,21 +126,21 @@ public class RandomCircularList
             }
         }
 
-        /*
-         *  Assign last player in the list to target firstPerson
-         */
         // get last person in the list
         lastPerson = getLastPerson();
 
-        // check to makesure coach and player aren't on the same team
+        // check to make sure lastPerson and firstPerson aren't on the same team
         if(!lastPerson.getTeam().equals(firstPerson.getTeam())){
-            lastPerson.setTarget(firstPerson);
+            lastPerson.setTarget(firstPerson);  // sets last person's target as first person
         } else {
-            assignTargets();
+            // if they are on the same team, rerun createList and try again
+            createList();
         }
 
+        // check to make sure no people next to eachother are on the same team
         if(sameTeamConflicts() != 0){
-            assignTargets();
+            // if people are on the same team, rerun creatList and try again
+            createList();
         }
     }
 
