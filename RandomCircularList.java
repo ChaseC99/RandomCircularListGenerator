@@ -35,6 +35,8 @@ public class RandomCircularList
     // instance variables
     public List<Team> teams;        // list teams that will included in the circular list
     public Person firstPerson;      // considered the "starting" point for the circular list
+    public Person lastPerson;       // considered the "ending" point for the circular list
+    private boolean list_is_good;   // variable represents whether the list
 
     /**
      * Constructor for objects of class RandomCircularList
@@ -43,34 +45,15 @@ public class RandomCircularList
     {
         this.teams = teams;
         firstPerson = teams.get(0).get(0);       // establishes first player on the first team as first player
-    }
+        lastPerson = null;
 
-    /**
-     *  pre: file contains team name, followed by each player on a seperate line
-     *  post: returns a List<Person>
-     *
-    private List<Person> fileToArray(String file, Team team){
-        List<Person> array = new ArrayList<Person>();    // Makes a list
-
-        FileInput inFile = new FileInput(file); // Creates input file
-
-        inFile.readLine();   // Disregards the team name at the beginning of the file
-
-        int i = 0;  // Index to run through array
-
-        // Runs through each number and adds it to an item
-        while(inFile.hasMoreTokens()){
-            String name = inFile.readLine();        // name from file
-
-            Person temp = new Person(name, team);   // Creates new Person with parameters from the file
-            array.add(temp);                        // Adds Person to array
-            i++;                                    // Moves to next position in array
+        System.out.println("Made it to while loop");
+        list_is_good = false;
+        while(!list_is_good){
+            System.out.println("Loop");
+            assignTargets();
         }
-
-        inFile.close();     // Closes in file
-
-        return array;       // Returns array with items in it
-    }*/
+    }
 
     /**
      *  This method creates the circlular linked list, telling each person who its next target is
@@ -82,8 +65,13 @@ public class RandomCircularList
         // Make a copy of teams
         List<Team> teamsCopy = copyListOfTeams(teams);
 
+        // Set targets to null
+        resetList();
+
         // Establish start of loop
         firstPerson = removeRandomPerson(teamsCopy);
+
+
 
         // Set up for while loop
         Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
@@ -150,24 +138,25 @@ public class RandomCircularList
                     }
             }
         }
-
+        System.out.println("made it to getLastPerson");
         /*
          *  Assign last player in the list to target firstPerson
          */
         // get last person in the list
-        Person lastPerson = getLastPerson();
+        lastPerson = getLastPerson();
 
+        System.out.println("got last person in list");
         // check to makesure coach and player aren't on the same team
         if(!lastPerson.getTeam().equals(firstPerson.getTeam())){
+            System.out.println("Entered if statement");
             lastPerson.setTarget(firstPerson);
-        } else {
-            assignTargets();    // rerun the assign targets method so new player is at the end
+            System.out.println("set last person target");
+            if(sameTeamConflicts() == 0){
+                list_is_good = true;
+            }
         }
 
-        // check to make sure there are no same team conflicts
-        if(sameTeamConflicts() != 0){
-            //assignTargets();    // rerun assignTargets so there are no conflicts
-        }
+        System.out.println("made it through method");
     }
 
     /**
@@ -256,6 +245,23 @@ public class RandomCircularList
 
         // return lastPerson
         return lastPerson;
+    }
+
+    private void resetList(){
+        if(lastPerson == null){
+            return;
+        }
+
+        Person i = firstPerson;
+        Person iNext = i.getTarget();
+
+        while(iNext != lastPerson){
+            i.setTarget(null);
+            i = iNext;
+            iNext = iNext.getTarget();
+        }
+
+        iNext.setTarget(null);
     }
 
     /**
