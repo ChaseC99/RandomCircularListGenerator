@@ -2,5 +2,6 @@
 *.class
 *.ctxt
 *.jar
+.DS_Store
 package.bluej
 README.TXT
