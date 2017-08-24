@@ -10,11 +10,13 @@ public class UI extends JFrame
 
         // JPanels
         JPanel playerView = new JPanel();
+        playerView.setBackground(Color.BLACK);
         add(playerView);
 
-        add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
+        //add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
 
         JPanel listView = new JPanel();
+        listView.setBackground(Color.BLUE);
         add(listView);
 
         // DON'T FORGET TO INCLUDE THIS CODE - otherwise you will not
