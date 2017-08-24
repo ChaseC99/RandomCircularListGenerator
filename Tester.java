@@ -10,6 +10,8 @@
 public class Tester {
     // test RandomCircularList
     public static void main(String[] args){
+        UI window = new UI();
+
         List<Team> teams = new ArrayList<Team>();
 
         Team varsity = new Team("Varsity");
