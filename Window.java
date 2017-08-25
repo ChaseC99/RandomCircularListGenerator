@@ -27,6 +27,8 @@ public class Window extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        viewButtonGroup = new javax.swing.ButtonGroup();
+        textField1 = new java.awt.TextField();
         groupsPanel = new javax.swing.JPanel();
         groupComboBox = new javax.swing.JComboBox<>();
         addGroupButton = new javax.swing.JButton();
@@ -39,12 +41,26 @@ public class Window extends javax.swing.JFrame {
         addPersonButton = new javax.swing.JButton();
         nameTextField = new javax.swing.JTextField();
         listPanel = new javax.swing.JPanel();
+        listDisplayPane = new javax.swing.JScrollPane();
+        listDisplay = new javax.swing.JTextArea();
+        listWarningLabel = new javax.swing.JLabel();
+        generateListButton = new javax.swing.JButton();
+        listRadioButton = new javax.swing.JRadioButton();
+        singleNextRadioButton = new javax.swing.JRadioButton();
+        viewTypeLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         helpItem = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+
+        textField1.setText("textField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Random List Generator");
-        setMinimumSize(new java.awt.Dimension(860, 590));
+        setMinimumSize(new java.awt.Dimension(860, 535));
         setSize(getMinimumSize());
 
         groupsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Manager"));
@@ -63,11 +79,6 @@ public class Window extends javax.swing.JFrame {
         editRosterButton.setText("Edit Roster");
 
         rosterDisplay.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Roster"));
-        rosterDisplay.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         rosterDisplay.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         rosterDisplayPane.setViewportView(rosterDisplay);
 
@@ -146,18 +157,101 @@ public class Window extends javax.swing.JFrame {
 
         listPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("List"));
 
+        listDisplay.setEditable(false);
+        listDisplay.setColumns(20);
+        listDisplay.setRows(5);
+        listDisplayPane.setViewportView(listDisplay);
+
+        listWarningLabel.setFont(new java.awt.Font("Lucida Grande", 2, 11)); // NOI18N
+        listWarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        listWarningLabel.setText("<html>\n* If there are only 2 groups or less, the list will be randomized,\n<BR>  but 2 people from the same group may be placed next to eachother.\n</html>");
+
+        generateListButton.setText("Generate Random List");
+
+        viewButtonGroup.add(listRadioButton);
+        listRadioButton.setText("List View");
+        listRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listRadioButtonActionPerformed(evt);
+            }
+        });
+
+        viewButtonGroup.add(singleNextRadioButton);
+        singleNextRadioButton.setSelected(true);
+        singleNextRadioButton.setText("Single-Next View");
+        singleNextRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                singleNextRadioButtonActionPerformed(evt);
+            }
+        });
+
+        viewTypeLabel.setText("View Type:");
+
         javax.swing.GroupLayout listPanelLayout = new javax.swing.GroupLayout(listPanel);
         listPanel.setLayout(listPanelLayout);
         listPanelLayout.setHorizontalGroup(
             listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGroup(listPanelLayout.createSequentialGroup()
+                .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(listPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(listDisplayPane)
+                            .addComponent(listWarningLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)))
+                    .addGroup(listPanelLayout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(generateListButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(listPanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(viewTypeLabel)
+                .addGap(18, 18, 18)
+                .addComponent(singleNextRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(listRadioButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         listPanelLayout.setVerticalGroup(
             listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(listPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(generateListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewTypeLabel)
+                    .addComponent(listRadioButton)
+                    .addComponent(singleNextRadioButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(listDisplayPane, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(listWarningLabel)
+                .addContainerGap())
         );
 
+        jMenu1.setText("File");
+
+        jMenuItem1.setText("Restart");
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
         helpItem.setText("Help");
+
+        jMenuItem2.setText("How to Use");
+        helpItem.add(jMenuItem2);
+
+        jMenuItem3.setText("Report Issue");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        helpItem.add(jMenuItem3);
+
+        jMenuItem4.setText("Source Code");
+        helpItem.add(jMenuItem4);
+
         jMenuBar1.add(helpItem);
 
         setJMenuBar(jMenuBar1);
@@ -190,6 +284,18 @@ public class Window extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addPersonButtonActionPerformed
 
+    private void listRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listRadioButtonActionPerformed
+
+    private void singleNextRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleNextRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_singleNextRadioButtonActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,15 +314,29 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton addPersonButton;
     private javax.swing.JPanel addPersonPane;
     private javax.swing.JButton editRosterButton;
+    private javax.swing.JButton generateListButton;
     private javax.swing.JComboBox<String> groupComboBox;
     private javax.swing.JPanel groupsPanel;
     private javax.swing.JMenu helpItem;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JTextArea listDisplay;
+    private javax.swing.JScrollPane listDisplayPane;
     private javax.swing.JPanel listPanel;
+    private javax.swing.JRadioButton listRadioButton;
+    private javax.swing.JLabel listWarningLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JButton removeGroupButton;
     private javax.swing.JButton renameGroupButton;
     private javax.swing.JList<String> rosterDisplay;
     private javax.swing.JScrollPane rosterDisplayPane;
+    private javax.swing.JRadioButton singleNextRadioButton;
+    private java.awt.TextField textField1;
+    private javax.swing.ButtonGroup viewButtonGroup;
+    private javax.swing.JLabel viewTypeLabel;
     // End of variables declaration//GEN-END:variables
 }
