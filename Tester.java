@@ -31,7 +31,7 @@ public class Tester {
             java.util.logging.Logger.getLogger(Window.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        Window ui = new Window();
+        //Window ui = new Window();
 
         List<Team> teams = new ArrayList<Team>();
 
