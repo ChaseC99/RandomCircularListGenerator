@@ -481,12 +481,15 @@ public class Window extends javax.swing.JFrame {
     
     // 
     private void createAddGroupJDialog(){
-        //controller.addGroup(new Team(""))
+        controller.addGroup("Test");
     }
     
     
     // groupComboBox code //
-
+    public void addGroupToComboBox(Group group){
+        groupComboBox.addItem(group);
+        groupComboBox.setSelectedItem(group);
+    }
     
     
     

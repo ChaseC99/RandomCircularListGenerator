@@ -16,6 +16,7 @@ public class Controller
     List<Group> groups;
     Group selectedGroup;
     ListViewType selectedViewType;
+    int i = 0;
 
     // Constructor
     public Controller(Window ui)
@@ -28,7 +29,11 @@ public class Controller
 
     public void addGroup(String groupName)
     {
-        groups.add(new Group(groupName));
+        Group group = new Group(groupName + i);
+        i++;
+        groups.add(group);
+        selectedGroup = group;
+        ui.addGroupToComboBox(group);
     }
 
     public List<Group> getGroups()
