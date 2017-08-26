@@ -320,7 +320,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_removeGroupButtonActionPerformed
 
     private void addPersonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPersonButtonActionPerformed
-        createAddGroupJDialog();
+        controller.addPerson(nameTextField.getText());
         resetNameTextField();
     }//GEN-LAST:event_addPersonButtonActionPerformed
 
@@ -346,7 +346,9 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_addGroupButtonActionPerformed
 
     private void groupComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupComboBoxActionPerformed
-        
+        // I tried to use .getSelectedItem() but that returned an Obj, not Group
+        // So instead I had to use .getItemAt(.getSelectedIndex()) because that returned Group
+        controller.setSelectedGroup(groupComboBox.getItemAt(groupComboBox.getSelectedIndex()));
     }//GEN-LAST:event_groupComboBoxActionPerformed
 
     private void sourceCodeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourceCodeItemActionPerformed
@@ -388,7 +390,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton renameGroupButton;
     private javax.swing.JMenuItem reportIssueItem;
     private javax.swing.JMenuItem restartItem;
-    private javax.swing.JList<String> rosterDisplay;
+    private javax.swing.JList<Person> rosterDisplay;
     private javax.swing.JScrollPane rosterDisplayPane;
     private javax.swing.JRadioButton singleNextRadioButton;
     private javax.swing.JMenuItem sourceCodeItem;
@@ -492,6 +494,13 @@ public class Window extends javax.swing.JFrame {
     }
     
     
+    // add single name to display
+    public void updateRosterDisplay(Person[] groupRoster)
+    {
+        rosterDisplay.setListData(groupRoster);
+        
+    }
+
     
   
 }

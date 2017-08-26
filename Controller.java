@@ -36,6 +36,13 @@ public class Controller
         ui.addGroupToComboBox(group);
     }
 
+    public void addPerson(String name)
+    {
+        Person person = new Person(name, selectedGroup);
+        selectedGroup.add(person);
+        ui.updateRosterDisplay(selectedGroup.getListAsArray());
+    }
+
     public List<Group> getGroups()
     {
         return groups;
@@ -44,6 +51,7 @@ public class Controller
     public void setSelectedGroup(Group group)
     {
         selectedGroup = group;
+        ui.updateRosterDisplay(group.getListAsArray());
     }
 
     public void setSelectedViewType(ListViewType viewType)
