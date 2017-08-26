@@ -71,11 +71,20 @@ public class Window extends javax.swing.JFrame {
 
         groupsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Manager"));
 
+        groupComboBox.setEnabled(false);
+
         addGroupButton.setText("Add Group");
+        addGroupButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addGroupButtonActionPerformed(evt);
+            }
+        });
 
         renameGroupButton.setText("Rename Group");
+        renameGroupButton.setEnabled(false);
 
         removeGroupButton.setText("Remove Group");
+        removeGroupButton.setEnabled(false);
         removeGroupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeGroupButtonActionPerformed(evt);
@@ -83,14 +92,17 @@ public class Window extends javax.swing.JFrame {
         });
 
         editRosterButton.setText("Edit Roster");
+        editRosterButton.setEnabled(false);
 
         rosterDisplay.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Roster"));
         rosterDisplay.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        rosterDisplay.setEnabled(false);
         rosterDisplayPane.setViewportView(rosterDisplay);
 
         addPersonPane.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         addPersonButton.setText("Add Person");
+        addPersonButton.setEnabled(false);
         addPersonButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addPersonButtonActionPerformed(evt);
@@ -99,6 +111,7 @@ public class Window extends javax.swing.JFrame {
 
         nameTextField.setForeground(new java.awt.Color(153, 153, 153));
         nameTextField.setText("Enter Name");
+        nameTextField.setEnabled(false);
         nameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameTextFieldActionPerformed(evt);
@@ -179,9 +192,11 @@ public class Window extends javax.swing.JFrame {
         listWarningLabel.setText("<html>\n* If there are only 2 groups or less, the list will be randomized,\n<BR>  but 2 people from the same group may be placed next to eachother.\n</html>");
 
         generateListButton.setText("Generate Random List");
+        generateListButton.setEnabled(false);
 
         viewButtonGroup.add(listRadioButton);
         listRadioButton.setText("List View");
+        listRadioButton.setEnabled(false);
         listRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listRadioButtonActionPerformed(evt);
@@ -191,6 +206,7 @@ public class Window extends javax.swing.JFrame {
         viewButtonGroup.add(singleNextRadioButton);
         singleNextRadioButton.setSelected(true);
         singleNextRadioButton.setText("Single-Next View");
+        singleNextRadioButton.setEnabled(false);
         singleNextRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 singleNextRadioButtonActionPerformed(evt);
@@ -312,6 +328,10 @@ public class Window extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTextFieldActionPerformed
 
+    private void addGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGroupButtonActionPerformed
+        enableComponents(true);
+    }//GEN-LAST:event_addGroupButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,6 +392,21 @@ public class Window extends javax.swing.JFrame {
     
     
     
+    // UI Buttons
+    
+    public void enableComponents(boolean enable){
+        groupComboBox.setEnabled(enable);
+        editRosterButton.setEnabled(enable);
+        renameGroupButton.setEnabled(enable);
+        removeGroupButton.setEnabled(enable);
+        rosterDisplay.setEnabled(enable);
+        nameTextField.setEnabled(enable);
+        addPersonButton.setEnabled(enable);
+        generateListButton.setEnabled(enable);
+        singleNextRadioButton.setEnabled(enable);
+        listRadioButton.setEnabled(enable);
+    }
+    
     // nameTextField code //
     /*  additional functionality is given to the nameTextField
      *      - hint text is added, which says "Enter Name"
@@ -420,4 +455,6 @@ public class Window extends javax.swing.JFrame {
         nameTextField.setForeground(new Color(153, 153, 153));
         hintTextDisplayed = true;
     }
+    
+    
 }
