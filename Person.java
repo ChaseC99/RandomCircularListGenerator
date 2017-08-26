@@ -2,37 +2,37 @@
  *  @author Chase Carnaroli
  *
  *  Each person is represented by a Person class
- *  The Person class tracks each person's name, team, and target
+ *  The Person class tracks each person's name, group, and target
  *
  *  INSTANCE VARIABLES
  *      String name         // person's name
- *      Team team           // the team that the person belongs to
+ *      Group group           // the group that the person belongs to
  *      Person target       // the person that comes after this person on the list
  *
  *  METHODS
  *      getName() -> String               // returns person's name
- *      getTeam() -> Team                 // returns person's team
- *      getTeamName() -> String           // returns team name
+ *      getGroup() -> Group                 // returns person's group
+ *      getGroupName() -> String           // returns group name
  *      setTarget()                       // sets person's target
  *      getTarget() -> Person             // returns person's target
- *      diffTeams(Person) -> boolean      // returns true if different teams, false if same team
- *      diffTeams(Team) -> boolean        // returns true if different teams, false if same team
+ *      diffGroups(Person) -> boolean      // returns true if different groups, false if same group
+ *      diffGroups(Group) -> boolean        // returns true if different groups, false if same group
  *      equals(Person) -> boolean         // return true if same person, false if different
  */
 public class Person
 {
     // Instance Variables
     private String name;
-    private Team team;
+    private Group group;
     private Person target;
 
     /**
      * Constructor Person class
      */
-    public Person(String name, Team team)
+    public Person(String name, Group group)
     {
         this.name = name;
-        this.team = team;
+        this.group = group;
     }
 
     // post: return name
@@ -40,14 +40,14 @@ public class Person
         return name;
     }
 
-    // post: returns team
-    public Team getTeam(){
-        return team;
+    // post: returns group
+    public Group getGroup(){
+        return group;
     }
 
-    // post: returns team name
-    public String getTeamName(){
-        return team.getTeamName();
+    // post: returns group name
+    public String getGroupName(){
+        return group.getGroupName();
     }
 
     // post: set target
@@ -60,14 +60,14 @@ public class Person
         return target;
     }
 
-    // post: returns true if different teams, false if same team
-    public boolean diffTeams(Person person){
-        return team.equals(person.getTeam());
+    // post: returns true if different groups, false if same group
+    public boolean diffGroups(Person person){
+        return group.equals(person.getGroup());
     }
 
-    // post: returns true if different teams, false if same team
-    public boolean diffTeams(Team teamName){
-        return team.equals(teamName);
+    // post: returns true if different groups, false if same group
+    public boolean diffGroups(Group groupName){
+        return group.equals(groupName);
     }
 
     // post: return true if same object, false if different

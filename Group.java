@@ -2,43 +2,43 @@
 /** RandomCircularListGenerator
  *  @author Chase Carnaroli
  *
- *  The Team class tracks a List<Person>
- *  This is so that people of the same team won't get placed together
+ *  The Group class tracks a List<Person>
+ *  This is so that people of the same group won't get placed together
  *
  *  INSTANCE VARIABLES
- *      String teamName             // name of the team
- *      List<Person> people         // list of Persons on the team
+ *      String groupName             // name of the group
+ *      List<Person> people         // list of Persons on the group
  *
  *  METHODS
- *      size() -> int                   // returns number of people on the team
+ *      size() -> int                   // returns number of people on the group
  *      add(Person)                     // a Person is added to the List<Person> people
  *      remove(Person) -> boolean       // returns true if person is removed, false if person wasn't in list
  *      setList(List<Person>)           // people is set to the List<Person> passed through
  *      getList() -> List<Person>       // returns List<Person> people
- *      getTeamName() -> String         // returns teamName
+ *      getGroupName() -> String         // returns groupName
  *      get(int) -> Person              // returns person at index in List<Person> people
- *      toString() -> String            // overrides toString method and returns teamName
+ *      toString() -> String            // overrides toString method and returns groupName
  */
 
  import java.util.*;    // import arraylists
-public class Team
+public class Group
 {
     // Instance Variables
-    private String teamName;
+    private String groupName;
     private List<Person> people;
 
     // Constructors
-    public Team(String teamName){
-        this.teamName = teamName;
+    public Group(String groupName){
+        this.groupName = groupName;
         people = new ArrayList<Person>();
     }
 
-    public Team(String teamName, List<Person> people){
-        this.teamName = teamName;
+    public Group(String groupName, List<Person> people){
+        this.groupName = groupName;
         this.people = people;
     }
 
-    // post: returns number of people on the team
+    // post: returns number of people on the group
     public int size(){
       return people.size();
     }
@@ -70,9 +70,9 @@ public class Team
         return people;
     }
 
-    // post: return teamName
-    public String getTeamName(){
-        return teamName;
+    // post: return groupName
+    public String getGroupName(){
+        return groupName;
     }
 
     // post: returns person at index in List<Person> people
@@ -80,8 +80,8 @@ public class Team
         return people.get(index);
     }
 
-    // post: overrides toString method and returns teamName
+    // post: overrides toString method and returns groupName
     public String toString(){
-        return getTeamName();
+        return getGroupName();
     }
 }

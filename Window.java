@@ -342,6 +342,7 @@ public class Window extends javax.swing.JFrame {
 
     private void addGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGroupButtonActionPerformed
         enableComponents(true);
+        createAddGroupJDialog();
     }//GEN-LAST:event_addGroupButtonActionPerformed
 
     private void groupComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupComboBoxActionPerformed
@@ -372,7 +373,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton editRosterButton;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton generateListButton;
-    private javax.swing.JComboBox<Team> groupComboBox;
+    private javax.swing.JComboBox<Group> groupComboBox;
     private javax.swing.JPanel groupsPanel;
     private javax.swing.JMenu helpItem;
     private javax.swing.JMenuItem howToUseItem;
@@ -480,7 +481,7 @@ public class Window extends javax.swing.JFrame {
     
     // 
     private void createAddGroupJDialog(){
-        
+        //controller.addGroup(new Team(""))
     }
     
     

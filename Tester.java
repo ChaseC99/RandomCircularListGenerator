@@ -33,42 +33,42 @@ public class Tester {
 
         //Window ui = new Window();
 
-        List<Team> teams = new ArrayList<Team>();
+        List<Group> groups = new ArrayList<Group>();
 
-        Team varsity = new Team("Varsity");
+        Group varsity = new Group("Varsity");
         varsity.setList(fileToArray("TestFiles/varsity.txt", varsity));
-        teams.add(varsity);
+        groups.add(varsity);
 
-        Team jv = new Team("JV");
+        Group jv = new Group("JV");
         jv.setList(fileToArray("TestFiles/jv.txt", jv));
-        teams.add(jv);
+        groups.add(jv);
 
-        Team n = new Team("Novice");
+        Group n = new Group("Novice");
         n.setList(fileToArray("TestFiles/novice.txt", n));
-        teams.add(n);
+        groups.add(n);
 
-        Team sg = new Team("Stat Girls");
+        Group sg = new Group("Stat Girls");
         sg.setList(fileToArray("TestFiles/statGirls.txt", sg));
-        teams.add(sg);
+        groups.add(sg);
 
         for(int i = 0; i < 100; i++){
-            RandomCircularList circularList = new RandomCircularList(teams);
+            RandomCircularList circularList = new RandomCircularList(groups);
 
-            circularList.printAllTeams();
+            circularList.printAllGroups();
             circularList.printFirstTargets();
             circularList.printList();
             System.out.println();
             System.out.println(circularList.getNumPeople());
             System.out.println(circularList.getNumPeopleInList());
-            System.out.println("Number of same team conflicts = " + circularList.sameTeamConflicts());
+            System.out.println("Number of same group conflicts = " + circularList.sameGroupConflicts());
         }
     }
 
     /**
-     *  pre: file contains team name, followed by each player on a seperate line
+     *  pre: file contains group name, followed by each player on a seperate line
      *  post: returns a List<Person>
      */
-    private static List<Person> fileToArray(String file, Team team){
+    private static List<Person> fileToArray(String file, Group group){
         List<Person> array = new ArrayList<Person>();    // Makes a list
 
         try {
@@ -76,14 +76,14 @@ public class Tester {
 
             BufferedReader inFile = new BufferedReader(inputFile); // wraps in bufferedReader
 
-            inFile.readLine();   // Disregards the team name at the beginning of the file
+            inFile.readLine();   // Disregards the group name at the beginning of the file
 
             String name;        // name from file
 
             // Runs through each number and adds it to an item
             while((name = inFile.readLine()) != null){
 
-                Person temp = new Person(name, team);   // Creates new Person with parameters from the file
+                Person temp = new Person(name, group);   // Creates new Person with parameters from the file
                 array.add(temp);                        // Adds Person to array
             }
 

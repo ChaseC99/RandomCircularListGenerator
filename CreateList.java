@@ -9,10 +9,10 @@
 public class CreateList
 {
    public static void main(String[] args){
-       List<Team> temp = new ArrayList<Team>();
+       List<Group> temp = new ArrayList<Group>();
        RandomCircularList game = new RandomCircularList(temp);
        System.out.println("Number of people = " + game.getNumPeople());
-       game.printAllTeams();
+       game.printAllGroups();
        System.out.println(" ------------------------ ");
        System.out.println();
        game.printFirstTargets();

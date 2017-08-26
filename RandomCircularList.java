@@ -5,104 +5,104 @@
  *  The list is essentially a linked list. Each person is a node.
  *  Each person class is assigned a target, so it knows who the next node is
  *
- *  No two players on the same team will be directly next to eachother on the list (unless only one team is inputed)
+ *  No two players on the same group will be directly next to eachother on the list (unless only one group is inputed)
  *
  *  INSTANCE VARIABLES
- *      List<Team> teams        // list teams that will included in the circular list
+ *      List<Group> groups        // list groups that will included in the circular list
  *      Person firstPeron       // considered the "starting" point for the circular list
  *
  *  METHODS
  *      createList()                                    // creates the circlular linked list, telling each person who its next target is
- *      copyListOfTeams(List<Team>) -> List<Team>       // return copy of a list of Team objects
- *      copyListFromTeam(Team) -> List<Person>          // return copy of list of Person objects
- *      randomlySelectTeam(List<Team>)                  // randomly selects team form a list of teams
- *      removeRandomPerson(Team)                        // randomly selects, removes, and returns a person from a team
- *      removeRandomPerson(List<Team>)                  // randomly selects, removes, and returns a person from a random team in a list of teams
+ *      copyListOfGroups(List<Group>) -> List<Group>       // return copy of a list of Group objects
+ *      copyListFromGroup(Group) -> List<Person>          // return copy of list of Person objects
+ *      randomlySelectGroup(List<Group>)                  // randomly selects group form a list of groups
+ *      removeRandomPerson(Group)                        // randomly selects, removes, and returns a person from a group
+ *      removeRandomPerson(List<Group>)                  // randomly selects, removes, and returns a person from a random group in a list of groups
  *      getLastPerson() -> Person                       // returns last person in the list
  *      printFirstTargets()                             // prints to console a list of everyone's first target.
  *                                                              Ex: One "Person -> Target" per line
  *      printList()                                     // prints to console a list of everyone and who they are targeting
  *                                                              Ex: "x --> y --> z --> a --> b --> c --> x"
- *      printTeam(Team)                                 // prints to console a list of the team's players
- *                                                              Ex: "TeamName/n - name1 /n -name2 /n" etc
- *      printAllTeams()                                 // runs printTeam(Team) method for all teams in the list
+ *      printGroup(Group)                                 // prints to console a list of the group's players
+ *                                                              Ex: "GroupName/n - name1 /n -name2 /n" etc
+ *      printAllGroups()                                 // runs printGroup(Group) method for all groups in the list
  *      getNumPeople() -> int                           // returns number of people in the game
  *      getNumPeopleInList() -> int                     // returns number of people in the list
- *      sameTeamConflicts() -> int                      // returns number of times people on the same team are next to eachother
+ *      sameGroupConflicts() -> int                      // returns number of times people on the same group are next to eachother
  */
 
 import java.util.*;     // Import List
 public class RandomCircularList
 {
     // instance variables
-    public List<Team> teams;        // list teams that will included in the circular list
+    public List<Group> groups;        // list groups that will included in the circular list
     public Person firstPerson;      // considered the "starting" point for the circular list
     public Person lastPerson;       // considered the "ending" point for the circular list
 
     /**
      * Constructor for objects of class RandomCircularList
      */
-    public RandomCircularList(List<Team> teams)
+    public RandomCircularList(List<Group> groups)
     {
-        this.teams = teams;                     // sets teams variable
-        firstPerson = teams.get(0).get(0);      // establishes first player on the first team as first player
+        this.groups = groups;                     // sets groups variable
+        firstPerson = groups.get(0).get(0);      // establishes first player on the first group as first player
         createList();                           // creates the random circular linked list and instantiates lastPerson
     }
 
     /**
      *  This method creates the circlular linked list, telling each person who its next target is
      *
-     *  pre: the teams have players loaded onto them
+     *  pre: the groups have players loaded onto them
      *  post: each player is assigned a target, lastPerson = lastPerson in the list
      */
     public void createList(){
-        // Make a copy of teams
-        List<Team> teamsCopy = copyListOfTeams(teams);
+        // Make a copy of groups
+        List<Group> groupsCopy = copyListOfGroups(groups);
 
         // Establish start of loop
-        firstPerson = removeRandomPerson(teamsCopy);
+        firstPerson = removeRandomPerson(groupsCopy);
 
         // Set up for while loop
         Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
-        Team lastTargetTeam = firstPerson.getTeam();    // sets lastTargetTeam as the first players team
-        Team targetTeam;                                // declares targetTeam
+        Group lastTargetGroup = firstPerson.getGroup();    // sets lastTargetGroup as the first players group
+        Group targetGroup;                                // declares targetGroup
         Person target;                                  // declares target
 
         // Randomly assign player targets
-        while(teamsCopy.size() > 1){
-            // Randomly gives the Person a team that is different from his own
-            // post: targetTeam is a team different that the previous player's
+        while(groupsCopy.size() > 1){
+            // Randomly gives the Person a group that is different from his own
+            // post: targetGroup is a group different that the previous player's
             do{
-                targetTeam = randomlySelectTeam(teamsCopy);
-            } while(targetTeam == lastTargetTeam);
+                targetGroup = randomlySelectGroup(groupsCopy);
+            } while(targetGroup == lastTargetGroup);
 
-            // Give player a random target from his/her targetTeam
-            target = removeRandomPerson(targetTeam);    // randomly removes a person from the target team
+            // Give player a random target from his/her targetGroup
+            target = removeRandomPerson(targetGroup);    // randomly removes a person from the target group
             player.setTarget(target);                   // set player's target
 
-            // If the targetTeam is now empty, take the team out of the teamsCopy List
-            if(targetTeam.size() == 0){
-                // remove team from list
-                int index = teamsCopy.indexOf(targetTeam);
-                teamsCopy.remove(index);
+            // If the targetGroup is now empty, take the group out of the groupsCopy List
+            if(targetGroup.size() == 0){
+                // remove group from list
+                int index = groupsCopy.indexOf(targetGroup);
+                groupsCopy.remove(index);
             }
 
-            lastTargetTeam = targetTeam;  // updates last team
+            lastTargetGroup = targetGroup;  // updates last group
             player = target;              // target now gets assigned their target
         }
 
         /*
-         *  After the while loop there is usually one team left
+         *  After the while loop there is usually one group left
          *  The remaining players must be inserted into the list
-         *  It runs through the linked list until it finds a pair of people who are different teams
+         *  It runs through the linked list until it finds a pair of people who are different groups
          *  The player is inserted inbetween the two people
          */
 
-        // Establishes which team is left
-        Team teamLeft = teamsCopy.get(0);                   // get team List
-        List<Person> peopleLeft = teamLeft.getList();       // get list of remaining people from teamLeft
+        // Establishes which group is left
+        Group groupLeft = groupsCopy.get(0);                   // get group List
+        List<Person> peopleLeft = groupLeft.getList();       // get list of remaining people from groupLeft
 
-        // Assign targets to remaining players on teamLeft
+        // Assign targets to remaining players on groupLeft
         for(Person thisPerson: peopleLeft)
         {
             // Starts search at the beginning of the list
@@ -113,12 +113,12 @@ public class RandomCircularList
             // runs until player inserted
             while(!inserted)
                 {
-                    if(player1.getTeam().equals(teamLeft) || player2.getTeam().equals(teamLeft))    // if player is on same team as target
+                    if(player1.getGroup().equals(groupLeft) || player2.getGroup().equals(groupLeft))    // if player is on same group as target
                     {
                         // move to next player
                         player1 = player2;
                         player2 = player1.getTarget();
-                    } else  // if player is on different team as target
+                    } else  // if player is on different group as target
                     {
                         // insert player
                         player1.setTarget(thisPerson);  // set previous player target as thisPerson
@@ -131,36 +131,36 @@ public class RandomCircularList
         // get last person in the list
         lastPerson = getLastPerson();
 
-        // check to make sure lastPerson and firstPerson aren't on the same team
-        if(!lastPerson.getTeam().equals(firstPerson.getTeam())){
+        // check to make sure lastPerson and firstPerson aren't on the same group
+        if(!lastPerson.getGroup().equals(firstPerson.getGroup())){
             lastPerson.setTarget(firstPerson);  // sets last person's target as first person
         } else {
-            // if they are on the same team, rerun createList and try again
+            // if they are on the same group, rerun createList and try again
             createList();
         }
 
-        // check to make sure no people next to eachother are on the same team
-        if(sameTeamConflicts() != 0){
-            // if people are on the same team, rerun creatList and try again
+        // check to make sure no people next to eachother are on the same group
+        if(sameGroupConflicts() != 0){
+            // if people are on the same group, rerun creatList and try again
             createList();
         }
     }
 
     /**
-     *  This method takes a list of teams and returns a copy of that list
+     *  This method takes a list of groups and returns a copy of that list
      *  The copy is a new object, seperate from the original
      *
-     *  post: return copy of a list of teams
+     *  post: return copy of a list of groups
      */
-    private List<Team> copyListOfTeams(List<Team> original){
+    private List<Group> copyListOfGroups(List<Group> original){
         // Create list
-        List<Team> copy = new ArrayList<Team>();
+        List<Group> copy = new ArrayList<Group>();
 
-        // Create new team and add team to the list
-        for(Team team: teams){
-            List<Person> teamListCopy = copyListFromTeam(team);
-            Team teamCopy = new Team(team.getTeamName(), teamListCopy);
-            copy.add(teamCopy);
+        // Create new group and add group to the list
+        for(Group group: groups){
+            List<Person> groupListCopy = copyListFromGroup(group);
+            Group groupCopy = new Group(group.getGroupName(), groupListCopy);
+            copy.add(groupCopy);
         }
 
         // Return list
@@ -173,61 +173,61 @@ public class RandomCircularList
      *
      *  post: return copy of a list of Person objects
      */
-    private List<Person> copyListFromTeam(Team team){
+    private List<Person> copyListFromGroup(Group group){
         List<Person> newList = new ArrayList<Person>();
-        List<Person> oldList = team.getList();
+        List<Person> oldList = group.getList();
 
         for(Person i: oldList){
-            newList.add(new Person(i.getName(), i.getTeam()));
+            newList.add(new Person(i.getName(), i.getGroup()));
         }
 
         return newList;
     }
 
     /**
-     *  This method randomly selects a team from a list of teams.
+     *  This method randomly selects a group from a list of groups.
      *
-     *  pre: listOfTeam.size() >= 1
-     *  post: return random team
+     *  pre: listOfGroup.size() >= 1
+     *  post: return random group
      */
-    private Team randomlySelectTeam(List<Team> listOfTeams){
-        Team team;          // Team to be returned
+    private Group randomlySelectGroup(List<Group> listOfGroups){
+        Group group;          // Group to be returned
 
         Random rand = new Random();
-        int teamIndex = rand.nextInt(listOfTeams.size());   // random index in listOfTeams to pick random team
-        team = listOfTeams.get(teamIndex);                  // get team from list based off teamIndex
+        int groupIndex = rand.nextInt(listOfGroups.size());   // random index in listOfGroups to pick random group
+        group = listOfGroups.get(groupIndex);                  // get group from list based off groupIndex
 
-        return team;        // return team
+        return group;        // return group
     }
 
     /**
-     *  This method randomly selects a player from a team.
-     *  The player is removed from the team and returned
+     *  This method randomly selects a player from a group.
+     *  The player is removed from the group and returned
      *
-     *  pre: team.size() >= 1
+     *  pre: group.size() >= 1
      *  post: random player is removed and returned
      */
-    private Person removeRandomPerson(Team team){
+    private Person removeRandomPerson(Group group){
         Person target;          // Person to be returned
 
         Random r = new Random();
-        int i = r.nextInt(team.size());         // random index in the targetTeam List to pick random person in the team
-        target = team.getList().remove(i);      // set target as player at random index of targetTeam and takes them out of the list
+        int i = r.nextInt(group.size());         // random index in the targetGroup List to pick random person in the group
+        target = group.getList().remove(i);      // set target as player at random index of targetGroup and takes them out of the list
 
         return target;          // return target
     }
 
     /**
-     *  This method randomly selects a player from a team from a list of teams.
-     *  The player is removed from the team and returned.
+     *  This method randomly selects a player from a group from a list of groups.
+     *  The player is removed from the group and returned.
      *
-     *  pre: teams.size() >= 1 && team.size() >= 1
+     *  pre: groups.size() >= 1 && group.size() >= 1
      *  post: random player is removed and returned
      */
-    private Person removeRandomPerson(List<Team> teams){
-        Team targetTeam = randomlySelectTeam(teams);        // Team from which person is selected
+    private Person removeRandomPerson(List<Group> groups){
+        Group targetGroup = randomlySelectGroup(groups);        // Group from which person is selected
 
-        Person target = removeRandomPerson(targetTeam);     // Person to be returned
+        Person target = removeRandomPerson(targetGroup);     // Person to be returned
 
         return target;          // return target
     }
@@ -266,7 +266,7 @@ public class RandomCircularList
         Person target = hunter.getTarget();
 
         do{
-            System.out.println(hunter.getName() + " ( " + hunter.getTeam().getTeamName().substring(0,1) + " )" + " --> " + target.getName() + " ( " + target.getTeamName().substring(0,1) + " )");
+            System.out.println(hunter.getName() + " ( " + hunter.getGroup().getGroupName().substring(0,1) + " )" + " --> " + target.getName() + " ( " + target.getGroupName().substring(0,1) + " )");
             hunter = target;
             target = hunter.getTarget();
         }while(!hunter.equals(firstPerson));
@@ -292,16 +292,16 @@ public class RandomCircularList
     }
 
     /**
-     *  prints a list of the team's players
+     *  prints a list of the group's players
      *  example:
-     *      team
+     *      group
      *       - a
      *       - b
      *       - c
      */
-    public void printTeam(Team team){
-        System.out.println(team.getTeamName());
-        List<Person> people = team.getList();
+    public void printGroup(Group group){
+        System.out.println(group.getGroupName());
+        List<Person> people = group.getList();
         for(Person person: people){
             System.out.println(" - " + person.getName());
         }
@@ -309,11 +309,11 @@ public class RandomCircularList
     }
 
     /**
-     *  prints all team rosters using printTeam method
+     *  prints all group rosters using printGroup method
      */
-    public void printAllTeams(){
-        for(Team team: teams){
-            printTeam(team);
+    public void printAllGroups(){
+        for(Group group: groups){
+            printGroup(group);
         }
     }
 
@@ -323,8 +323,8 @@ public class RandomCircularList
     public int getNumPeople(){
         int sum = 0;
 
-        for(Team team: teams){
-            sum += team.size();
+        for(Group group: groups){
+            sum += group.size();
         }
 
         return sum;
@@ -347,22 +347,22 @@ public class RandomCircularList
     }
 
     /**
-     *  Counts and returns the number of times people on the same team are next to eachother
+     *  Counts and returns the number of times people on the same group are next to eachother
      *
      *  pre: circular linked list is created
-     *  post: returns number of times people on the same team are next to eachother
+     *  post: returns number of times people on the same group are next to eachother
      */
-    public int sameTeamConflicts(){
+    public int sameGroupConflicts(){
         int count = 0;
 
         Person i = firstPerson.getTarget();
-        Team previousTeam = firstPerson.getTeam();
+        Group previousGroup = firstPerson.getGroup();
         do{
-            if(i.getTeam().equals(previousTeam)){
+            if(i.getGroup().equals(previousGroup)){
                 count++;
             }
 
-            previousTeam = i.getTeam();
+            previousGroup = i.getGroup();
             i = i.getTarget();
         }while(i != firstPerson);
 

@@ -13,30 +13,30 @@ public class Controller
 {
     // Instance Variables
     Window ui;
-    List<Team> groups;
-    Team selectedGroup;
+    List<Group> groups;
+    Group selectedGroup;
     ListViewType selectedViewType;
 
     // Constructor
     public Controller(Window ui)
     {
         this.ui = ui;
-        groups = new ArrayList<Team>();
+        groups = new ArrayList<Group>();
         selectedGroup = null;
         selectedViewType = ListViewType.SINGLE_NEXT;
     }
 
     public void addGroup(String groupName)
     {
-        groups.add(new Team(groupName));
+        groups.add(new Group(groupName));
     }
 
-    public List<Team> getGroups()
+    public List<Group> getGroups()
     {
         return groups;
     }
 
-    public void setSelectedGroup(Team group)
+    public void setSelectedGroup(Group group)
     {
         selectedGroup = group;
     }
