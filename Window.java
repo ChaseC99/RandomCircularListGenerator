@@ -101,6 +101,7 @@ public class Window extends javax.swing.JFrame {
         editRosterButton.setEnabled(false);
 
         rosterDisplay.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Roster"));
+        rosterDisplay.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         rosterDisplay.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         rosterDisplay.setEnabled(false);
         rosterDisplayPane.setViewportView(rosterDisplay);
