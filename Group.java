@@ -15,7 +15,7 @@
  *      remove(Person) -> boolean       // returns true if person is removed, false if person wasn't in list
  *      setList(List<Person>)           // people is set to the List<Person> passed through
  *      getList() -> List<Person>       // returns List<Person> people
- *      getGroupName() -> String         // returns groupName
+ *      getGroupName() -> String        // returns groupName
  *      get(int) -> Person              // returns person at index in List<Person> people
  *      toString() -> String            // overrides toString method and returns groupName
  */
@@ -68,6 +68,14 @@ public class Group
     // post: returns List<Person> people
     public List<Person> getList(){
         return people;
+    }
+
+    public Person[] getListAsArray(){
+        Person[] rosterArray = new Person[people.size()];
+        for(int i = 0; i < rosterArray.length; i++){
+            rosterArray[i] = people.get(i);
+        }
+        return rosterArray;
     }
 
     // post: return groupName
