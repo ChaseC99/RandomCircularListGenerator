@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -54,13 +55,13 @@ public class Window extends javax.swing.JFrame {
         listRadioButton = new javax.swing.JRadioButton();
         singleNextRadioButton = new javax.swing.JRadioButton();
         viewTypeLabel = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        restartItem = new javax.swing.JMenuItem();
         helpItem = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        howToUseItem = new javax.swing.JMenuItem();
+        reportIssueItem = new javax.swing.JMenuItem();
+        sourceCodeItem = new javax.swing.JMenuItem();
 
         textField1.setText("textField1");
 
@@ -72,6 +73,11 @@ public class Window extends javax.swing.JFrame {
         groupsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Manager"));
 
         groupComboBox.setEnabled(false);
+        groupComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                groupComboBoxActionPerformed(evt);
+            }
+        });
 
         addGroupButton.setText("Add Group");
         addGroupButton.addActionListener(new java.awt.event.ActionListener() {
@@ -257,32 +263,37 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("File");
+        fileMenu.setText("File");
 
-        jMenuItem1.setText("Restart");
-        jMenu1.add(jMenuItem1);
+        restartItem.setText("Restart");
+        fileMenu.add(restartItem);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar.add(fileMenu);
 
         helpItem.setText("Help");
 
-        jMenuItem2.setText("How to Use");
-        helpItem.add(jMenuItem2);
+        howToUseItem.setText("How to Use");
+        helpItem.add(howToUseItem);
 
-        jMenuItem3.setText("Report Issue");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        reportIssueItem.setText("Report Issue");
+        reportIssueItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                reportIssueItemActionPerformed(evt);
             }
         });
-        helpItem.add(jMenuItem3);
+        helpItem.add(reportIssueItem);
 
-        jMenuItem4.setText("Source Code");
-        helpItem.add(jMenuItem4);
+        sourceCodeItem.setText("Source Code");
+        sourceCodeItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sourceCodeItemActionPerformed(evt);
+            }
+        });
+        helpItem.add(sourceCodeItem);
 
-        jMenuBar1.add(helpItem);
+        jMenuBar.add(helpItem);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -309,20 +320,21 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_removeGroupButtonActionPerformed
 
     private void addPersonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPersonButtonActionPerformed
+        createAddGroupJDialog();
         resetNameTextField();
     }//GEN-LAST:event_addPersonButtonActionPerformed
 
     private void listRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listRadioButtonActionPerformed
-        // TODO add your handling code here:
+        controller.setSelectedViewType(ListViewType.LIST);
     }//GEN-LAST:event_listRadioButtonActionPerformed
 
     private void singleNextRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleNextRadioButtonActionPerformed
-        // TODO add your handling code here:
+        controller.setSelectedViewType(ListViewType.SINGLE_NEXT);
     }//GEN-LAST:event_singleNextRadioButtonActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void reportIssueItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportIssueItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_reportIssueItemActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -331,6 +343,14 @@ public class Window extends javax.swing.JFrame {
     private void addGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGroupButtonActionPerformed
         enableComponents(true);
     }//GEN-LAST:event_addGroupButtonActionPerformed
+
+    private void groupComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupComboBoxActionPerformed
+        
+    }//GEN-LAST:event_groupComboBoxActionPerformed
+
+    private void sourceCodeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourceCodeItemActionPerformed
+        controller.openWebsite("https://github.com/ChaseC99/RandomCircularListGenerator");
+    }//GEN-LAST:event_sourceCodeItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,16 +370,13 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton addPersonButton;
     private javax.swing.JPanel addPersonPane;
     private javax.swing.JButton editRosterButton;
+    private javax.swing.JMenu fileMenu;
     private javax.swing.JButton generateListButton;
-    private javax.swing.JComboBox<String> groupComboBox;
+    private javax.swing.JComboBox<Team> groupComboBox;
     private javax.swing.JPanel groupsPanel;
     private javax.swing.JMenu helpItem;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem howToUseItem;
+    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JTextArea listDisplay;
     private javax.swing.JScrollPane listDisplayPane;
     private javax.swing.JPanel listPanel;
@@ -368,9 +385,12 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextField nameTextField;
     private javax.swing.JButton removeGroupButton;
     private javax.swing.JButton renameGroupButton;
+    private javax.swing.JMenuItem reportIssueItem;
+    private javax.swing.JMenuItem restartItem;
     private javax.swing.JList<String> rosterDisplay;
     private javax.swing.JScrollPane rosterDisplayPane;
     private javax.swing.JRadioButton singleNextRadioButton;
+    private javax.swing.JMenuItem sourceCodeItem;
     private java.awt.TextField textField1;
     private javax.swing.ButtonGroup viewButtonGroup;
     private javax.swing.JLabel viewTypeLabel;
@@ -457,4 +477,17 @@ public class Window extends javax.swing.JFrame {
     }
     
     
+    
+    // 
+    private void createAddGroupJDialog(){
+        
+    }
+    
+    
+    // groupComboBox code //
+
+    
+    
+    
+  
 }
