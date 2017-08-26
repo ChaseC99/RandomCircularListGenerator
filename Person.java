@@ -74,4 +74,9 @@ public class Person
     public boolean equals(Person person){
         return this.name == person.getName();
     }
+
+    // post: return String of the person's name
+    public String toString(){
+        return name;
+    }
 }
