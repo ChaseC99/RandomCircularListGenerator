@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import javax.swing.JOptionPane;
 
 
 /*
@@ -101,7 +102,7 @@ public class Window extends javax.swing.JFrame {
         editRosterButton.setEnabled(false);
 
         rosterDisplay.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Roster"));
-        rosterDisplay.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        rosterDisplay.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         rosterDisplay.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         rosterDisplay.setEnabled(false);
         rosterDisplayPane.setViewportView(rosterDisplay);
@@ -317,7 +318,7 @@ public class Window extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void removeGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeGroupButtonActionPerformed
-        // TODO add your handling code here:
+        controller.removeGroupClicked();
     }//GEN-LAST:event_removeGroupButtonActionPerformed
 
     private void addPersonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPersonButtonActionPerformed
@@ -347,9 +348,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_addGroupButtonActionPerformed
 
     private void groupComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupComboBoxActionPerformed
-        // I tried to use .getSelectedItem() but that returned an Obj, not Group
-        // So instead I had to use .getItemAt(.getSelectedIndex()) because that returned Group
-        controller.setSelectedGroup(groupComboBox.getItemAt(groupComboBox.getSelectedIndex()));
+        controller.setSelectedGroup(getSelectedComboBoxGroup());
     }//GEN-LAST:event_groupComboBoxActionPerformed
 
     private void sourceCodeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourceCodeItemActionPerformed
@@ -494,6 +493,21 @@ public class Window extends javax.swing.JFrame {
         groupComboBox.setSelectedItem(group);
     }
     
+    public void removeGroupFromComboBox(int index){
+        groupComboBox.removeItemAt(index);
+    }
+    
+    // I tried to use .getSelectedItem() but that returned an Obj, not Group
+    // So instead I had to use .getItemAt(.getSelectedIndex()) because that returned Group
+    public Group getSelectedComboBoxGroup(){
+        int index = groupComboBox.getSelectedIndex();
+        if (index == -1){
+            return null;
+        } else {
+            return groupComboBox.getItemAt(index);
+        }
+        
+    }
     
     // add single name to display
     public void updateRosterDisplay(Person[] groupRoster)
@@ -502,6 +516,16 @@ public class Window extends javax.swing.JFrame {
         
     }
 
-    
+    public boolean removeGroupPopUp(Group selectedGroup)
+    {
+        // Open JOptionPane, asking if user wants to delete group
+        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove '" + selectedGroup.toString() + "'?", "Remove Group", JOptionPane.YES_NO_OPTION);
+        if(response == JOptionPane.YES_OPTION){
+            return true;
+        } else {
+            return false;
+        }
+    }
+            
   
 }

@@ -8,6 +8,7 @@ import java.util.*;     // import lists
 import java.awt.Desktop;
 import java.net.*;
 import java.io.*;
+import javax.swing.JOptionPane;
 //import j
 public class Controller
 {
@@ -51,7 +52,38 @@ public class Controller
     public void setSelectedGroup(Group group)
     {
         selectedGroup = group;
-        ui.updateRosterDisplay(group.getListAsArray());
+        if(selectedGroup == null){
+
+        } else {
+            ui.updateRosterDisplay(group.getListAsArray());
+        }
+    }
+
+    public void removeGroupClicked(){
+        boolean response = ui.removeGroupPopUp(selectedGroup);
+        if(response){
+            int groupIndex = removeSelectedGroup();
+            ui.removeGroupFromComboBox(groupIndex);
+
+            if(groups.size() == 0){
+                selectedGroup = null;
+                ui.enableComponents(false);
+            }
+        }
+    }
+
+    public int removeSelectedGroup()
+    {
+        for(int i = 0; i < groups.size(); i++)
+        {
+            if(groups.get(i) == selectedGroup)
+            {
+                groups.remove(i);
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public void setSelectedViewType(ListViewType viewType)
