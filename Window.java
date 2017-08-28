@@ -106,6 +106,11 @@ public class Window extends javax.swing.JFrame {
 
         editRosterButton.setText("Edit Roster");
         editRosterButton.setEnabled(false);
+        editRosterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editRosterButtonActionPerformed(evt);
+            }
+        });
 
         rosterDisplay.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Roster"));
         rosterDisplay.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
@@ -328,7 +333,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_removeGroupButtonActionPerformed
 
     private void addPersonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPersonButtonActionPerformed
-        controller.addPerson(nameTextField.getText());
+        if(!hintTextDisplayed){controller.addPerson(nameTextField.getText());}
         resetNameTextField();
     }//GEN-LAST:event_addPersonButtonActionPerformed
 
@@ -363,6 +368,10 @@ public class Window extends javax.swing.JFrame {
     private void renameGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renameGroupButtonActionPerformed
         controller.renameGroupClicked();
     }//GEN-LAST:event_renameGroupButtonActionPerformed
+
+    private void editRosterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editRosterButtonActionPerformed
+        controller.editRosterClicked();
+    }//GEN-LAST:event_editRosterButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -509,7 +518,7 @@ public class Window extends javax.swing.JFrame {
     // post: returns true if yes is selected, else returns false
     public boolean removeGroupPopUp(Group selectedGroup){
         // Open JOptionPane, asking if user wants to delete group
-        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove '" + selectedGroup.toString() + "'?", "Remove Group", JOptionPane.YES_NO_OPTION);
+        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove '" + selectedGroup.toString() + "'?", "Remove Group", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if(response == JOptionPane.YES_OPTION){
             return true;
         } else {
