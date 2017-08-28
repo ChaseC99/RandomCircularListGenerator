@@ -70,12 +70,18 @@ public class Group
         return people;
     }
 
+    // post: returns the list<Person> people as an array
     public Person[] getListAsArray(){
         Person[] rosterArray = new Person[people.size()];
         for(int i = 0; i < rosterArray.length; i++){
             rosterArray[i] = people.get(i);
         }
         return rosterArray;
+    }
+
+    // post: groupName is changed
+    public void setGroupName(String name){
+        groupName = name;
     }
 
     // post: return groupName
