@@ -142,6 +142,7 @@ public class Controller
         if(updatedName != null)
         {
             selectedGroup.setGroupName(updatedName);
+            setSelectedGroup(selectedGroup);    // updates rosterDisplay to show correct title border
         }
     }
 
