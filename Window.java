@@ -335,7 +335,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_singleNextRadioButtonActionPerformed
 
     private void reportIssueItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportIssueItemActionPerformed
-        // TODO add your handling code here:
+        controller.openWebsite("https://github.com/ChaseC99/RandomCircularListGenerator/issues/new");
     }//GEN-LAST:event_reportIssueItemActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
@@ -516,6 +516,7 @@ public class Window extends javax.swing.JFrame {
         
     }
     
+    // clears the rosterDisplay
     public void clearRosterDisplay()
     {
         updateRosterDisplay(new Person[0]);
