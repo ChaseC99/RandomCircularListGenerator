@@ -15,6 +15,8 @@
  *      remove(Person) -> boolean       // returns true if person is removed, false if person wasn't in list
  *      setList(List<Person>)           // people is set to the List<Person> passed through
  *      getList() -> List<Person>       // returns List<Person> people
+ *      getListAsArray() -> Person[]    // returns List<Person> people as an array
+ *      setGroupName(String)            // sets groupName as the inputted name
  *      getGroupName() -> String        // returns groupName
  *      get(int) -> Person              // returns person at index in List<Person> people
  *      toString() -> String            // overrides toString method and returns groupName
