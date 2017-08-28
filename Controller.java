@@ -16,7 +16,6 @@ public class Controller
     List<Group> groups;
     Group selectedGroup;
     ListViewType selectedViewType;
-    int i = 0;
 
     // CONSTRUCTOR
     public Controller(Window ui)
@@ -32,8 +31,7 @@ public class Controller
     // post: new group created, set as selectedGroup, and added to groups
     public void addGroup(String groupName)
     {
-        Group group = new Group(groupName + i);
-        i++;
+        Group group = new Group(groupName);
         groups.add(group);
         selectedGroup = group;
         ui.addGroupToComboBox(group);
@@ -44,7 +42,7 @@ public class Controller
     {
         Person person = new Person(name, selectedGroup);
         selectedGroup.add(person);
-        ui.updateRosterDisplay(selectedGroup.getListAsArray());
+        ui.updateRosterDisplay(selectedGroup.getGroupName(), selectedGroup.getListAsArray());
     }
 
     // post: returns List<Group> groups
@@ -66,7 +64,7 @@ public class Controller
             ui.clearRosterDisplay();
         } else {
             // Otherwise, rosterDisplay is updated
-            ui.updateRosterDisplay(selectedGroup.getListAsArray());
+            ui.updateRosterDisplay(selectedGroup.getGroupName(), selectedGroup.getListAsArray());
         }
     }
 
@@ -113,6 +111,38 @@ public class Controller
 
         // returns -1 if selectedGroup is not in groups
         return -1;
+    }
+
+    /**
+     *  Starts the process to add a group
+     *      First the addGroupPopUp is called
+     *      If a name is inputted, then a the new group is created and added
+     *      Components will also become enabled
+     *      If no name is inputted, then nothing happens
+     */
+    public void addGroupClicked()
+    {
+        String groupName = ui.addGroupPopUp();
+
+        if(groupName != null)
+        {
+            addGroup(groupName);
+            ui.enableComponents(true);
+        }
+    }
+
+    /**
+     *  Starts the process to rename a group
+     *      First the renameGroupPopUp is called
+     *      If a name is inputted, then the group will be renamed to that name
+     */
+    public void renameGroupClicked()
+    {
+        String updatedName = ui.renameGroupPopUp(selectedGroup.getGroupName());
+        if(updatedName != null)
+        {
+            selectedGroup.setGroupName(updatedName);
+        }
     }
 
     // post: selectedViewType is set as viewType and listDisplay is updated

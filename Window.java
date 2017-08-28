@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
 
@@ -89,6 +90,11 @@ public class Window extends javax.swing.JFrame {
 
         renameGroupButton.setText("Rename Group");
         renameGroupButton.setEnabled(false);
+        renameGroupButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                renameGroupButtonActionPerformed(evt);
+            }
+        });
 
         removeGroupButton.setText("Remove Group");
         removeGroupButton.setEnabled(false);
@@ -343,8 +349,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_nameTextFieldActionPerformed
 
     private void addGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGroupButtonActionPerformed
-        enableComponents(true);
-        createAddGroupJDialog();
+        controller.addGroupClicked();
     }//GEN-LAST:event_addGroupButtonActionPerformed
 
     private void groupComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupComboBoxActionPerformed
@@ -354,6 +359,10 @@ public class Window extends javax.swing.JFrame {
     private void sourceCodeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourceCodeItemActionPerformed
         controller.openWebsite("https://github.com/ChaseC99/RandomCircularListGenerator");
     }//GEN-LAST:event_sourceCodeItemActionPerformed
+
+    private void renameGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renameGroupButtonActionPerformed
+        controller.renameGroupClicked();
+    }//GEN-LAST:event_renameGroupButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,10 +490,7 @@ public class Window extends javax.swing.JFrame {
     
     
     
-    // 
-    private void createAddGroupJDialog(){
-        controller.addGroup("Test");
-    }
+
     
     
     // groupComboBox code //
@@ -499,7 +505,7 @@ public class Window extends javax.swing.JFrame {
         groupComboBox.removeItemAt(index);
     }
     
-    // displays JOptionPane askning user if user wants to delete group
+    // displays JOptionPane asking user if user wants to delete group
     // post: returns true if yes is selected, else returns false
     public boolean removeGroupPopUp(Group selectedGroup){
         // Open JOptionPane, asking if user wants to delete group
@@ -509,6 +515,18 @@ public class Window extends javax.swing.JFrame {
         } else {
             return false;
         }
+    }
+    
+    // displays JOptionPane prompting user to input a group name
+    // post: returns the group name, null if cancel was clicked
+    public String addGroupPopUp(){
+        String groupName = JOptionPane.showInputDialog("Enter Group Name:");
+        return groupName;
+    }
+    
+    public String renameGroupPopUp(String originalName){
+        String newName = JOptionPane.showInputDialog("Enter new name for '" + originalName +"':", originalName);
+        return newName;
     }
     
     // I tried to use .getSelectedItem() but that returned an Obj, not Group
@@ -524,14 +542,14 @@ public class Window extends javax.swing.JFrame {
         
     }
     
-    // add single name to display
-    public void updateRosterDisplay(Person[] groupRoster){
+    // updates display to inputed list and updates title border to the group name
+    public void updateRosterDisplay(String groupName, Person[] groupRoster){
         rosterDisplay.setListData(groupRoster);
-        
+        rosterDisplay.setBorder(BorderFactory.createTitledBorder(groupName + " Roster"));
     }
     
     // clears the rosterDisplay
     public void clearRosterDisplay(){
-        updateRosterDisplay(new Person[0]);
+        updateRosterDisplay("Group", new Person[0]);
     }          
 }
