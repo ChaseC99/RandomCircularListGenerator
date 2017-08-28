@@ -515,6 +515,11 @@ public class Window extends javax.swing.JFrame {
         rosterDisplay.setListData(groupRoster);
         
     }
+    
+    public void clearRosterDisplay()
+    {
+        updateRosterDisplay(new Person[0]);
+    }
 
     public boolean removeGroupPopUp(Group selectedGroup)
     {

@@ -52,10 +52,11 @@ public class Controller
     public void setSelectedGroup(Group group)
     {
         selectedGroup = group;
-        if(selectedGroup == null){
-
-        } else {
+        // When there are no group
+        if(selectedGroup != null){
             ui.updateRosterDisplay(group.getListAsArray());
+        } else {
+            ui.clearRosterDisplay();
         }
     }
 
