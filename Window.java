@@ -488,17 +488,32 @@ public class Window extends javax.swing.JFrame {
     
     
     // groupComboBox code //
+    // post: group is added to comboBox and set as selected item
     public void addGroupToComboBox(Group group){
         groupComboBox.addItem(group);
         groupComboBox.setSelectedItem(group);
     }
     
+    // post: group is removed from the comboBox
     public void removeGroupFromComboBox(int index){
         groupComboBox.removeItemAt(index);
     }
     
+    // displays JOptionPane askning user if user wants to delete group
+    // post: returns true if yes is selected, else returns false
+    public boolean removeGroupPopUp(Group selectedGroup){
+        // Open JOptionPane, asking if user wants to delete group
+        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove '" + selectedGroup.toString() + "'?", "Remove Group", JOptionPane.YES_NO_OPTION);
+        if(response == JOptionPane.YES_OPTION){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     // I tried to use .getSelectedItem() but that returned an Obj, not Group
     // So instead I had to use .getItemAt(.getSelectedIndex()) because that returned Group
+    // post: returns the selected group from the comboBox
     public Group getSelectedComboBoxGroup(){
         int index = groupComboBox.getSelectedIndex();
         if (index == -1){
@@ -510,28 +525,13 @@ public class Window extends javax.swing.JFrame {
     }
     
     // add single name to display
-    public void updateRosterDisplay(Person[] groupRoster)
-    {
+    public void updateRosterDisplay(Person[] groupRoster){
         rosterDisplay.setListData(groupRoster);
         
     }
     
     // clears the rosterDisplay
-    public void clearRosterDisplay()
-    {
+    public void clearRosterDisplay(){
         updateRosterDisplay(new Person[0]);
-    }
-
-    public boolean removeGroupPopUp(Group selectedGroup)
-    {
-        // Open JOptionPane, asking if user wants to delete group
-        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove '" + selectedGroup.toString() + "'?", "Remove Group", JOptionPane.YES_NO_OPTION);
-        if(response == JOptionPane.YES_OPTION){
-            return true;
-        } else {
-            return false;
-        }
-    }
-            
-  
+    }          
 }
