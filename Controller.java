@@ -68,6 +68,12 @@ public class Controller
         }
     }
 
+    // post: returns selectedGroup
+    public Group getSelectedGroup()
+    {
+        return selectedGroup;
+    }
+
     /**
      *  Starts the process to remove a group
      *      First the removeGroupPopUp is called
@@ -144,6 +150,16 @@ public class Controller
             selectedGroup.setGroupName(updatedName);
             setSelectedGroup(selectedGroup);    // updates rosterDisplay to show correct title border
         }
+    }
+
+    public void editRosterClicked()
+    {
+        ui.editRosterPopUp(selectedGroup);
+    }
+
+    public void enableUI(boolean enable)
+    {
+        ui.enableUI(enable);
     }
 
     // post: selectedViewType is set as viewType and listDisplay is updated
