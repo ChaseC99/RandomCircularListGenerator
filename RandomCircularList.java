@@ -56,93 +56,129 @@ public class RandomCircularList
      *  post: each player is assigned a target, lastPerson = lastPerson in the list
      */
     public void createList(){
-        // Make a copy of groups
-        List<Group> groupsCopy = copyListOfGroups(groups);
+        if(groups.size() >= 3){
+            // Make a copy of groups
+            List<Group> groupsCopy = copyListOfGroups(groups);
 
-        // Establish start of loop
-        firstPerson = removeRandomPerson(groupsCopy);
+            // Establish start of loop
+            firstPerson = removeRandomPerson(groupsCopy);
 
-        // Set up for while loop
-        Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
-        Group lastTargetGroup = firstPerson.getGroup();    // sets lastTargetGroup as the first players group
-        Group targetGroup;                                // declares targetGroup
-        Person target;                                  // declares target
+            // Set up for while loop
+            Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
+            Group lastTargetGroup = firstPerson.getGroup();    // sets lastTargetGroup as the first players group
+            Group targetGroup;                                // declares targetGroup
+            Person target;                                  // declares target
 
-        // Randomly assign player targets
-        while(groupsCopy.size() > 1){
-            // Randomly gives the Person a group that is different from his own
-            // post: targetGroup is a group different that the previous player's
-            do{
-                targetGroup = randomlySelectGroup(groupsCopy);
-            } while(targetGroup == lastTargetGroup);
+            // Randomly assign player targets
+            while(groupsCopy.size() > 1){
+                // Randomly gives the Person a group that is different from his own
+                // post: targetGroup is a group different that the previous player's
+                do{
+                    targetGroup = randomlySelectGroup(groupsCopy);
+                } while(targetGroup == lastTargetGroup);
 
-            // Give player a random target from his/her targetGroup
-            target = removeRandomPerson(targetGroup);    // randomly removes a person from the target group
-            player.setTarget(target);                   // set player's target
+                // Give player a random target from his/her targetGroup
+                target = removeRandomPerson(targetGroup);    // randomly removes a person from the target group
+                player.setTarget(target);                   // set player's target
 
-            // If the targetGroup is now empty, take the group out of the groupsCopy List
-            if(targetGroup.size() == 0){
-                // remove group from list
-                int index = groupsCopy.indexOf(targetGroup);
-                groupsCopy.remove(index);
+                // If the targetGroup is now empty, take the group out of the groupsCopy List
+                if(targetGroup.size() == 0){
+                    // remove group from list
+                    int index = groupsCopy.indexOf(targetGroup);
+                    groupsCopy.remove(index);
+                }
+
+                lastTargetGroup = targetGroup;  // updates last group
+                player = target;              // target now gets assigned their target
             }
 
-            lastTargetGroup = targetGroup;  // updates last group
-            player = target;              // target now gets assigned their target
-        }
+            /*
+             *  After the while loop there is usually one group left
+             *  The remaining players must be inserted into the list
+             *  It runs through the linked list until it finds a pair of people who are different groups
+             *  The player is inserted inbetween the two people
+             */
 
-        /*
-         *  After the while loop there is usually one group left
-         *  The remaining players must be inserted into the list
-         *  It runs through the linked list until it finds a pair of people who are different groups
-         *  The player is inserted inbetween the two people
-         */
+            // Establishes which group is left
+            Group groupLeft = groupsCopy.get(0);                   // get group List
+            List<Person> peopleLeft = groupLeft.getList();       // get list of remaining people from groupLeft
 
-        // Establishes which group is left
-        Group groupLeft = groupsCopy.get(0);                   // get group List
-        List<Person> peopleLeft = groupLeft.getList();       // get list of remaining people from groupLeft
+            // Assign targets to remaining players on groupLeft
+            for(Person thisPerson: peopleLeft)
+            {
+                // Starts search at the beginning of the list
+                Person player1 = firstPerson;               // sets firstPerson as starting point for the loop
+                Person player2 = player1.getTarget();       // sets player2 based off of firstPerson's target
+                boolean inserted = false;                   // false until the player is added into the list
 
-        // Assign targets to remaining players on groupLeft
-        for(Person thisPerson: peopleLeft)
-        {
-            // Starts search at the beginning of the list
-            Person player1 = firstPerson;               // sets firstPerson as starting point for the loop
-            Person player2 = player1.getTarget();       // sets player2 based off of firstPerson's target
-            boolean inserted = false;                   // false until the player is added into the list
-
-            // runs until player inserted
-            while(!inserted)
-                {
-                    if(player1.getGroup().equals(groupLeft) || player2.getGroup().equals(groupLeft))    // if player is on same group as target
+                // runs until player inserted
+                while(!inserted)
                     {
-                        // move to next player
-                        player1 = player2;
-                        player2 = player1.getTarget();
-                    } else  // if player is on different group as target
-                    {
-                        // insert player
-                        player1.setTarget(thisPerson);  // set previous player target as thisPerson
-                        thisPerson.setTarget(player2);  // set thisPerson's target to previous player's target
-                        inserted = true;
-                    }
+                        if(player1.getGroup().equals(groupLeft) || player2.getGroup().equals(groupLeft))    // if player is on same group as target
+                        {
+                            // move to next player
+                            player1 = player2;
+                            player2 = player1.getTarget();
+                        } else  // if player is on different group as target
+                        {
+                            // insert player
+                            player1.setTarget(thisPerson);  // set previous player target as thisPerson
+                            thisPerson.setTarget(player2);  // set thisPerson's target to previous player's target
+                            inserted = true;
+                        }
+                }
             }
-        }
 
-        // get last person in the list
-        lastPerson = getLastPerson();
+            // get last person in the list
+            lastPerson = getLastPerson();
 
-        // check to make sure lastPerson and firstPerson aren't on the same group
-        if(!lastPerson.getGroup().equals(firstPerson.getGroup())){
-            lastPerson.setTarget(firstPerson);  // sets last person's target as first person
+            // check to make sure lastPerson and firstPerson aren't on the same group
+            if(!lastPerson.getGroup().equals(firstPerson.getGroup())){
+                lastPerson.setTarget(firstPerson);  // sets last person's target as first person
+            } else {
+                // if they are on the same group, rerun createList and try again
+                createList();
+            }
+
+            // check to make sure no people next to eachother are on the same group
+            if(sameGroupConflicts() != 0){
+                // if people are on the same group, rerun creatList and try again
+                createList();
+            }
         } else {
-            // if they are on the same group, rerun createList and try again
-            createList();
-        }
+            // Make a copy of groups
+            List<Group> groupsCopy = copyListOfGroups(groups);
 
-        // check to make sure no people next to eachother are on the same group
-        if(sameGroupConflicts() != 0){
-            // if people are on the same group, rerun creatList and try again
-            createList();
+            // Establish start of loop
+            firstPerson = removeRandomPerson(groupsCopy);
+
+            // Set up for while loop
+            Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
+            Group lastTargetGroup = firstPerson.getGroup();    // sets lastTargetGroup as the first players group
+            Group targetGroup;                                // declares targetGroup
+            Person target;                                  // declares target
+
+            // Randomly assign player targets
+            while(groupsCopy.size() > 0){
+
+                targetGroup = randomlySelectGroup(groupsCopy);
+
+                // Give player a random target from his/her targetGroup
+                target = removeRandomPerson(targetGroup);   // randomly removes a person from the target group
+                player.setTarget(target);                                       // set player's target
+
+                // If the targetGroup is now empty, take the group out of the groupsCopy List
+                if(targetGroup.size() == 0){
+                    // remove group from list
+                    int index = groupsCopy.indexOf(targetGroup);
+                    groupsCopy.remove(index);
+                }
+
+                lastTargetGroup = targetGroup;  // updates last group
+                player = target;              // target now gets assigned their target
+            }
+
+            player.setTarget(firstPerson);
         }
     }
 
