@@ -4,6 +4,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 
 /*
@@ -201,7 +203,6 @@ public class Window extends javax.swing.JFrame {
 
         listPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("List"));
 
-        listDisplay.setEditable(false);
         listDisplay.setColumns(20);
         listDisplay.setRows(5);
         listDisplayPane.setViewportView(listDisplay);
@@ -212,6 +213,11 @@ public class Window extends javax.swing.JFrame {
 
         generateListButton.setText("Generate Random List");
         generateListButton.setEnabled(false);
+        generateListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateListButtonActionPerformed(evt);
+            }
+        });
 
         viewButtonGroup.add(listRadioButton);
         listRadioButton.setText("List View");
@@ -373,6 +379,10 @@ public class Window extends javax.swing.JFrame {
         controller.editRosterClicked();
     }//GEN-LAST:event_editRosterButtonActionPerformed
 
+    private void generateListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateListButtonActionPerformed
+       // TODO
+    }//GEN-LAST:event_generateListButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -446,6 +456,12 @@ public class Window extends javax.swing.JFrame {
         generateListButton.setEnabled(enable);
         singleNextRadioButton.setEnabled(enable);
         listRadioButton.setEnabled(enable);
+        listDisplay.setEnabled(enable);
+    }
+    
+    public void enableUI(boolean enable){
+        addGroupButton.setEnabled(enable);
+        enableComponents(enable);
     }
     
     // nameTextField code //
@@ -538,6 +554,21 @@ public class Window extends javax.swing.JFrame {
         return newName;
     }
     
+    public String editRosterPopUp(Group group){
+        // Turn group roster into string
+        /*
+        JTextArea ta = new JTextArea("Test\nTest1\nTest2");
+        JOptionPane popUp = new JOptionPane();
+        switch (JOptionPane.showConfirmDialog(this, new JScrollPane(ta))) {
+            case JOptionPane.OK_OPTION:
+                System.out.println(ta.getText());
+                break;
+        }   */
+        EditRosterPopUp popUp = new EditRosterPopUp(this, controller);
+        
+        return null;
+    }
+    
     // I tried to use .getSelectedItem() but that returned an Obj, not Group
     // So instead I had to use .getItemAt(.getSelectedIndex()) because that returned Group
     // post: returns the selected group from the comboBox
@@ -552,13 +583,15 @@ public class Window extends javax.swing.JFrame {
     }
     
     // updates display to inputed list and updates title border to the group name
-    public void updateRosterDisplay(String groupName, Person[] groupRoster){
-        rosterDisplay.setListData(groupRoster);
-        rosterDisplay.setBorder(BorderFactory.createTitledBorder(groupName + " Roster"));
-    }
-    
-    // clears the rosterDisplay
-    public void clearRosterDisplay(){
-        updateRosterDisplay("Group", new Person[0]);
-    }          
+    public void updateRosterDisplay(){
+        Group selectedGroup = controller.getSelectedGroup();
+        
+        if(selectedGroup == null){
+            rosterDisplay.setListData(new Person[0]);
+            rosterDisplay.setBorder(BorderFactory.createTitledBorder("Group Roster"));
+        } else {
+            rosterDisplay.setListData(selectedGroup.getListAsArray());
+            rosterDisplay.setBorder(BorderFactory.createTitledBorder(selectedGroup.getGroupName() + " Roster"));
+        }
+    }    
 }
