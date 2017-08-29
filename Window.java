@@ -203,8 +203,13 @@ public class Window extends javax.swing.JFrame {
 
         listPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("List"));
 
+        listDisplayPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        listDisplay.setEditable(false);
         listDisplay.setColumns(20);
+        listDisplay.setLineWrap(true);
         listDisplay.setRows(5);
+        listDisplay.setWrapStyleWord(true);
         listDisplayPane.setViewportView(listDisplay);
 
         listWarningLabel.setFont(new java.awt.Font("Lucida Grande", 2, 11)); // NOI18N
@@ -380,7 +385,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_editRosterButtonActionPerformed
 
     private void generateListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateListButtonActionPerformed
-       // TODO
+        controller.generateListClicked();
     }//GEN-LAST:event_generateListButtonActionPerformed
 
     /**
@@ -594,4 +599,10 @@ public class Window extends javax.swing.JFrame {
             rosterDisplay.setBorder(BorderFactory.createTitledBorder(selectedGroup.getGroupName() + " Roster"));
         }
     }    
+    
+    
+
+    public void updateListDisplay(String text){
+        listDisplay.setText(text);
+    }
 }

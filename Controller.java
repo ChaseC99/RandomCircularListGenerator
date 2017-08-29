@@ -58,7 +58,7 @@ public class Controller
         selectedGroup = group;
         ui.updateRosterDisplay();
         // update rosterDisplay
-        
+
     }
 
     // post: returns selectedGroup
@@ -71,7 +71,7 @@ public class Controller
     {
         String[] lines = editedRoster.split("[\\r\\n]+");
         selectedGroup.setList(lines);
-        
+
         ui.updateRosterDisplay();
     }
 
@@ -156,6 +156,20 @@ public class Controller
     public void editRosterClicked()
     {
         ui.editRosterPopUp(selectedGroup);
+    }
+
+    public void generateListClicked()
+    {
+        RandomCircularList circularList = new RandomCircularList(groups);
+
+        switch(selectedViewType){
+            case SINGLE_NEXT:
+                ui.updateListDisplay(circularList.getSingleNextViewText());
+                break;
+            case LIST:
+                ui.updateListDisplay(circularList.getListViewText());
+                break;
+        }
     }
 
     public void enableUI(boolean enable)
