@@ -287,6 +287,34 @@ public class RandomCircularList
         return lastPerson;
     }
 
+    public String getSingleNextViewText(){
+        String listText = "";
+        Person hunter = firstPerson;
+        Person target = hunter.getTarget();
+
+        do{
+            listText += (hunter.getName() + " ( " + hunter.getGroup().getGroupName().substring(0,1) + " )" + " --> " + target.getName() + " ( " + target.getGroupName().substring(0,1) + " )");
+            listText += "\n";
+            hunter = target;
+            target = hunter.getTarget();
+        }while(!hunter.equals(firstPerson));
+
+        return listText;
+    }
+
+    public String getListViewText(){
+        String listText = "";
+
+        Person temp = firstPerson;
+        do{
+            listText += temp.getName() + " --> ";
+            temp = temp.getTarget();
+        } while (!temp.equals(firstPerson));
+        listText += firstPerson.getName();
+
+        return listText;
+    }
+
     /**
      *  prints a list of everyone's first target
      *  example:
