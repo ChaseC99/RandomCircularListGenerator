@@ -81,6 +81,14 @@ public class Group
         return rosterArray;
     }
 
+    public String getListAsTextArea(){
+        String roster = "";
+        for(Person person: people){
+            roster += person.getName() + "\n";
+        }
+        return roster;
+    }
+
     // post: groupName is changed
     public void setGroupName(String name){
         groupName = name;
