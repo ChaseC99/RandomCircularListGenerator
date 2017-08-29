@@ -42,7 +42,7 @@ public class Controller
     {
         Person person = new Person(name, selectedGroup);
         selectedGroup.add(person);
-        ui.updateRosterDisplay(selectedGroup.getGroupName(), selectedGroup.getListAsArray());
+        ui.updateRosterDisplay();
     }
 
     // post: returns List<Group> groups
@@ -56,22 +56,23 @@ public class Controller
     {
         // set selectedGroup as group
         selectedGroup = group;
-
+        ui.updateRosterDisplay();
         // update rosterDisplay
-        if(selectedGroup == null)
-        {
-            // If there are no groups left, it will clear the rosterDisplay
-            ui.clearRosterDisplay();
-        } else {
-            // Otherwise, rosterDisplay is updated
-            ui.updateRosterDisplay(selectedGroup.getGroupName(), selectedGroup.getListAsArray());
-        }
+        
     }
 
     // post: returns selectedGroup
     public Group getSelectedGroup()
     {
         return selectedGroup;
+    }
+
+    public void setSelectedGroupRoster(String editedRoster)
+    {
+        String[] lines = editedRoster.split("[\\r\\n]+");
+        selectedGroup.setList(lines);
+        
+        ui.updateRosterDisplay();
     }
 
     /**
