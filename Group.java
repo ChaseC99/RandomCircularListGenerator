@@ -67,6 +67,15 @@ public class Group
         this.people = people;
     }
 
+    // post: creates a list based off of the string inputed
+    public void setList(String[] names){
+        List<Person> people = new ArrayList<Person>();
+        for(String name: names){
+            people.add(new Person(name, this));
+        }
+        this.people = people;
+    }
+
     // post: returns List<Person> people
     public List<Person> getList(){
         return people;
