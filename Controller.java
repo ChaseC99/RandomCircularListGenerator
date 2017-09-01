@@ -46,6 +46,7 @@ public class Controller
     {
         Person person = new Person(name, selectedGroup);
         selectedGroup.add(person);
+        ui.updateListDisplay("");
         ui.updateRosterDisplay();
     }
 
@@ -106,6 +107,9 @@ public class Controller
                 ui.enableComponents(false);
             }
         }
+
+        // Clear listDisplay
+        ui.updateListDisplay("");
     }
 
     // post: removes selectedGroup from groups and returns its index
@@ -140,6 +144,8 @@ public class Controller
             addGroup(groupName);
             ui.enableComponents(true);
         }
+
+        ui.updateListDisplay("");
     }
 
     /**
@@ -155,11 +161,14 @@ public class Controller
             selectedGroup.setGroupName(updatedName);
             setSelectedGroup(selectedGroup);    // updates rosterDisplay to show correct title border
         }
+
+        ui.updateListDisplay(getSelectedViewText());
     }
 
     public void editRosterClicked()
     {
         ui.editRosterPopUp(selectedGroup);
+        ui.updateListDisplay("");
     }
 
     public void generateListClicked()
