@@ -5,5 +5,5 @@
  */
 public enum ListViewType
 {
-    LIST, SINGLE_NEXT
+    LIST, TARGET, NUMBER
 }
