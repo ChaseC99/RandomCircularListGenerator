@@ -38,6 +38,7 @@ public class RandomCircularList
     public List<Group> groups;        // list groups that will included in the circular list
     public Person firstPerson;      // considered the "starting" point for the circular list
     public Person lastPerson;       // considered the "ending" point for the circular list
+    private int attempts = 0;           // represents the amount of times createList() has been attempted
 
     /**
      * Constructor for objects of class RandomCircularList
@@ -56,7 +57,7 @@ public class RandomCircularList
      *  post: each player is assigned a target, lastPerson = lastPerson in the list
      */
     public void createList(){
-        if(groups.size() >= 3){
+        if(groups.size() >= 3 && attempts < 200){
             // Make a copy of groups
             List<Group> groupsCopy = copyListOfGroups(groups);
 
@@ -146,6 +147,8 @@ public class RandomCircularList
                 createList();
             }
 
+            attempts++;
+
             // check to make sure no people next to eachother are on the same group
             if(sameGroupConflicts() != 0){
                 // if people are on the same group, rerun creatList and try again
@@ -157,6 +160,12 @@ public class RandomCircularList
 
             // Establish start of loop
             firstPerson = removeRandomPerson(groupsCopy);
+            // Remove firstPerson's group from groups
+            // if they were the only person in the group
+            if(firstPerson.getGroup().size() == 0){
+                int index = groupsCopy.indexOf(firstPerson.getGroup());
+                groupsCopy.remove(index);
+            }
 
             // Set up for while loop
             Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
