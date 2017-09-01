@@ -63,12 +63,6 @@ public class RandomCircularList
 
             // Establish start of loop
             firstPerson = removeRandomPerson(groupsCopy);
-            // Remove firstPerson's group from groups
-            // if they were the only person in the group
-            if(firstPerson.getGroup().size() == 0){
-                int index = groupsCopy.indexOf(firstPerson.getGroup());
-                groupsCopy.remove(index);
-            }
 
             // Set up for while loop
             Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
@@ -279,6 +273,13 @@ public class RandomCircularList
         Group targetGroup = randomlySelectGroup(groups);        // Group from which person is selected
 
         Person target = removeRandomPerson(targetGroup);     // Person to be returned
+
+        // Remove firstPerson's group from groups
+        // if they were the only person in the group
+        if(targetGroup.size() == 0){
+            int index = groups.indexOf(targetGroup);
+            groups.remove(index);
+        }
 
         return target;          // return target
     }
