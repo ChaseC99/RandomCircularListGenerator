@@ -57,8 +57,8 @@ public class Tester {
             circularList.printAllGroups();
             //circularList.printFirstTargets();
             //circularList.printList();
-            System.out.print(circularList.getSingleNextViewText());
-            System.out.print(circularList.getListViewText());
+            //System.out.print(circularList.getTargetViewText());
+            //System.out.print(circularList.getListViewText());
             System.out.println();
             System.out.println(circularList.getNumPeople());
             System.out.println(circularList.getNumPeopleInList());
