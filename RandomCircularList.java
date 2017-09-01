@@ -287,13 +287,40 @@ public class RandomCircularList
         return lastPerson;
     }
 
-    public String getSingleNextViewText(){
+    public String getText(ListViewType viewType, Boolean withGroup){
+        String listText = "";
+
+        switch(viewType){
+            case TARGET:
+                listText = getTargetViewText(withGroup);
+                break;
+            case LIST:
+                listText = getListViewText(withGroup);
+                break;
+            case NUMBER:
+                listText = getNumberViewText(withGroup);
+                break;
+        }
+
+        return listText;
+    }
+
+    private String getTargetViewText(Boolean withGroup){
         String listText = "";
         Person hunter = firstPerson;
         Person target = hunter.getTarget();
 
         do{
-            listText += (hunter.getName() + " ( " + hunter.getGroup().getGroupName().substring(0,1) + " )" + " --> " + target.getName() + " ( " + target.getGroupName().substring(0,1) + " )");
+            listText += hunter.getName();
+            if(withGroup){
+                listText += " ( " + hunter.getGroup().getGroupName().substring(0,1) + " )";
+            }
+
+            listText += " --> " + target.getName();
+            if(withGroup){
+                listText += " ( " + target.getGroupName().substring(0,1) + " )";
+            }
+
             listText += "\n";
             hunter = target;
             target = hunter.getTarget();
@@ -302,15 +329,40 @@ public class RandomCircularList
         return listText;
     }
 
-    public String getListViewText(){
+    private String getListViewText(Boolean withGroup){
         String listText = "";
 
         Person temp = firstPerson;
         do{
-            listText += temp.getName() + " --> ";
+            listText += temp.getName();
+            if(withGroup){
+                listText += " ( " + temp.getGroupName().substring(0,1) + " )";
+            }
+            listText += " --> ";
             temp = temp.getTarget();
         } while (!temp.equals(firstPerson));
         listText += firstPerson.getName();
+        if(withGroup){
+            listText += " ( " + firstPerson.getGroupName().substring(0,1) + " )";
+        }
+
+        return listText;
+    }
+
+    private String getNumberViewText(Boolean withGroup){
+        String listText = "";
+
+        Person temp = firstPerson;
+        int i = 1;
+        do{
+            listText += i + ". " + temp.getName();
+            if(withGroup){
+                listText += " ( " + temp.getGroupName().substring(0,1) + " )";
+            }
+            listText += "\n";
+            temp = temp.getTarget();
+            i++;
+        } while(!temp.equals(firstPerson));
 
         return listText;
     }

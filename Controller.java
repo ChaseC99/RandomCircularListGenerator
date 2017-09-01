@@ -16,6 +16,8 @@ public class Controller
     List<Group> groups;
     Group selectedGroup;
     ListViewType selectedViewType;
+    RandomCircularList list;
+    Boolean showGroup;
 
     // CONSTRUCTOR
     public Controller(Window ui)
@@ -23,7 +25,9 @@ public class Controller
         this.ui = ui;
         groups = new ArrayList<Group>();
         selectedGroup = null;
-        selectedViewType = ListViewType.SINGLE_NEXT;
+        selectedViewType = ListViewType.TARGET;
+        list = null;
+        showGroup = false;
     }
 
     // METHODS
@@ -160,16 +164,9 @@ public class Controller
 
     public void generateListClicked()
     {
-        RandomCircularList circularList = new RandomCircularList(groups);
+        list = new RandomCircularList(groups);
 
-        switch(selectedViewType){
-            case SINGLE_NEXT:
-                ui.updateListDisplay(circularList.getSingleNextViewText());
-                break;
-            case LIST:
-                ui.updateListDisplay(circularList.getListViewText());
-                break;
-        }
+        ui.updateListDisplay(getSelectedViewText());
     }
 
     public void enableUI(boolean enable)
@@ -181,7 +178,23 @@ public class Controller
     public void setSelectedViewType(ListViewType viewType)
     {
         selectedViewType = viewType;
-        // TODO: update list display
+
+        if(list != null)
+        {
+            ui.updateListDisplay(getSelectedViewText());
+        }
+    }
+
+    private String getSelectedViewText()
+    {
+        return list.getText(selectedViewType, showGroup);
+    }
+
+    public void showGroupChecked(Boolean checked)
+    {
+        showGroup = checked;
+
+        ui.updateListDisplay(getSelectedViewText());
     }
 
     // post: website is opened in user's default browser

@@ -57,8 +57,10 @@ public class Window extends javax.swing.JFrame {
         listWarningLabel = new javax.swing.JLabel();
         generateListButton = new javax.swing.JButton();
         listRadioButton = new javax.swing.JRadioButton();
-        singleNextRadioButton = new javax.swing.JRadioButton();
+        targetRadioButton = new javax.swing.JRadioButton();
         viewTypeLabel = new javax.swing.JLabel();
+        numberRadioButton = new javax.swing.JRadioButton();
+        showGroupCheckBox = new javax.swing.JCheckBox();
         jMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         restartItem = new javax.swing.JMenuItem();
@@ -71,7 +73,7 @@ public class Window extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Random List Generator");
-        setMinimumSize(new java.awt.Dimension(860, 535));
+        setMinimumSize(new java.awt.Dimension(900, 535));
         setSize(getMinimumSize());
 
         groupsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Manager"));
@@ -225,7 +227,7 @@ public class Window extends javax.swing.JFrame {
         });
 
         viewButtonGroup.add(listRadioButton);
-        listRadioButton.setText("List View");
+        listRadioButton.setText("List");
         listRadioButton.setEnabled(false);
         listRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,41 +235,59 @@ public class Window extends javax.swing.JFrame {
             }
         });
 
-        viewButtonGroup.add(singleNextRadioButton);
-        singleNextRadioButton.setSelected(true);
-        singleNextRadioButton.setText("Single-Next View");
-        singleNextRadioButton.setEnabled(false);
-        singleNextRadioButton.addActionListener(new java.awt.event.ActionListener() {
+        viewButtonGroup.add(targetRadioButton);
+        targetRadioButton.setSelected(true);
+        targetRadioButton.setText("Target");
+        targetRadioButton.setEnabled(false);
+        targetRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                singleNextRadioButtonActionPerformed(evt);
+                targetRadioButtonActionPerformed(evt);
             }
         });
 
+        viewTypeLabel.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         viewTypeLabel.setText("View Type:");
+
+        viewButtonGroup.add(numberRadioButton);
+        numberRadioButton.setText("Number");
+        numberRadioButton.setEnabled(false);
+        numberRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numberRadioButtonActionPerformed(evt);
+            }
+        });
+
+        showGroupCheckBox.setText("Show Group");
+        showGroupCheckBox.setEnabled(false);
+        showGroupCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showGroupCheckBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout listPanelLayout = new javax.swing.GroupLayout(listPanel);
         listPanel.setLayout(listPanelLayout);
         listPanelLayout.setHorizontalGroup(
             listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(listPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(listDisplayPane)
-                            .addComponent(listWarningLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)))
-                    .addGroup(listPanelLayout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(generateListButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(showGroupCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(viewTypeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(targetRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(listRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numberRadioButton))
+                    .addComponent(listWarningLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                    .addComponent(listDisplayPane))
                 .addContainerGap())
             .addGroup(listPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(viewTypeLabel)
-                .addGap(18, 18, 18)
-                .addComponent(singleNextRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listRadioButton)
+                .addGap(127, 127, 127)
+                .addComponent(generateListButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         listPanelLayout.setVerticalGroup(
@@ -279,7 +299,9 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewTypeLabel)
                     .addComponent(listRadioButton)
-                    .addComponent(singleNextRadioButton))
+                    .addComponent(targetRadioButton)
+                    .addComponent(numberRadioButton)
+                    .addComponent(showGroupCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(listDisplayPane, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -335,7 +357,7 @@ public class Window extends javax.swing.JFrame {
             .addComponent(groupsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(860, 557));
+        setSize(new java.awt.Dimension(900, 557));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -352,9 +374,9 @@ public class Window extends javax.swing.JFrame {
         controller.setSelectedViewType(ListViewType.LIST);
     }//GEN-LAST:event_listRadioButtonActionPerformed
 
-    private void singleNextRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleNextRadioButtonActionPerformed
-        controller.setSelectedViewType(ListViewType.SINGLE_NEXT);
-    }//GEN-LAST:event_singleNextRadioButtonActionPerformed
+    private void targetRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetRadioButtonActionPerformed
+        controller.setSelectedViewType(ListViewType.TARGET);
+    }//GEN-LAST:event_targetRadioButtonActionPerformed
 
     private void reportIssueItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportIssueItemActionPerformed
         controller.openWebsite("https://github.com/ChaseC99/RandomCircularListGenerator/issues/new");
@@ -388,6 +410,14 @@ public class Window extends javax.swing.JFrame {
         controller.generateListClicked();
     }//GEN-LAST:event_generateListButtonActionPerformed
 
+    private void numberRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberRadioButtonActionPerformed
+        controller.setSelectedViewType(ListViewType.NUMBER);
+    }//GEN-LAST:event_numberRadioButtonActionPerformed
+
+    private void showGroupCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGroupCheckBoxActionPerformed
+        controller.showGroupChecked(showGroupCheckBox.isSelected());
+    }//GEN-LAST:event_showGroupCheckBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -419,14 +449,16 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JRadioButton listRadioButton;
     private javax.swing.JLabel listWarningLabel;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JRadioButton numberRadioButton;
     private javax.swing.JButton removeGroupButton;
     private javax.swing.JButton renameGroupButton;
     private javax.swing.JMenuItem reportIssueItem;
     private javax.swing.JMenuItem restartItem;
     private javax.swing.JList<Person> rosterDisplay;
     private javax.swing.JScrollPane rosterDisplayPane;
-    private javax.swing.JRadioButton singleNextRadioButton;
+    private javax.swing.JCheckBox showGroupCheckBox;
     private javax.swing.JMenuItem sourceCodeItem;
+    private javax.swing.JRadioButton targetRadioButton;
     private java.awt.TextField textField1;
     private javax.swing.ButtonGroup viewButtonGroup;
     private javax.swing.JLabel viewTypeLabel;
@@ -459,8 +491,10 @@ public class Window extends javax.swing.JFrame {
         nameTextField.setEnabled(enable);
         addPersonButton.setEnabled(enable);
         generateListButton.setEnabled(enable);
-        singleNextRadioButton.setEnabled(enable);
+        showGroupCheckBox.setEnabled(enable);
+        targetRadioButton.setEnabled(enable);
         listRadioButton.setEnabled(enable);
+        numberRadioButton.setEnabled(enable);
         listDisplay.setEnabled(enable);
     }
     
