@@ -3,117 +3,134 @@
  *  @author Chase Carnaroli
  *
  *  The Group class tracks a List<Person>
- *  This is so that people of the same group won't get placed together
+ *  This is so that roster of the same group won't get placed together
  *
  *  INSTANCE VARIABLES
  *      String groupName             // name of the group
- *      List<Person> people         // list of Persons on the group
+ *      List<Person> roster         // list of Persons on the group
  *
  *  METHODS
- *      size() -> int                   // returns number of people on the group
- *      add(Person)                     // a Person is added to the List<Person> people
+ *      size() -> int                   // returns number of roster on the group
+ *      add(Person)                     // a Person is added to the List<Person> roster
  *      remove(Person) -> boolean       // returns true if person is removed, false if person wasn't in list
- *      setList(List<Person>)           // people is set to the List<Person> passed through
- *      getList() -> List<Person>       // returns List<Person> people
- *      getListAsArray() -> Person[]    // returns List<Person> people as an array
+ *      setList(List<Person>)           // roster is set to the List<Person> passed through
+ *      getList() -> List<Person>       // returns List<Person> roster
+ *      getListAsArray() -> Person[]    // returns List<Person> roster as an array
  *      setGroupName(String)            // sets groupName as the inputted name
  *      getGroupName() -> String        // returns groupName
- *      get(int) -> Person              // returns person at index in List<Person> people
+ *      get(int) -> Person              // returns person at index in List<Person> roster
  *      toString() -> String            // overrides toString method and returns groupName
  */
 
  import java.util.*;    // import arraylists
 public class Group
 {
-    // Instance Variables
+    // INSTANCE VARIABLES
     private String groupName;
-    private List<Person> people;
+    private List<Person> roster;
 
-    // Constructors
+    // CONSTRUCTORS
     public Group(String groupName){
         this.groupName = groupName;
-        people = new ArrayList<Person>();
+        roster = new ArrayList<Person>();
     }
 
-    public Group(String groupName, List<Person> people){
+    public Group(String groupName, List<Person> roster){
         this.groupName = groupName;
-        this.people = people;
+        this.roster = roster;
     }
 
-    // post: returns number of people on the group
+    // METHODS
+
+    // Get the size of roster
+    // post: returns number of roster on the group
     public int size(){
-      return people.size();
+      return roster.size();
     }
 
-    // post: a Person is added to the List<Person> people
+    // Add a person to the group
+    // post: a Person is added to the List<Person> roster
     public void add(Person person){
-        people.add(person);
+        roster.add(person);
     }
 
-    // scans List<Person> people and removes the person
+    // Remove a person from the group
+    // Scans List<Person> roster and removes the person
     // post: returns true if person is removed, false if person wasn't in list
     public boolean remove(Person person){
-        int index = people.indexOf(person);
+        int index = roster.indexOf(person);
         if(index != -1){
-            people.remove(index);
+            roster.remove(index);
             return true;
         } else {
             return false;
         }
     }
 
-    // post: people is set to the List<Person> passed through
-    public void setList(List<Person> people){
-        this.people = people;
+    // Set roster from a list
+    // post: roster is set to the List<Person> passed through
+    public void setRoster(List<Person> roster){
+        this.roster = roster;
     }
 
+    // Set roster from an array of strings
     // post: creates a list based off of the string inputed
-    public void setList(String[] names){
-        List<Person> people = new ArrayList<Person>();
+    public void setRoster(String[] names){
+        List<Person> roster = new ArrayList<Person>();
         for(String name: names){
-            people.add(new Person(name, this));
+            roster.add(new Person(name, this));
         }
-        this.people = people;
+        this.roster = roster;
     }
 
-    // post: returns List<Person> people
-    public List<Person> getList(){
-        return people;
+    // Get roster
+    // post: returns List<Person> roster
+    public List<Person> getRoster(){
+        return roster;
     }
 
-    // post: returns the list<Person> people as an array
-    public Person[] getListAsArray(){
-        Person[] rosterArray = new Person[people.size()];
+    // Get the roster as a Person[]
+    // post: returns the list<Person> roster as an array
+    public Person[] getRosterAsArray(){
+        Person[] rosterArray = new Person[roster.size()];
         for(int i = 0; i < rosterArray.length; i++){
-            rosterArray[i] = people.get(i);
+            rosterArray[i] = roster.get(i);
         }
         return rosterArray;
     }
 
-    public String getListAsTextArea(){
-        String roster = "";
-        for(Person person: people){
-            roster += person.getName() + "\n";
+    // Get roster for a string for a text area
+    // Each person is on a seperate line
+    // post: returns a string of names in roster, with each name on a seperate line
+    public String getRosterAsTextArea(){
+        String rosterText = "";
+        for(Person person: roster){
+            rosterText += person.getName() + "\n";
         }
-        return roster;
+        return rosterText;
     }
 
+    // Set the group name
     // post: groupName is changed
     public void setGroupName(String name){
         groupName = name;
     }
 
+    // Get the group name
     // post: return groupName
     public String getGroupName(){
         return groupName;
     }
 
-    // post: returns person at index in List<Person> people
+    // Get person at index
+    // post: returns person at index in List<Person> roster
     public Person get(int index){
-        return people.get(index);
+        return roster.get(index);
     }
 
+    // Override toString method
     // post: overrides toString method and returns groupName
+    @Override
     public String toString(){
         return getGroupName();
     }

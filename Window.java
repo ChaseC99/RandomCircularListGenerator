@@ -468,7 +468,7 @@ public class Window extends javax.swing.JFrame {
     
     
     
-    // Controller code //
+    /* Controller code */
     
     // Variable to represent the Controller
     private Controller controller;
@@ -480,8 +480,10 @@ public class Window extends javax.swing.JFrame {
     
     
     
-    // UI Buttons
+    /* UI Buttons code */
     
+    // Enables or disables all the componets, except the addGroupButton
+    // post: the components are enabled or disabled
     public void enableComponents(boolean enable){
         groupComboBox.setEnabled(enable);
         editRosterButton.setEnabled(enable);
@@ -498,12 +500,16 @@ public class Window extends javax.swing.JFrame {
         listDisplay.setEnabled(enable);
     }
     
+    // Enables or disables all the components, including the addGroupButton
+    // post: the UI is enabled or diabled
     public void enableUI(boolean enable){
         addGroupButton.setEnabled(enable);
         enableComponents(enable);
     }
+
+
     
-    // nameTextField code //
+    /* nameTextField code */
     /*  additional functionality is given to the nameTextField
      *      - hint text is added, which says "Enter Name"
      *      - when clicked on, hint text disapears
@@ -554,10 +560,8 @@ public class Window extends javax.swing.JFrame {
     
     
     
-
+    /* groupComboBox code */
     
-    
-    // groupComboBox code //
     // post: group is added to comboBox and set as selected item
     public void addGroupToComboBox(Group group){
         groupComboBox.addItem(group);
@@ -568,6 +572,23 @@ public class Window extends javax.swing.JFrame {
     public void removeGroupFromComboBox(int index){
         groupComboBox.removeItemAt(index);
     }
+    
+    // I tried to use .getSelectedItem() but that returned an Obj, not Group
+    // So instead I had to use .getItemAt(.getSelectedIndex()) because that returned Group
+    // post: returns the selected group from the comboBox
+    public Group getSelectedComboBoxGroup(){
+        int index = groupComboBox.getSelectedIndex();
+        if (index == -1){
+            return null;
+        } else {
+            return groupComboBox.getItemAt(index);
+        }
+        
+    }
+    
+    
+    
+    /* PopUp Menus code */
     
     // displays JOptionPane asking user if user wants to delete group
     // post: returns true if yes is selected, else returns false
@@ -588,38 +609,22 @@ public class Window extends javax.swing.JFrame {
         return groupName;
     }
     
+    // displays JOptionPane prompting user to change a group's name
+    // post: returns the new group name, null if cancel was clicked
     public String renameGroupPopUp(String originalName){
         String newName = JOptionPane.showInputDialog("Enter new name for '" + originalName +"':", originalName);
         return newName;
     }
     
-    public String editRosterPopUp(Group group){
-        // Turn group roster into string
-        /*
-        JTextArea ta = new JTextArea("Test\nTest1\nTest2");
-        JOptionPane popUp = new JOptionPane();
-        switch (JOptionPane.showConfirmDialog(this, new JScrollPane(ta))) {
-            case JOptionPane.OK_OPTION:
-                System.out.println(ta.getText());
-                break;
-        }   */
+    // display EditRosterPopUp prompting the user to update the roster
+    public void editRosterPopUp(Group group){
+        // Generate EditRosterPopUp, the popup does the rest of the work
         EditRosterPopUp popUp = new EditRosterPopUp(this, controller);
-        
-        return null;
     }
     
-    // I tried to use .getSelectedItem() but that returned an Obj, not Group
-    // So instead I had to use .getItemAt(.getSelectedIndex()) because that returned Group
-    // post: returns the selected group from the comboBox
-    public Group getSelectedComboBoxGroup(){
-        int index = groupComboBox.getSelectedIndex();
-        if (index == -1){
-            return null;
-        } else {
-            return groupComboBox.getItemAt(index);
-        }
-        
-    }
+    
+    
+    /* Roster Displau code */
     
     // updates display to inputed list and updates title border to the group name
     public void updateRosterDisplay(){
@@ -629,13 +634,16 @@ public class Window extends javax.swing.JFrame {
             rosterDisplay.setListData(new Person[0]);
             rosterDisplay.setBorder(BorderFactory.createTitledBorder("Group Roster"));
         } else {
-            rosterDisplay.setListData(selectedGroup.getListAsArray());
+            rosterDisplay.setListData(selectedGroup.getRosterAsArray());
             rosterDisplay.setBorder(BorderFactory.createTitledBorder(selectedGroup.getGroupName() + " Roster"));
         }
     }    
     
     
-
+    
+    /* List Display code */
+    
+    // sets the text of listDisplay
     public void updateListDisplay(String text){
         listDisplay.setText(text);
     }

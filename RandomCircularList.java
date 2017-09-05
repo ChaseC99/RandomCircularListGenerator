@@ -102,7 +102,7 @@ public class RandomCircularList
 
             // Establishes which group is left
             Group groupLeft = groupsCopy.get(0);                   // get group List
-            List<Person> peopleLeft = groupLeft.getList();       // get list of remaining people from groupLeft
+            List<Person> peopleLeft = groupLeft.getRoster();       // get list of remaining people from groupLeft
 
             // Assign targets to remaining players on groupLeft
             for(Person thisPerson: peopleLeft)
@@ -220,7 +220,7 @@ public class RandomCircularList
      */
     private List<Person> copyListFromGroup(Group group){
         List<Person> newList = new ArrayList<Person>();
-        List<Person> oldList = group.getList();
+        List<Person> oldList = group.getRoster();
 
         for(Person i: oldList){
             newList.add(new Person(i.getName(), i.getGroup()));
@@ -257,7 +257,7 @@ public class RandomCircularList
 
         Random r = new Random();
         int i = r.nextInt(group.size());         // random index in the targetGroup List to pick random person in the group
-        target = group.getList().remove(i);      // set target as player at random index of targetGroup and takes them out of the list
+        target = group.getRoster().remove(i);    // set target as player at random index of targetGroup and takes them out of the list
 
         return target;          // return target
     }
@@ -433,7 +433,7 @@ public class RandomCircularList
      */
     public void printGroup(Group group){
         System.out.println(group.getGroupName());
-        List<Person> people = group.getList();
+        List<Person> people = group.getRoster();
         for(Person person: people){
             System.out.println(" - " + person.getName());
         }

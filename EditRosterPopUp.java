@@ -18,11 +18,14 @@ public class EditRosterPopUp extends javax.swing.JDialog {
      */
     public EditRosterPopUp(java.awt.Frame parent, Controller controller) {
         super(parent, "Edit Roster");
-        this.controller = controller;
-        controller.enableUI(false);
-        initComponents();
-        rosterTextArea.setText(controller.getSelectedGroup().getListAsTextArea());
-        setVisible(true);
+        this.controller = controller;   // Sets controller
+        controller.enableUI(false);     // Disables UI
+        initComponents();               // Creates PopUp
+        
+        // Sets rosterTextArea as the selected group's roster
+        rosterTextArea.setText(controller.getSelectedGroup().getRosterAsTextArea()); 
+        
+        setVisible(true);               // Sets PopUp as visible
     }
 
     /**
@@ -161,6 +164,9 @@ public class EditRosterPopUp extends javax.swing.JDialog {
     }
     
     // MY CODE
+    
+    // Overrides the default dispose method
+    // post: when the window closes, the UI is enabled
     @Override
     public void dispose(){
         controller.enableUI(true);
