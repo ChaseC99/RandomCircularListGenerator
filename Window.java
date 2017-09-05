@@ -236,7 +236,6 @@ public class Window extends javax.swing.JFrame {
         });
 
         viewButtonGroup.add(targetRadioButton);
-        targetRadioButton.setSelected(true);
         targetRadioButton.setText("Target");
         targetRadioButton.setEnabled(false);
         targetRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -249,6 +248,7 @@ public class Window extends javax.swing.JFrame {
         viewTypeLabel.setText("View Type:");
 
         viewButtonGroup.add(numberRadioButton);
+        numberRadioButton.setSelected(true);
         numberRadioButton.setText("Number");
         numberRadioButton.setEnabled(false);
         numberRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -274,21 +274,21 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(listPanelLayout.createSequentialGroup()
                         .addComponent(showGroupCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addComponent(viewTypeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(targetRadioButton)
+                        .addComponent(numberRadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(listRadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numberRadioButton))
-                    .addComponent(listWarningLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                        .addComponent(targetRadioButton))
+                    .addComponent(listWarningLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(listPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(generateListButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(listDisplayPane))
                 .addContainerGap())
-            .addGroup(listPanelLayout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(generateListButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         listPanelLayout.setVerticalGroup(
             listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,9 +299,9 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewTypeLabel)
                     .addComponent(listRadioButton)
-                    .addComponent(targetRadioButton)
                     .addComponent(numberRadioButton)
-                    .addComponent(showGroupCheckBox))
+                    .addComponent(showGroupCheckBox)
+                    .addComponent(targetRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(listDisplayPane, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
