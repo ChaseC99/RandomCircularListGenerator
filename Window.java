@@ -622,6 +622,10 @@ public class Window extends javax.swing.JFrame {
         EditRosterPopUp popUp = new EditRosterPopUp(this, controller);
     }
     
+    public void generateListErrorPopUp(){
+        JOptionPane.showMessageDialog(this, "One or more groups contain no people.\nPlease make sure all groups have at least one person.", "Error - Empty Group", JOptionPane.ERROR_MESSAGE);
+    }
+    
     
     
     /* Roster Displau code */
