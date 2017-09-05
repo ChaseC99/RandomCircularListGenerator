@@ -31,6 +31,9 @@ If there are 3 or more groups in ```groups```, then this is how the program gene
 5. Take the people from the remaining group and insert them into the list between two people who aren't in the same group as them.
 6. Check to make sure no two people from the same group are next to each other and that the first and last people are not from the same group. If they there are any ```sameGroupConflicts```, go back to step 1 and try again. (I know this is inefficient, but it works for now)
 
+
+\* If the amount of players in ```groups``` is uneven and won't allow for a list where no two people from the same group end up next to each other, it will create a normal randomized list instead.
+
 **See [Issues](https://github.com/ChaseC99/RandomCircularListGenerator/issues) for known bugs**
 
 ---
