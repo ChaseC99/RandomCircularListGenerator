@@ -622,8 +622,14 @@ public class Window extends javax.swing.JFrame {
         EditRosterPopUp popUp = new EditRosterPopUp(this, controller);
     }
     
+    // display error message, telling user each group must have at least one person
     public void generateListErrorPopUp(){
         JOptionPane.showMessageDialog(this, "One or more groups contain no people.\nPlease make sure all groups have at least one person.", "Error - Empty Group", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    //
+    public void invalidGroupNamePopUp(){
+        JOptionPane.showMessageDialog(this, "Groups must have a name.\nPlease enter something for the group name.", "Invalid Group Name", JOptionPane.ERROR_MESSAGE);
     }
     
     

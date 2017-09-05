@@ -127,8 +127,14 @@ public class Controller
         // If group name is not null, create a new group
         if(groupName != null)
         {
-            addGroup(groupName);
-            ui.enableComponents(true);
+            if(groupName.equals(""))
+            {
+                ui.invalidGroupNamePopUp();
+                addGroupClicked();
+            } else {
+                addGroup(groupName);
+                ui.enableComponents(true);
+            }
         }
 
         // Update UI
