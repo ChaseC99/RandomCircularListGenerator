@@ -25,7 +25,7 @@ public class Controller
         this.ui = ui;
         groups = new ArrayList<Group>();
         selectedGroup = null;
-        selectedViewType = ListViewType.TARGET;
+        selectedViewType = ListViewType.NUMBER;
         list = null;
         showGroup = false;
     }
