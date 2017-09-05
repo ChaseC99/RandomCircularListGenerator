@@ -36,19 +36,19 @@ public class Tester {
         List<Group> groups = new ArrayList<Group>();
 
         Group varsity = new Group("Varsity");
-        varsity.setList(fileToArray("TestFiles/varsity.txt", varsity));
+        varsity.setRoster(fileToArray("TestFiles/varsity.txt", varsity));
         groups.add(varsity);
 
         Group jv = new Group("JV");
-        jv.setList(fileToArray("TestFiles/jv.txt", jv));
+        jv.setRoster(fileToArray("TestFiles/jv.txt", jv));
         groups.add(jv);
 
         Group n = new Group("Novice");
-        n.setList(fileToArray("TestFiles/novice.txt", n));
+        n.setRoster(fileToArray("TestFiles/novice.txt", n));
         groups.add(n);
 
         Group sg = new Group("Stat Girls");
-        sg.setList(fileToArray("TestFiles/statGirls.txt", sg));
+        sg.setRoster(fileToArray("TestFiles/statGirls.txt", sg));
         groups.add(sg);
 
         for(int i = 0; i < 100; i++){
