@@ -209,11 +209,27 @@ public class Controller
      */
     public void generateListClicked()
     {
-        // Create new random list
-        list = new RandomCircularList(groups);
+        // Check to make sure all groups have at least one person in them
+        Boolean groupsValid = true;
+        for(Group group: groups)
+        {
+            if(group.size() == 0)
+            {
+                groupsValid = false;
+            }
+        }
 
-        // Update UI
-        ui.updateListDisplay(getSelectedViewText());    // sets listDisplay to the random list
+        // If the groups are valid, generate a list and update the UI
+        if(groupsValid)
+        {
+            // Create new random list
+            list = new RandomCircularList(groups);
+
+            // Update UI
+            ui.updateListDisplay(getSelectedViewText());    // sets listDisplay to the random list
+        } else {
+            ui.generateListErrorPopUp();
+        }
     }
 
     // Enable or disable the UI
