@@ -627,7 +627,7 @@ public class Window extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "One or more groups contain no people.\nPlease make sure all groups have at least one person.", "Error - Empty Group", JOptionPane.ERROR_MESSAGE);
     }
     
-    //
+    // display error message, telling user that the group must have a name
     public void invalidGroupNamePopUp(){
         JOptionPane.showMessageDialog(this, "Groups must have a name.\nPlease enter something for the group name.", "Invalid Group Name", JOptionPane.ERROR_MESSAGE);
     }

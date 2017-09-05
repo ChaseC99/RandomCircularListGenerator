@@ -124,7 +124,8 @@ public class Controller
         // Creates addGroupPopUp, which returns the groupName
         String groupName = ui.addGroupPopUp();
 
-        // If group name is not null, create a new group
+        // Checks to make sure groupName isn't null
+        // It will be null if "cancel" is clicked
         if(groupName != null)
         {
             if(groupName.equals(""))
@@ -134,11 +135,11 @@ public class Controller
             } else {
                 addGroup(groupName);
                 ui.enableComponents(true);
+                
+                // Update UI
+                ui.updateListDisplay("");   // clear listDisplay
             }
         }
-
-        // Update UI
-        ui.updateListDisplay("");   // clear listDisplay
     }
 
     /**
