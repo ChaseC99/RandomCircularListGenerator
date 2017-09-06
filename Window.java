@@ -312,6 +312,12 @@ public class Window extends javax.swing.JFrame {
         fileMenu.setText("File");
 
         restartItem.setText("Restart");
+        restartItem.setEnabled(false);
+        restartItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restartItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(restartItem);
 
         jMenuBar.add(fileMenu);
@@ -418,6 +424,10 @@ public class Window extends javax.swing.JFrame {
         controller.showGroupChecked(showGroupCheckBox.isSelected());
     }//GEN-LAST:event_showGroupCheckBoxActionPerformed
 
+    private void restartItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartItemActionPerformed
+        controller.resetClicked();
+    }//GEN-LAST:event_restartItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -498,6 +508,7 @@ public class Window extends javax.swing.JFrame {
         listRadioButton.setEnabled(enable);
         numberRadioButton.setEnabled(enable);
         listDisplay.setEnabled(enable);
+        restartItem.setEnabled(enable);
     }
     
     // Enables or disables all the components, including the addGroupButton
@@ -616,6 +627,18 @@ public class Window extends javax.swing.JFrame {
         return newName;
     }
     
+    // displays JOptionPane asking user if user wants to reset the program
+    // post: returns true if yes is selected, else returns false
+    public Boolean resetPopUp(){
+        // Open JOptionPane, asking if user wants to reset the program
+        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to reset the program?\nAll groups will be removed and the list display will be cleared.\n\nThis cannot be undone!", "Remove Group", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if(response == JOptionPane.YES_OPTION){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     // display EditRosterPopUp prompting the user to update the roster
     public void editRosterPopUp(Group group){
         // Generate EditRosterPopUp, the popup does the rest of the work
@@ -634,7 +657,7 @@ public class Window extends javax.swing.JFrame {
     
     
     
-    /* Roster Displau code */
+    /* Roster Display code */
     
     // updates display to inputed list and updates title border to the group name
     public void updateRosterDisplay(){
@@ -656,5 +679,19 @@ public class Window extends javax.swing.JFrame {
     // sets the text of listDisplay
     public void updateListDisplay(String text){
         listDisplay.setText(text);
+    }
+    
+    
+    
+    /* Reset code */
+    
+    // resets UI
+    // post: the UI looks like how it does when it first launced
+    public void reset(){
+        updateRosterDisplay();
+        updateListDisplay("");
+        groupComboBox.removeAllItems();
+        showGroupCheckBox.setSelected(false);
+        enableComponents(false);
     }
 }

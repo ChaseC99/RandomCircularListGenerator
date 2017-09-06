@@ -135,7 +135,7 @@ public class Controller
             } else {
                 addGroup(groupName);
                 ui.enableComponents(true);
-                
+
                 // Update UI
                 ui.updateListDisplay("");   // clear listDisplay
             }
@@ -237,6 +237,36 @@ public class Controller
         } else {
             ui.generateListErrorPopUp();
         }
+    }
+
+    /**
+     *  Starts the process to reset the program
+     *      resetPopUp is called and the result is recorded
+     *      If yes was selected, then reset() is called to reset the program
+     */
+    public void resetClicked()
+    {
+        Boolean resetResponse = ui.resetPopUp();
+
+        if(resetResponse)
+        {
+            reset();
+        }
+    }
+
+    // Resets the controller and the UI
+    // post: the controller and UI are reset to how they were when the program launched
+    private void reset()
+    {
+        // Reset instance varaibles
+        groups = new ArrayList<Group>();
+        selectedGroup = null;
+        selectedViewType = ListViewType.NUMBER;
+        list = null;
+        showGroup = false;
+
+        // Reset UI
+        ui.reset();
     }
 
     // Enable or disable the UI
