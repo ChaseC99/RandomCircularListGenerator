@@ -17,7 +17,7 @@ public class Controller
     Group selectedGroup;
     ListViewType selectedViewType;
     RandomCircularList list;
-    Boolean showGroup;
+    boolean showGroup;
 
     // CONSTRUCTOR
     public Controller(Window ui)
@@ -217,7 +217,7 @@ public class Controller
     public void generateListClicked()
     {
         // Check to make sure all groups have at least one person in them
-        Boolean groupsValid = true;
+        boolean groupsValid = true;
         for(Group group: groups)
         {
             if(group.size() == 0)
@@ -246,7 +246,7 @@ public class Controller
      */
     public void resetClicked()
     {
-        Boolean resetResponse = ui.resetPopUp();
+        boolean resetResponse = ui.resetPopUp();
 
         if(resetResponse)
         {
@@ -298,7 +298,7 @@ public class Controller
 
     // Toggles whether showGroup is checked or not
     // post: showGroup is set to the state that it is in on the UI
-    public void showGroupChecked(Boolean checked)
+    public void showGroupChecked(boolean checked)
     {
         showGroup = checked;
 

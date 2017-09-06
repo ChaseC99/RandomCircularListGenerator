@@ -303,7 +303,7 @@ public class RandomCircularList
         return lastPerson;
     }
 
-    public String getText(ListViewType viewType, Boolean withGroup){
+    public String getText(ListViewType viewType, boolean withGroup){
         String listText = "";
 
         switch(viewType){
@@ -321,7 +321,7 @@ public class RandomCircularList
         return listText;
     }
 
-    private String getTargetViewText(Boolean withGroup){
+    private String getTargetViewText(boolean withGroup){
         String listText = "";
         Person hunter = firstPerson;
         Person target = hunter.getTarget();
@@ -345,7 +345,7 @@ public class RandomCircularList
         return listText;
     }
 
-    private String getListViewText(Boolean withGroup){
+    private String getListViewText(boolean withGroup){
         String listText = "";
 
         Person temp = firstPerson;
@@ -365,7 +365,7 @@ public class RandomCircularList
         return listText;
     }
 
-    private String getNumberViewText(Boolean withGroup){
+    private String getNumberViewText(boolean withGroup){
         String listText = "";
 
         Person temp = firstPerson;
