@@ -1,5 +1,7 @@
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.BorderFactory;
@@ -527,11 +529,13 @@ public class Window extends javax.swing.JFrame {
      *      - when resetNameTextField is called, hint text reappears
      */
 
-    // Represents whether or not the hint text is displayed
-    private boolean hintTextDisplayed = true;
+    // nameTextField variables
+    private boolean hintTextDisplayed = true;   // Represents whether or not the hint text is displayed
+    private boolean addNameFocused = false;     // Represents whether or not the textField is focused
 
-    // Adds FocuseListener to the text field
+    // Adds FocuseListener and ActionListener to the text field
     private void addNameTextFieldListener() {
+        // Adds focus listener to the textField
         nameTextField.addFocusListener(new FocusListener() {
 
             @Override
@@ -546,6 +550,8 @@ public class Window extends javax.swing.JFrame {
                     nameTextField.setForeground(Color.black);
                     hintTextDisplayed = false;
                 }
+                
+                addNameFocused = true;
             }
 
             @Override
@@ -557,7 +563,26 @@ public class Window extends javax.swing.JFrame {
                 if(nameTextField.getText().length() == 0){
                     resetNameTextField();
                 }
+                
+                addNameFocused = false;
             }
+        });
+        
+        // Adds action listener to the textField
+        nameTextField.addActionListener(new ActionListener() {
+
+                /*  When the enter key is pressed, this method is called
+                *   If the textField is focused, then addPersonButtonAction is called
+                *   It then focuses on addPersonButton so textField can reset  
+                */
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(addNameFocused)
+                    {
+                        addPersonButtonActionPerformed(null);   // calls addPersonButton
+                        addPersonButton.requestFocus();         // focus leaves textField and goes to addPersonButton 
+                    }
+                }
         });
     }
 
