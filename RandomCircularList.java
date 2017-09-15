@@ -308,6 +308,9 @@ public class RandomCircularList
         return lastPerson;
     }
 
+    private String sameGroupConflictMessage =
+        "Warning: Two or more people from the same group are placed next to each other.";
+
     public String getText(ListViewType viewType, boolean withGroup){
         String listText = "";
 
@@ -321,6 +324,10 @@ public class RandomCircularList
             case NUMBER:
                 listText = getNumberViewText(withGroup);
                 break;
+        }
+
+        if(hasSameGroupConflict){
+            listText += "\n\n" + sameGroupConflictMessage;
         }
 
         return listText;
