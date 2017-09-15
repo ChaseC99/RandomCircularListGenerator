@@ -5,49 +5,66 @@
  *  The list is essentially a linked list. Each person is a node.
  *  Each person class is assigned a target, so it knows who the next node is
  *
- *  No two players on the same group will be directly next to eachother on the list (unless only one group is inputed)
+ *  The program will try to make it so that no two players on the same group will be directly next to eachother on the list
+ *  If this cannot be done, a normal randomized list will be made instead
  *
  *  INSTANCE VARIABLES
- *      List<Group> groups        // list groups that will included in the circular list
- *      Person firstPeron       // considered the "starting" point for the circular list
+ *      List<Group> groups              // list groups that will included in the circular list
+ *      Person firstPeron               // considered the "starting" point for the circular list
+ *      Person lastPerson               // considered the "ending" point for the circular list
+ *      int attempts                    // represents the amount of times createList() has been attempted
+ *      boolean hasSameGroupConflict    // represents whether the list has a same group conflict
  *
  *  METHODS
+ *      // Methods for creating the list
  *      createList()                                    // creates the circlular linked list, telling each person who its next target is
- *      copyListOfGroups(List<Group>) -> List<Group>       // return copy of a list of Group objects
- *      copyListFromGroup(Group) -> List<Person>          // return copy of list of Person objects
- *      randomlySelectGroup(List<Group>)                  // randomly selects group form a list of groups
- *      removeRandomPerson(Group)                        // randomly selects, removes, and returns a person from a group
- *      removeRandomPerson(List<Group>)                  // randomly selects, removes, and returns a person from a random group in a list of groups
+ *      copyListOfGroups(List<Group>) -> List<Group>    // return copy of a list of Group objects
+ *      copyListFromGroup(Group) -> List<Person>        // return copy of list of Person objects
+ *      randomlySelectGroup(List<Group>)                // randomly selects group form a list of groups
+ *      removeRandomPerson(Group)                       // randomly selects, removes, and returns a person from a group
+ *      removeRandomPerson(List<Group>)                 // randomly selects, removes, and returns a person from a random group in a list of groups
  *      getLastPerson() -> Person                       // returns last person in the list
+ *
+ *      // Methods for displaying the list
+ *      getText(ListViewType, boolean) -> String        // returns a string of the list in the requested viewType
+ *      getTargetViewText(boolean) -> String            // returns a list of everyone's first target with option to show people's group
+ *                                                              Ex: One "Person -> Target" per line
+ *      getListViewText(boolean) -> String              // returns a list of everyone and who they are targeting with option to show people's group
+ *                                                              Ex: "x --> y --> z --> a --> b --> c --> x"
+ *      getNumberViewText(boolean) -> String            // returns a numbered list of everyone's name with option to show people's group
+ *                                                              Ex: 1. Person Name /n 2. Next Name
  *      printFirstTargets()                             // prints to console a list of everyone's first target.
  *                                                              Ex: One "Person -> Target" per line
  *      printList()                                     // prints to console a list of everyone and who they are targeting
  *                                                              Ex: "x --> y --> z --> a --> b --> c --> x"
- *      printGroup(Group)                                 // prints to console a list of the group's players
+ *      printGroup(Group)                               // prints to console a list of the group's players
  *                                                              Ex: "GroupName/n - name1 /n -name2 /n" etc
- *      printAllGroups()                                 // runs printGroup(Group) method for all groups in the list
+ *      printAllGroups()                                // runs printGroup(Group) method for all groups in the list
+ *
+ *      // Other informational methods
  *      getNumPeople() -> int                           // returns number of people in the game
  *      getNumPeopleInList() -> int                     // returns number of people in the list
- *      sameGroupConflicts() -> int                      // returns number of times people on the same group are next to eachother
+ *      sameGroupConflicts() -> int                     // returns number of times people on the same group are next to eachother
+ *      hasSameGroupConflict() -> boolean               // returns hasSameGroupConflict
  */
 
 import java.util.*;     // Import List
 public class RandomCircularList
 {
     // instance variables
-    public List<Group> groups;        // list groups that will included in the circular list
-    public Person firstPerson;      // considered the "starting" point for the circular list
-    public Person lastPerson;       // considered the "ending" point for the circular list
-    private int attempts = 0;           // represents the amount of times createList() has been attempted
-    private boolean hasSameGroupConflict = false;
+    public List<Group> groups;                      // list groups that will included in the circular list
+    public Person firstPerson;                      // considered the "starting" point for the circular list
+    public Person lastPerson;                       // considered the "ending" point for the circular list
+    private int attempts = 0;                       // represents the amount of times createList() has been attempted
+    private boolean hasSameGroupConflict = false;   // represents whether the list has a same group conflict
 
     /**
      * Constructor for objects of class RandomCircularList
      */
     public RandomCircularList(List<Group> groups)
     {
-        this.groups = groups;                     // sets groups variable
-        firstPerson = groups.get(0).get(0);      // establishes first player on the first group as first player
+        this.groups = groups;                   // sets groups variable
+        firstPerson = groups.get(0).get(0);     // establishes first player on the first group as first player
         createList();                           // creates the random circular linked list and instantiates lastPerson
     }
 
@@ -58,6 +75,8 @@ public class RandomCircularList
      *  post: each player is assigned a target, lastPerson = lastPerson in the list
      */
     public void createList(){
+        // Create a list with no same group conflicts
+        // If it cannot do this after 200 attempts, it will create a normal randomized list
         if(groups.size() >= 3 && attempts < 200){
             // Make a copy of groups
             List<Group> groupsCopy = copyListOfGroups(groups);
@@ -150,6 +169,11 @@ public class RandomCircularList
                 createList();
             }
         } else {
+            /**
+             *  If it cannot create a list with no same group conflicts,
+             *  it will create a normal randomized list
+             */
+
             // Make a copy of groups
             List<Group> groupsCopy = copyListOfGroups(groups);
 
@@ -191,6 +215,7 @@ public class RandomCircularList
             player.setTarget(firstPerson);
         }
 
+        // If there is any same group conflicts, set hasSameGroupConflict to true
         if(sameGroupConflicts() != 0){
             hasSameGroupConflict = true;
         }
@@ -308,9 +333,18 @@ public class RandomCircularList
         return lastPerson;
     }
 
+    // Message for when there is a same group conflict
     private String sameGroupConflictMessage =
         "Warning: Two or more people from the same group are placed next to each other.";
 
+    /**
+     *  This method is called by the controller
+     *  The viewType is passed through along with whether or not withGroup should be displayed
+     *  It runs through a switch statement of viewTypes, returning a string of the right viewType
+     *  Then, if there is a same group conflict, a warning message is thrown on the end
+     *
+     *  post: returns a string of the list in the requested viewType
+     */
     public String getText(ListViewType viewType, boolean withGroup){
         String listText = "";
 
@@ -333,6 +367,13 @@ public class RandomCircularList
         return listText;
     }
 
+    /**
+     *  returns a list of everyone's first target
+     *  example:
+     *      x --> y
+     *      y --> z
+     *      z --> a
+     */
     private String getTargetViewText(boolean withGroup){
         String listText = "";
         Person hunter = firstPerson;
@@ -357,6 +398,11 @@ public class RandomCircularList
         return listText;
     }
 
+    /**
+     *  returns a list of everyone and who they are targeting
+     *  example:
+     *      x --> y --> z --> a --> b --> c --> x
+     */
     private String getListViewText(boolean withGroup){
         String listText = "";
 
@@ -377,6 +423,13 @@ public class RandomCircularList
         return listText;
     }
 
+    /**
+     *  returns a numbered list of everyone's name
+     *  example:
+     *      1. x
+     *      2. y
+     *      3. z
+     */
     private String getNumberViewText(boolean withGroup){
         String listText = "";
 
