@@ -65,6 +65,7 @@ public class Window extends javax.swing.JFrame {
         showGroupCheckBox = new javax.swing.JCheckBox();
         jMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        saveItem = new javax.swing.JMenuItem();
         restartItem = new javax.swing.JMenuItem();
         helpItem = new javax.swing.JMenu();
         howToUseItem = new javax.swing.JMenuItem();
@@ -313,6 +314,15 @@ public class Window extends javax.swing.JFrame {
 
         fileMenu.setText("File");
 
+        saveItem.setText("Save");
+        saveItem.setEnabled(false);
+        saveItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(saveItem);
+
         restartItem.setText("Restart");
         restartItem.setEnabled(false);
         restartItem.addActionListener(new java.awt.event.ActionListener() {
@@ -430,6 +440,10 @@ public class Window extends javax.swing.JFrame {
         controller.resetClicked();
     }//GEN-LAST:event_restartItemActionPerformed
 
+    private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -468,6 +482,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JMenuItem restartItem;
     private javax.swing.JList<Person> rosterDisplay;
     private javax.swing.JScrollPane rosterDisplayPane;
+    private javax.swing.JMenuItem saveItem;
     private javax.swing.JCheckBox showGroupCheckBox;
     private javax.swing.JMenuItem sourceCodeItem;
     private javax.swing.JRadioButton targetRadioButton;
@@ -510,6 +525,7 @@ public class Window extends javax.swing.JFrame {
         listRadioButton.setEnabled(enable);
         numberRadioButton.setEnabled(enable);
         listDisplay.setEnabled(enable);
+        saveItem.setEnabled(enable);
         restartItem.setEnabled(enable);
     }
 
