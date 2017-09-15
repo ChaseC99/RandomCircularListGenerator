@@ -240,6 +240,16 @@ public class Controller
     }
 
     /**
+     *  Starts the process to save the list
+     *      resetPopUp is called and the result is recorded
+     *      If yes was selected, then reset() is called to reset the program
+     */
+    public void saveClicked()
+    {
+
+    }
+
+    /**
      *  Starts the process to reset the program
      *      resetPopUp is called and the result is recorded
      *      If yes was selected, then reset() is called to reset the program

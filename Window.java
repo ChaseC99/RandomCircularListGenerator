@@ -441,7 +441,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_restartItemActionPerformed
 
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
-        // TODO add your handling code here:
+        controller.saveClicked();
     }//GEN-LAST:event_saveItemActionPerformed
 
     /**
