@@ -216,9 +216,9 @@ public class Window extends javax.swing.JFrame {
         listDisplay.setWrapStyleWord(true);
         listDisplayPane.setViewportView(listDisplay);
 
-        listWarningLabel.setFont(new java.awt.Font("Lucida Grande", 2, 11)); // NOI18N
+        listWarningLabel.setFont(new java.awt.Font("Lucida Grande", 2, 10)); // NOI18N
         listWarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        listWarningLabel.setText("<html>\n* If there are only 2 groups or less, the list will be randomized,\n<BR>  but 2 people from the same group may be placed next to eachother.\n</html>");
+        listWarningLabel.setText("<html><div style='text-align: center;'>Sometimes 2 people from the same group may be placed next to each other in the list.<BR>When this happens, a warning message will be displayed.</div></html>");
 
         generateListButton.setText("Generate Random List");
         generateListButton.setEnabled(false);
@@ -307,7 +307,7 @@ public class Window extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(listDisplayPane, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listWarningLabel)
+                .addComponent(listWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
