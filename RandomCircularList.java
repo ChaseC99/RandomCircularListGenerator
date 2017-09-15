@@ -39,6 +39,7 @@ public class RandomCircularList
     public Person firstPerson;      // considered the "starting" point for the circular list
     public Person lastPerson;       // considered the "ending" point for the circular list
     private int attempts = 0;           // represents the amount of times createList() has been attempted
+    private boolean hasSameGroupConflict = false;
 
     /**
      * Constructor for objects of class RandomCircularList
@@ -188,6 +189,10 @@ public class RandomCircularList
             }
 
             player.setTarget(firstPerson);
+        }
+
+        if(sameGroupConflicts() != 0){
+            hasSameGroupConflict = true;
         }
     }
 
@@ -499,5 +504,12 @@ public class RandomCircularList
         }while(i != firstPerson);
 
         return count;
+    }
+
+    /**
+     *  post: returns hasSameGroupConflict
+     */
+    public boolean hasSameGroupConflict(){
+        return hasSameGroupConflict;
     }
 }
