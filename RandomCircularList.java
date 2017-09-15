@@ -85,10 +85,10 @@ public class RandomCircularList
             firstPerson = removeRandomPerson(groupsCopy);
 
             // Set up for while loop
-            Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
-            Group lastTargetGroup = firstPerson.getGroup();    // sets lastTargetGroup as the first players group
-            Group targetGroup;                                // declares targetGroup
-            Person target;                                  // declares target
+            Person player = firstPerson;                        // variable for the while loop representing the player getting assigned a target
+            Group lastTargetGroup = firstPerson.getGroup();     // sets lastTargetGroup as the first players group
+            Group targetGroup;                                  // declares targetGroup
+            Person target;                                      // declares target
 
             // Randomly assign player targets
             while(groupsCopy.size() > 1){
@@ -99,8 +99,8 @@ public class RandomCircularList
                 } while(targetGroup == lastTargetGroup);
 
                 // Give player a random target from his/her targetGroup
-                target = removeRandomPerson(targetGroup);    // randomly removes a person from the target group
-                player.setTarget(target);                   // set player's target
+                target = removeRandomPerson(targetGroup);       // randomly removes a person from the target group
+                player.setTarget(target);                       // set player's target
 
                 // If the targetGroup is now empty, take the group out of the groupsCopy List
                 if(targetGroup.size() == 0){
@@ -109,8 +109,8 @@ public class RandomCircularList
                     groupsCopy.remove(index);
                 }
 
-                lastTargetGroup = targetGroup;  // updates last group
-                player = target;              // target now gets assigned their target
+                lastTargetGroup = targetGroup;      // updates last group
+                player = target;                    // target now gets assigned their target
             }
 
             /*
@@ -187,10 +187,10 @@ public class RandomCircularList
             }
 
             // Set up for while loop
-            Person player = firstPerson;                    // variable for the while loop representing the player getting assigned a target
-            Group lastTargetGroup = firstPerson.getGroup();    // sets lastTargetGroup as the first players group
-            Group targetGroup;                                // declares targetGroup
-            Person target;                                  // declares target
+            Person player = firstPerson;                        // variable for the while loop representing the player getting assigned a target
+            Group lastTargetGroup = firstPerson.getGroup();     // sets lastTargetGroup as the first players group
+            Group targetGroup;                                  // declares targetGroup
+            Person target;                                      // declares target
 
             // Randomly assign player targets
             while(groupsCopy.size() > 0){
@@ -199,7 +199,7 @@ public class RandomCircularList
 
                 // Give player a random target from his/her targetGroup
                 target = removeRandomPerson(targetGroup);   // randomly removes a person from the target group
-                player.setTarget(target);                                       // set player's target
+                player.setTarget(target);                   // set player's target
 
                 // If the targetGroup is now empty, take the group out of the groupsCopy List
                 if(targetGroup.size() == 0){
@@ -208,8 +208,8 @@ public class RandomCircularList
                     groupsCopy.remove(index);
                 }
 
-                lastTargetGroup = targetGroup;  // updates last group
-                player = target;              // target now gets assigned their target
+                lastTargetGroup = targetGroup;      // updates last group
+                player = target;                    // target now gets assigned their target
             }
 
             player.setTarget(firstPerson);
@@ -266,13 +266,13 @@ public class RandomCircularList
      *  post: return random group
      */
     private Group randomlySelectGroup(List<Group> listOfGroups){
-        Group group;          // Group to be returned
+        Group group;        // Group to be returned
 
         Random rand = new Random();
-        int groupIndex = rand.nextInt(listOfGroups.size());   // random index in listOfGroups to pick random group
-        group = listOfGroups.get(groupIndex);                  // get group from list based off groupIndex
+        int groupIndex = rand.nextInt(listOfGroups.size());     // random index in listOfGroups to pick random group
+        group = listOfGroups.get(groupIndex);                   // get group from list based off groupIndex
 
-        return group;        // return group
+        return group;       // return group
     }
 
     /**
@@ -302,7 +302,7 @@ public class RandomCircularList
     private Person removeRandomPerson(List<Group> groups){
         Group targetGroup = randomlySelectGroup(groups);        // Group from which person is selected
 
-        Person target = removeRandomPerson(targetGroup);     // Person to be returned
+        Person target = removeRandomPerson(targetGroup);        // Person to be returned
 
         // Remove firstPerson's group from groups
         // if they were the only person in the group
@@ -360,6 +360,7 @@ public class RandomCircularList
                 break;
         }
 
+        // If there is a same group conflict add on the warning message
         if(hasSameGroupConflict){
             listText += "\n\n" + sameGroupConflictMessage;
         }
