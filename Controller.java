@@ -8,6 +8,7 @@ import java.util.*;     // import lists
 import java.awt.Desktop;
 import java.net.*;
 import java.io.*;
+import javafx.stage.FileChooser;
 
 public class Controller
 {
@@ -249,24 +250,14 @@ public class Controller
      */
     public void saveClicked()
     {
-        // Check to see that there is a list
-        /*
-        // Generate FileChooser
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Random List");
-        File file = fileChooser.showSaveDialog(stage);
+        File file = ui.fileChooserPopUp();
         if (file != null) {
-            try {
-                ImageIO.write(SwingFXUtils.fromFXImage(pic.getImage(),
-                    null), "png", file);
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+            try(PrintStream fileContent = new PrintStream(file)){
+                fileContent.print(list.getFileText());
+            } catch (FileNotFoundException e){
+
             }
         }
-        */
-
-        System.out.print(list.getFile());
-        // Save data as text file
     }
 
     /**
