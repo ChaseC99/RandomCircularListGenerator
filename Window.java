@@ -203,7 +203,7 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(editRosterButton)
                     .addComponent(renameGroupButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rosterDisplayPane, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rosterDisplayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addPersonPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -222,7 +222,7 @@ public class Window extends javax.swing.JFrame {
 
         listWarningLabel.setFont(new java.awt.Font("Lucida Grande", 2, 10)); // NOI18N
         listWarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        listWarningLabel.setText("<html><div style='text-align: center;'>Sometimes 2 people from the same group may be placed next to each other in the list.<BR>When this happens, a warning message will be displayed.</div></html>");
+        listWarningLabel.setText("<html><div style='text-align: center;'> Sometimes 2 people from the same group may be placed next to each other in the list.<BR> When this happens, a warning message will be displayed.<BR><BR></div></html>");
 
         generateListButton.setText("Generate Random List");
         generateListButton.setEnabled(false);
@@ -309,9 +309,9 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(showGroupCheckBox)
                     .addComponent(targetRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listDisplayPane, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(listDisplayPane)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(listWarningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
