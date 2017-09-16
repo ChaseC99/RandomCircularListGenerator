@@ -449,7 +449,7 @@ public class RandomCircularList
         return listText;
     }
 
-    public String getFile(){
+    public String getFileText(){
         String fileText = "Random List";
 
         fileText += "\n\n";     // Adds line
