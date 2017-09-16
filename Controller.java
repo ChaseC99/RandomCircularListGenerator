@@ -8,7 +8,6 @@ import java.util.*;     // import lists
 import java.awt.Desktop;
 import java.net.*;
 import java.io.*;
-import javafx.stage.FileChooser;
 
 public class Controller
 {
@@ -138,7 +137,7 @@ public class Controller
                 ui.enableComponents(true);
 
                 // Update UI
-                ui.updateListDisplay("");   // clear listDisplay
+                clearListDisplay();
             }
         }
     }
@@ -172,7 +171,7 @@ public class Controller
         }
 
         // Update UI
-        ui.updateListDisplay("");   // clear listDisplay
+        clearListDisplay();
     }
 
     /**
@@ -210,7 +209,7 @@ public class Controller
         ui.editRosterPopUp(selectedGroup);
 
         // Update UI
-        ui.updateListDisplay("");   // clear listDisplay since roster changed
+        clearListDisplay();
     }
 
     /**
@@ -250,11 +249,17 @@ public class Controller
      */
     public void saveClicked()
     {
-        File file = ui.fileChooserPopUp();
-        if (file != null) {
-            try(PrintStream fileContent = new PrintStream(file)){
-                fileContent.print(list.getFileText());
-            } catch (FileNotFoundException e){}
+        if(list == null)
+        {
+            ui.saveErrorNoListPopUp();
+        } else {
+            File file = ui.fileChooserPopUp();
+            if (file != null)
+            {
+                try(PrintStream fileContent = new PrintStream(file)){
+                    fileContent.print(list.getFileText());
+                } catch (FileNotFoundException e){}
+            }
         }
     }
 
@@ -326,6 +331,14 @@ public class Controller
         {
             ui.updateListDisplay(getSelectedViewText());
         }
+    }
+
+    // Clears the list display in the ui and sets list to null
+    // post: ui listDisplay is empty and list = null
+    private void clearListDisplay()
+    {
+        ui.updateListDisplay("");   // clear listDisplay
+        list = null;                // clear list
     }
 
     // Open website URL
