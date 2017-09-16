@@ -7,7 +7,7 @@
  import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class RandomCircularListGenerator
+public class RandomListGenerator
 {
     // Instance Variables
     private static Window ui;
