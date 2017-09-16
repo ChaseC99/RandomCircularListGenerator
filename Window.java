@@ -715,6 +715,10 @@ public class Window extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Groups must have a name.\nPlease enter something for the group name.", "Invalid Group Name", JOptionPane.ERROR_MESSAGE);
     }
     
+    public void saveErrorNoListPopUp(){
+        JOptionPane.showMessageDialog(this, "There is currently no list to save.\nPlease click \"Generate Random List\" and try again.", "No List - Cannot Save", JOptionPane.ERROR_MESSAGE);
+    }
+    
     // display JFileChooser to save a file
     // post: returns the saved file, null if canceled
     public File fileChooserPopUp(){
