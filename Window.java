@@ -4,10 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.File;
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /*
@@ -337,6 +340,11 @@ public class Window extends javax.swing.JFrame {
         helpItem.setText("Help");
 
         howToUseItem.setText("How to Use");
+        howToUseItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                howToUseItemActionPerformed(evt);
+            }
+        });
         helpItem.add(howToUseItem);
 
         reportIssueItem.setText("Report Issue");
@@ -443,6 +451,10 @@ public class Window extends javax.swing.JFrame {
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
         controller.saveClicked();
     }//GEN-LAST:event_saveItemActionPerformed
+
+    private void howToUseItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_howToUseItemActionPerformed
+        controller.openWebsite("https://youtube.com");
+    }//GEN-LAST:event_howToUseItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -694,6 +706,27 @@ public class Window extends javax.swing.JFrame {
     // display error message, telling user that the group must have a name
     public void invalidGroupNamePopUp(){
         JOptionPane.showMessageDialog(this, "Groups must have a name.\nPlease enter something for the group name.", "Invalid Group Name", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    // display JFileChooser to save a file
+    public File fileChooserPopUp(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files", "txt", "text"));
+        fileChooser.setSelectedFile(new File("list.txt"));
+        
+        int response = fileChooser.showSaveDialog(this);
+        if(response == JFileChooser.APPROVE_OPTION){
+            File savedFile = fileChooser.getSelectedFile();
+            
+            String fileName = savedFile.getAbsolutePath();
+            if(!fileName.endsWith(".txt") ){
+                savedFile = new File(fileName + ".txt");
+            }
+            
+            return savedFile;
+        } else {
+            return null;
+        }
     }
 
 
