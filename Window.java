@@ -79,8 +79,8 @@ public class Window extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Random List Generator");
-        setMinimumSize(new java.awt.Dimension(908, 535));
-        setPreferredSize(new java.awt.Dimension(908, 535));
+        setMinimumSize(new java.awt.Dimension(910, 535));
+        setPreferredSize(new java.awt.Dimension(910, 535));
         setSize(getMinimumSize());
 
         groupsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Manager"));
