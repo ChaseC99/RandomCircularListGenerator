@@ -383,12 +383,12 @@ public class RandomCircularList
         do{
             listText += hunter.getName();
             if(withGroup){
-                listText += " ( " + hunter.getGroup().getGroupName().substring(0,1) + " )";
+                listText += " (" + hunter.getGroupName() + ")";
             }
 
             listText += " --> " + target.getName();
             if(withGroup){
-                listText += " ( " + target.getGroupName().substring(0,1) + " )";
+                listText += " (" + target.getGroupName() + ")";
             }
 
             listText += "\n";
@@ -411,14 +411,14 @@ public class RandomCircularList
         do{
             listText += temp.getName();
             if(withGroup){
-                listText += " ( " + temp.getGroupName().substring(0,1) + " )";
+                listText += " (" + temp.getGroupName() + ") ";
             }
             listText += " --> ";
             temp = temp.getTarget();
         } while (!temp.equals(firstPerson));
         listText += firstPerson.getName();
         if(withGroup){
-            listText += " ( " + firstPerson.getGroupName().substring(0,1) + " )";
+            listText += " (" + firstPerson.getGroupName() + ")";
         }
 
         return listText;
@@ -439,7 +439,7 @@ public class RandomCircularList
         do{
             listText += i + ". " + temp.getName();
             if(withGroup){
-                listText += " ( " + temp.getGroupName().substring(0,1) + " )";
+                listText += " (" + temp.getGroupName() + ")";
             }
             listText += "\n";
             temp = temp.getTarget();
