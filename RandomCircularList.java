@@ -38,7 +38,7 @@
  *      printList()                                     // prints to console a list of everyone and who they are targeting
  *                                                              Ex: "x --> y --> z --> a --> b --> c --> x"
  *      printGroup(Group)                               // prints to console a list of the group's players
- *                                                              Ex: "GroupName/n - name1 /n -name2 /n" etc
+ *                                                              Ex: "GroupName/n - name1 \n -name2 \n" etc
  *      printAllGroups()                                // runs printGroup(Group) method for all groups in the list
  *
  *      // Other informational methods
@@ -449,6 +449,29 @@ public class RandomCircularList
         return listText;
     }
 
+    public String getFile(){
+        String fileText = "Random List";
+
+        fileText += "\n\n";     // Adds line
+
+        fileText += getNumberViewText(true);
+
+        fileText += "\n\n";     // Adds line
+
+        fileText += "-----------------------------";
+
+        fileText += "\n\n";
+
+        fileText += "GROUPS";
+
+        fileText += "\n\n";
+
+        fileText += getAllGroupsAsString();
+
+        return fileText;
+
+    }
+
     /**
      *  prints a list of everyone's first target
      *  example:
@@ -497,22 +520,31 @@ public class RandomCircularList
      *       - b
      *       - c
      */
-    public void printGroup(Group group){
-        System.out.println(group.getGroupName());
+    public String getGroupAsString(Group group){
+        String groupText = group.getGroupName();
+
+        groupText += "\n";
         List<Person> people = group.getRoster();
         for(Person person: people){
-            System.out.println(" - " + person.getName());
+            groupText += "    - " + person.getName();
+            groupText += "\n";
         }
-        System.out.println();   // gap for readability
+
+        return groupText;
     }
 
     /**
      *  prints all group rosters using printGroup method
      */
-    public void printAllGroups(){
+    public String getAllGroupsAsString(){
+        String groupsText = "";
+
         for(Group group: groups){
-            printGroup(group);
+            groupsText += getGroupAsString(group);
+            groupsText += "\n\n";
         }
+
+        return groupsText;
     }
 
     /**
