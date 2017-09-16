@@ -122,6 +122,8 @@ public class Window extends javax.swing.JFrame {
             }
         });
 
+        rosterDisplayPane.setBorder(javax.swing.BorderFactory.createLineBorder(javax.swing.UIManager.getDefaults().getColor("TextArea.inactiveForeground")));
+
         rosterDisplay.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Roster"));
         rosterDisplay.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         rosterDisplay.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -211,7 +213,10 @@ public class Window extends javax.swing.JFrame {
 
         listPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("List"));
 
+        listDisplayPane.setBorder(javax.swing.BorderFactory.createLineBorder(javax.swing.UIManager.getDefaults().getColor("TextArea.inactiveForeground")));
         listDisplayPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        listDisplayPane.setViewportBorder(javax.swing.BorderFactory.createTitledBorder("List Display"));
+        listDisplayPane.setEnabled(false);
 
         listDisplay.setEditable(false);
         listDisplay.setColumns(20);
@@ -308,7 +313,7 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(numberRadioButton)
                     .addComponent(showGroupCheckBox)
                     .addComponent(targetRadioButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(9, 9, 9)
                 .addComponent(listDisplayPane)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(listWarningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -536,6 +541,7 @@ public class Window extends javax.swing.JFrame {
         targetRadioButton.setEnabled(enable);
         listRadioButton.setEnabled(enable);
         numberRadioButton.setEnabled(enable);
+        listDisplayPane.setEnabled(enable);
         listDisplay.setEnabled(enable);
         saveItem.setEnabled(enable);
         restartItem.setEnabled(enable);
