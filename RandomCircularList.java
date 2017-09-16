@@ -33,6 +33,7 @@
  *                                                              Ex: "x --> y --> z --> a --> b --> c --> x"
  *      getNumberViewText(boolean) -> String            // returns a numbered list of everyone's name with option to show people's group
  *                                                              Ex: 1. Person Name /n 2. Next Name
+ *      getFileText() -> String                         // returns the content of the list as a string, to be added to a text later
  *      printFirstTargets()                             // prints to console a list of everyone's first target.
  *                                                              Ex: One "Person -> Target" per line
  *      printList()                                     // prints to console a list of everyone and who they are targeting
@@ -449,6 +450,24 @@ public class RandomCircularList
         return listText;
     }
 
+    /**
+     *  returns the content of the list as a string, to be added to a text later
+     *  the format looks like this:
+     *      Random List
+     *
+     *      1. Name
+     *      2. Name
+     *      ...
+     *
+     *      --------------
+     *
+     *      GROUPS
+     *
+     *      Group 1
+     *          - Name
+     *          - Name
+     *      ...
+     */
     public String getFileText(){
         String fileText = "Random List";
 

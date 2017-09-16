@@ -245,8 +245,8 @@ public class Controller
 
     /**
      *  Starts the process to save the list
-     *
-     *
+     *      generates a fileChooserPopUp
+     *      if a file is returned from the fileChooser, then save text to the file
      */
     public void saveClicked()
     {
@@ -254,9 +254,7 @@ public class Controller
         if (file != null) {
             try(PrintStream fileContent = new PrintStream(file)){
                 fileContent.print(list.getFileText());
-            } catch (FileNotFoundException e){
-
-            }
+            } catch (FileNotFoundException e){}
         }
     }
 

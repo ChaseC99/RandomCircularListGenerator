@@ -709,15 +709,22 @@ public class Window extends javax.swing.JFrame {
     }
     
     // display JFileChooser to save a file
+    // post: returns the saved file, null if canceled
     public File fileChooserPopUp(){
+        // Create JFileChooser
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files", "txt", "text"));
-        fileChooser.setSelectedFile(new File("list.txt"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files", "txt", "text"));    // set file filter
+        fileChooser.setSelectedFile(new File("list.txt"));                                      // set default file name
         
-        int response = fileChooser.showSaveDialog(this);
+        // Prompt user to save the file
+        int response = fileChooser.showSaveDialog(this);    // generate save file dialog
+        
+        // If the user saves a file, proceed, otherwise return null
         if(response == JFileChooser.APPROVE_OPTION){
+            // Get saved file from fileChooser
             File savedFile = fileChooser.getSelectedFile();
             
+            // Check to make sure file ends with ".txt"
             String fileName = savedFile.getAbsolutePath();
             if(!fileName.endsWith(".txt") ){
                 savedFile = new File(fileName + ".txt");

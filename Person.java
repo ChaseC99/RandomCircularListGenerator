@@ -6,18 +6,18 @@
  *
  *  INSTANCE VARIABLES
  *      String name         // person's name
- *      Group group           // the group that the person belongs to
+ *      Group group         // the group that the person belongs to
  *      Person target       // the person that comes after this person on the list
  *
  *  METHODS
- *      getName() -> String               // returns person's name
+ *      getName() -> String                 // returns person's name
  *      getGroup() -> Group                 // returns person's group
- *      getGroupName() -> String           // returns group name
- *      setTarget()                       // sets person's target
- *      getTarget() -> Person             // returns person's target
- *      diffGroups(Person) -> boolean      // returns true if different groups, false if same group
+ *      getGroupName() -> String            // returns group name
+ *      setTarget()                         // sets person's target
+ *      getTarget() -> Person               // returns person's target
+ *      diffGroups(Person) -> boolean       // returns true if different groups, false if same group
  *      diffGroups(Group) -> boolean        // returns true if different groups, false if same group
- *      equals(Person) -> boolean         // return true if same person, false if different
+ *      equals(Person) -> boolean           // return true if same person, false if different
  */
 public class Person
 {
