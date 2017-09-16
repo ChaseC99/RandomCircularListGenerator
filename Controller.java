@@ -192,7 +192,10 @@ public class Controller
         }
 
         // Update UI
-        ui.updateListDisplay(getSelectedViewText());    // update listDisplay
+        if(list != null)
+        {
+            ui.updateListDisplay(getSelectedViewText());    // update listDisplay
+        }
     }
 
     /**
@@ -241,12 +244,29 @@ public class Controller
 
     /**
      *  Starts the process to save the list
-     *      resetPopUp is called and the result is recorded
-     *      If yes was selected, then reset() is called to reset the program
+     *
+     *
      */
     public void saveClicked()
     {
+        // Check to see that there is a list
+        /*
+        // Generate FileChooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Random List");
+        File file = fileChooser.showSaveDialog(stage);
+        if (file != null) {
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage(pic.getImage(),
+                    null), "png", file);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        */
 
+        System.out.print(list.getFile());
+        // Save data as text file
     }
 
     /**
