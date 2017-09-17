@@ -459,7 +459,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_saveItemActionPerformed
 
     private void howToUseItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_howToUseItemActionPerformed
-        controller.openWebsite("https://youtube.com");
+        controller.openWebsite("https://youtu.be/64j0xa_kzUQ");
     }//GEN-LAST:event_howToUseItemActionPerformed
 
     /**
@@ -585,7 +585,7 @@ public class Window extends javax.swing.JFrame {
                     nameTextField.setForeground(Color.black);
                     hintTextDisplayed = false;
                 }
-                
+
                 addNameFocused = true;
             }
 
@@ -598,24 +598,24 @@ public class Window extends javax.swing.JFrame {
                 if(nameTextField.getText().length() == 0){
                     resetNameTextField();
                 }
-                
+
                 addNameFocused = false;
             }
         });
-        
+
         // Adds action listener to the textField
         nameTextField.addActionListener(new ActionListener() {
 
                 /*  When the enter key is pressed, this method is called
                 *   If the textField is focused, then addPersonButtonAction is called
-                *   It then focuses on addPersonButton so textField can reset  
+                *   It then focuses on addPersonButton so textField can reset
                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(addNameFocused)
                     {
                         addPersonButtonActionPerformed(null);   // calls addPersonButton
-                        addPersonButton.requestFocus();         // focus leaves textField and goes to addPersonButton 
+                        addPersonButton.requestFocus();         // focus leaves textField and goes to addPersonButton
                     }
                 }
         });
@@ -714,11 +714,11 @@ public class Window extends javax.swing.JFrame {
     public void invalidGroupNamePopUp(){
         JOptionPane.showMessageDialog(this, "Groups must have a name.\nPlease enter something for the group name.", "Invalid Group Name", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     public void saveErrorNoListPopUp(){
         JOptionPane.showMessageDialog(this, "There is currently no list to save.\nPlease click \"Generate Random List\" and try again.", "No List - Cannot Save", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     // display JFileChooser to save a file
     // post: returns the saved file, null if canceled
     public File fileChooserPopUp(){
@@ -726,21 +726,21 @@ public class Window extends javax.swing.JFrame {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files", "txt", "text"));    // set file filter
         fileChooser.setSelectedFile(new File("list.txt"));                                      // set default file name
-        
+
         // Prompt user to save the file
         int response = fileChooser.showSaveDialog(this);    // generate save file dialog
-        
+
         // If the user saves a file, proceed, otherwise return null
         if(response == JFileChooser.APPROVE_OPTION){
             // Get saved file from fileChooser
             File savedFile = fileChooser.getSelectedFile();
-            
+
             // Check to make sure file ends with ".txt"
             String fileName = savedFile.getAbsolutePath();
             if(!fileName.endsWith(".txt") ){
                 savedFile = new File(fileName + ".txt");
             }
-            
+
             return savedFile;
         } else {
             return null;
