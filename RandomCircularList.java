@@ -39,7 +39,7 @@
  *      printList()                                     // prints to console a list of everyone and who they are targeting
  *                                                              Ex: "x --> y --> z --> a --> b --> c --> x"
  *      printGroup(Group)                               // prints to console a list of the group's players
- *                                                              Ex: "GroupName/n - name1 \n -name2 \n" etc
+ *                                                              Ex: "GroupName/n - name1 \r\n -name2 \r\n" etc
  *      printAllGroups()                                // runs printGroup(Group) method for all groups in the list
  *
  *      // Other informational methods
@@ -363,7 +363,7 @@ public class RandomCircularList
 
         // If there is a same group conflict add on the warning message
         if(hasSameGroupConflict){
-            listText += "\n\n" + sameGroupConflictMessage;
+            listText += "\r\n\r\n" + sameGroupConflictMessage;
         }
 
         return listText;
@@ -392,7 +392,7 @@ public class RandomCircularList
                 listText += " (" + target.getGroupName() + ")";
             }
 
-            listText += "\n";
+            listText += "\r\n";
             hunter = target;
             target = hunter.getTarget();
         }while(!hunter.equals(firstPerson));
@@ -442,7 +442,7 @@ public class RandomCircularList
             if(withGroup){
                 listText += " (" + temp.getGroupName() + ")";
             }
-            listText += "\n";
+            listText += "\r\n";
             temp = temp.getTarget();
             i++;
         } while(!temp.equals(firstPerson));
@@ -471,19 +471,19 @@ public class RandomCircularList
     public String getFileText(){
         String fileText = "Random List";
 
-        fileText += "\n\n";     // Adds line
+        fileText += "\r\n\r\n";     // Adds line
 
         fileText += getNumberViewText(true);
 
-        fileText += "\n\n";     // Adds line
+        fileText += "\r\n\r\n";     // Adds line
 
         fileText += "-----------------------------";
 
-        fileText += "\n\n";
+        fileText += "\r\n\r\n";
 
         fileText += "GROUPS";
 
-        fileText += "\n\n";
+        fileText += "\r\n\r\n";
 
         fileText += getAllGroupsAsString();
 
@@ -542,11 +542,11 @@ public class RandomCircularList
     public String getGroupAsString(Group group){
         String groupText = group.getGroupName();
 
-        groupText += "\n";
+        groupText += "\r\n";
         List<Person> people = group.getRoster();
         for(Person person: people){
             groupText += "    - " + person.getName();
-            groupText += "\n";
+            groupText += "\r\n";
         }
 
         return groupText;
@@ -560,7 +560,7 @@ public class RandomCircularList
 
         for(Group group: groups){
             groupsText += getGroupAsString(group);
-            groupsText += "\n\n";
+            groupsText += "\r\n\r\n";
         }
 
         return groupsText;
