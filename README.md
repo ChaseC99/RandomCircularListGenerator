@@ -5,6 +5,7 @@ The program takes a list of names from multiple groups of people and generates a
 Video: [Random List Generator Demo](https://youtu.be/64j0xa_kzUQ)
 
 ![Random List Generator Screenshot](https://i.imgur.com/R9uxRFm.png)
+*Screenshot of Random List Generator running on Mac OS; it will look different on Windows and Linux*
 
 #### How to Download
 Go to this [link](https://github.com/ChaseC99/RandomCircularListGenerator/blob/master/RandomListGenerator.jar)   
