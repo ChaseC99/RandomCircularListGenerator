@@ -6,6 +6,12 @@ Video: [Random List Generator Demo](https://youtu.be/64j0xa_kzUQ)
 
 ![Random List Generator Screenshot](https://i.imgur.com/R9uxRFm.png)
 
+#### How to Download
+Go to this [link](https://github.com/ChaseC99/RandomCircularListGenerator/blob/master/RandomListGenerator.jar)   
+Then click "Download"
+![Download Button](https://i.imgur.com/dAnA9i2.png)
+
+---
 #### Background
 Every year, my high school volleyball team would play a game called "*The Assasination Game*" (TAG for short).
 Everyone in the volleyball program would play together: Varsity, JV, Novice, and Stat Keepers.
