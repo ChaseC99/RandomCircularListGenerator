@@ -2,7 +2,9 @@
 ### Created by Chase Carnaroli
 The program takes a list of names from multiple groups of people and generates a circular linked list where no two people from the same group are next to each other (three or more groups required for this, otherwise it will be a normal randomized list).
 
-![Random List Generator Screenshot](https://i.imgur.com/NeaQabX.png)
+Video: [Random List Generator Demo](https://youtu.be/64j0xa_kzUQ)
+
+![Random List Generator Screenshot](https://i.imgur.com/R9uxRFm.png)
 
 #### Background
 Every year, my high school volleyball team would play a game called "*The Assasination Game*" (TAG for short).
