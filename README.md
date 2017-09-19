@@ -2,15 +2,12 @@
 ### Created by Chase Carnaroli
 The program takes a list of names from multiple groups of people and generates a circular linked list where no two people from the same group are next to each other (three or more groups required for this, otherwise it will be a normal randomized list).
 
+[CLICK HERE TO DOWNLOAD THE JAR FILE](https://github.com/ChaseC99/RandomCircularListGenerator/raw/master/RandomListGenerator.jar)
+
 Video: [Random List Generator Demo](https://youtu.be/64j0xa_kzUQ)
 
 ![Random List Generator Screenshot](https://i.imgur.com/R9uxRFm.png)
 *Screenshot of Random List Generator running on Mac OS; it will look different on Windows and Linux*
-
-#### How to Download
-Go to this [link](https://github.com/ChaseC99/RandomCircularListGenerator/raw/master/RandomListGenerator.jar)   
-Then click "Download"
-![Download Button](https://i.imgur.com/dAnA9i2.png)
 
 ---
 #### Background
