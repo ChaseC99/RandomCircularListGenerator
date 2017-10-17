@@ -1,8 +1,9 @@
 # Random List Generator
 ### Created by Chase Carnaroli
-The program takes a list of names from multiple groups of people and generates a circular linked list where no two people from the same group are next to each other (three or more groups required for this, otherwise it will be a normal randomized list).
 
 [CLICK HERE TO DOWNLOAD THE JAR FILE](https://github.com/ChaseC99/RandomCircularListGenerator/raw/master/RandomListGenerator.jar)
+
+The program takes a list of names from multiple groups of people and generates a circular linked list where no two people from the same group are next to each other (three or more groups required for this, otherwise it will be a normal randomized list).
 
 Video: [Random List Generator Demo](https://youtu.be/64j0xa_kzUQ)
 
@@ -14,11 +15,11 @@ Video: [Random List Generator Demo](https://youtu.be/64j0xa_kzUQ)
 Every year, my high school volleyball team would play a game called "*The Assasination Game*" (TAG for short).
 Everyone in the volleyball program would play together: Varsity, JV, Novice, and Stat Keepers.
 
-To set up the game, our coach would take everyone's name and make a big randomized circular list, where no two kids from the same team were next to eachother.
-It was a pain for my coach to set up though, because there were over 50 people in the game!
+To set up the game, our coach would take everyone's name and make a big randomized circular list, where no two kids from the same team were next to each other.
+It was a pain to set up though, because there were over 50 people in the game!
 
 So, I created this program to automate that process.
-All coach has to do now is put in a list of names and it will generate the circular list for him!
+Now, all you have to do is put in a list of names and it will generate the circular list for you!
 
 ---
 ### The Code
