@@ -8,7 +8,7 @@ The program takes a list of names from multiple groups of people and generates a
 Video: [Random List Generator Demo](https://youtu.be/64j0xa_kzUQ)
 
 ![Random List Generator Screenshot](https://i.imgur.com/R9uxRFm.png)
-*Screenshot of Random List Generator running on Mac OS; it will look different on Windows and Linux*
+*Screenshot of Random List Generator running on Mac OS; it will look different on Windows and Linux.*
 
 ---
 #### Background
@@ -43,7 +43,7 @@ If there are 3 or more groups in ```groups```, then this is how the program gene
 
 \* If the amount of players in ```groups``` is uneven and won't allow for a list where no two people from the same group end up next to each other, it will create a normal randomized list instead.
 
-**See [Issues](https://github.com/ChaseC99/RandomCircularListGenerator/issues) for known bugs**
+**See [Issues](https://github.com/ChaseC99/RandomCircularListGenerator/issues) for known bugs.**
 
 ---
 ### License
